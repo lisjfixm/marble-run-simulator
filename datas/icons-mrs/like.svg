@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="800px"
+   height="800px"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg875"
+   sodipodi:docname="like.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <metadata
+     id="metadata881">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>ionicons-v5-h</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs879" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="2560"
+     inkscape:window-height="1377"
+     id="namedview877"
+     showgrid="false"
+     inkscape:pagecheckerboard="true"
+     inkscape:zoom="1.26"
+     inkscape:cx="400"
+     inkscape:cy="400"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg875"
+     inkscape:document-rotation="0" />
+  <title
+     id="title869">ionicons-v5-h</title>
+  <path
+     d="m 464.23566,234.55573 c -38.00869,73.09364 -139.69007,172.501 -197.1904,225.45328 -6.18199,5.581 -15.58366,5.581 -21.76566,0 C 187.45441,407.05673 85.773033,307.64937 47.764339,234.55573 -35.724842,73.749724 174.78484,-33.454283 256,127.35172 337.21516,-33.454283 547.72484,73.749724 464.23566,234.55573 Z"
+     id="path2"
+     style="stroke-width:32.4861;fill:#ffffff;fill-opacity:1;stroke:none" />
+</svg>

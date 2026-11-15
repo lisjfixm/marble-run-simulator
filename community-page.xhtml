@@ -1,0 +1,58 @@
+<div class="machine-page-top">
+    <img class="machine-page-logo" style="display: inline-block; height: 100%; vertical-align: middle;" src="datas/icons-mrs/title.png"></img>
+</div>
+
+<div id="machine-page-server-status-container" style="position: absolute; top: 10px; right: 5px; text-align: right;">
+    <img class="label" style="display: inline-block; height: 20px;" src="./datas/icons-mrs/internet.svg"/>
+    <br/>
+    <span style="display: inline-block; font-size: 12px; font-weight: 300;">OFFLINE</span>
+</div>
+
+<div class="machine-page-body">
+    <div style="display: flex; flex-direction: row; justify-content: space-evenly;">
+        <img class="machine-page-logo" style="height: 70px;" src="datas/icons-mrs/title.png"></img>
+        <div class="machine-page-filters">
+            <div style="flex: 1">
+                <span><i18n-text text-key="community-sort-label"></span>
+                <button id="machine-page-filter-best" class="filters-btn left active"><i18n-text text-key="community-sort-best-label"></i18n-text> <span class="sort-asc" style="display: none;">▲</span><span class="sort-desc" style="display: none;">▼</span></button>
+                <button id="machine-page-filter-latest" class="filters-btn middle"><i18n-text text-key="community-sort-latest-label"></i18n-text> <span class="sort-asc" style="display: none;">▲</span><span class="sort-desc" style="display: none;">▼</span></button>
+                <button id="machine-page-filter-size" class="filters-btn right"><i18n-text text-key="community-sort-size-label"></i18n-text> <span class="sort-asc" style="display: none;">▲</span><span class="sort-desc" style="display: none;">▼</span></button>
+            </div>
+            <div style="flex: 1">
+                <span><i18n-text text-key="community-date-label"></i18n-text></span>
+                <button id="machine-page-filter-all-time" class="filters-btn left active"><i18n-text text-key="community-date-alltime-label"></i18n-text></button>
+                <button id="machine-page-filter-month" class="filters-btn middle"><i18n-text text-key="community-date-month-label"></i18n-text></button>
+                <button id="machine-page-filter-week" class="filters-btn right"><i18n-text text-key="community-date-week-label"></i18n-text></button>
+            </div>
+            <div id="machine-page-state-filters" style="flex: 1; display: none;">
+                <span>filter</span>
+                <button id="machine-page-filter-tbd" class="filters-btn s left active">...</button>
+                <button id="machine-page-filter-ok" class="filters-btn s middle active">OK</button>
+                <button id="machine-page-filter-star" class="filters-btn s middle active">OK+</button>
+                <button id="machine-page-filter-nok" class="filters-btn s middle active">X</button>
+                <button id="machine-page-filter-problem" class="filters-btn s middle active">!</button>
+                <button id="machine-page-filter-info" class="filters-btn s right active">?</button>
+            </div>
+        </div>
+    </div>
+    <div class="machine-page-machines">
+        
+    </div>
+    <div class="machine-page-navigation" style="display: flex; flex-direction: row; gap: 5px;">
+        <div style="flex: 2;">
+            
+        </div>
+        <div style="flex: 1;">
+            <button class="machine-page-prev navigation-btn">◄</button>
+        </div>
+        <div style="flex: 1; padding-top: 5px;">
+            <span class="machine-page-page-num">1/6</span>
+        </div>
+        <div style="flex: 1;">
+            <button class="machine-page-next navigation-btn">►</button>
+        </div>
+        <div style="flex: 2; text-align: right;">
+            <a href="#home"><button class="navigation-btn large"><i18n-text text-key="btn-home"></i18n-text></button></a>
+        </div>
+    </div>
+</div>

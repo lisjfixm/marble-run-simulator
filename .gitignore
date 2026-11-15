@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Backups
+_backup/
+_pre_fix_backup_*/
+
+# Temporary / conflict artifacts
+*.orig
+*.log
+
+# Scraper helper (not part of the offline package)
+_scrape.py

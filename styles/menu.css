@@ -1,0 +1,497 @@
+.menu {
+    display: flex;
+    gap: var(--menu-gap);
+    flex-direction: column;
+    width: min(1200px, 95vw);
+    left: calc((100vw - min(1200px, 95vw)) * 0.5);
+}
+
+.menu .top-container {
+    flex: 3;
+}
+
+.menu .panel-container {
+    flex: 2;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    display: flex;
+    gap: var(--menu-gap);
+    flex-direction: row;
+}
+
+.menu .bottom-container {
+    flex: 2;
+    display: flex;
+    gap: var(--menu-gap);
+    flex-direction: row;
+}
+
+.menu .panel {
+    flex: 5;
+    position: relative;
+    vertical-align: top;
+    margin: 0;
+    padding: 0;
+    background-color: var(--panel-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: white;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: initial;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    height: fit-content;
+}
+
+.menu .spacer {
+    flex: 1;
+    height: 100%;
+    margin: 1px;
+    padding: 0;
+    pointer-events: none;
+}
+
+.menu .panel.title {
+    background-color: rgba(0, 0, 0, 0);
+    outline: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    color: white;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: initial;
+}
+
+.menu .panel:hover { 
+    background-color: rgb(61, 66, 70);
+    transition: background-color 0.3s;
+}
+
+.menu .panel.title:hover { 
+    background-color: rgba(0, 0, 0, 0);
+    outline: none;
+}
+
+.menu .panel .label {
+    position: relative;
+    text-align: right;
+    display: block;
+    margin: 3px 6px 3px 6px;
+    font-size: var(--medium-panel-label-font-size);
+    z-index: 1;
+}
+
+.menu .panel.large-panel .label {
+    text-align: center;
+    font-size: var(--large-panel-label-font-size);
+    margin: 5px 20px 5px 20px;
+    font-weight: 700;
+}
+
+.menu .panel .label img {
+    display: inline-block;
+    height: min(2vh, 3vw);
+    vertical-align: middle;
+}
+
+.menu .panel.large-panel .sublabel {
+    position: relative;
+    text-align: center;
+    display: block;
+    margin: 5px 0px 5px 0px;
+    font-size: calc(var(--large-panel-label-font-size) * 0.8);
+    z-index: 1;
+    background-color: var(--panel-bg-color);
+}
+
+.menu .panel .label-2 {
+    text-align: left;
+    display: block;
+    position: absolute;
+    bottom: 10px;
+    font-size: var(--medium-panel-label-2-font-size);
+    background-color: black;
+    padding: 0.2vh 1vh 0.2vh min(1.5svh, 2.5vw);
+    z-index: 1;
+}
+
+.menu .panel.large-panel .label-2 {
+    font-size: var(--large-panel-label-2-font-size);
+}
+
+.menu .panel.option .label {
+    text-align: left;
+    display: block;
+}
+
+.menu .panel.credit .label {
+    text-align: left;
+    display: block;
+}
+
+
+.machine-page-top {
+    height: 70px;
+}
+
+body.vertical .machine-page-top {
+    display: block;
+}
+
+body:not(.vertical) .machine-page-top {
+    height: 0px;
+}
+
+body.vertical .machine-page-body .machine-page-logo {
+    display: none;
+}
+
+body:not(.vertical) .machine-page-body .machine-page-logo {
+    display: flex;
+}
+
+#bb-puzzles-menu .machine-page-body .machine-page-logo {
+    font-size: 30px;
+    font-family: BigBottomCartoon;
+    background-color: #e96645;
+    -webkit-text-stroke: 4px black;
+    paint-order: stroke fill;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.machine-page-body {
+    height: calc(100% - 88px);
+}
+
+.machine-line {
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    padding: var(--half-menu-gap);
+    gap: var(--menu-gap);
+    justify-content: space-between;
+    touch-action: all;
+}
+
+.machine-tile {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    background-color: var(--panel-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    touch-action: inherit;
+    font-family: Roboto;
+}
+
+.machine-tile canvas {
+    touch-action: inherit;
+}
+
+.menu .machine-tile:hover { 
+    background-color: rgb(61, 66, 70);
+    transition: background-color 0.3s;
+}
+
+.machine-tile .title {
+    position: relative;
+    margin: 4px;
+    text-align: center;
+    font-weight: 300;
+    font-size: 16px;
+    height: 2lh;
+    word-wrap: break-word;
+}
+
+.machine-tile .machine-id {
+    position: absolute;
+    top: 46px;
+    left: 6px;
+    font-family: Roboto;
+    font-weight: 100;
+}
+
+.machine-tile .country {
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
+    border-radius: 2px;
+}
+
+.machine-tile .author {
+    margin-right: 4px;
+    margin-bottom: 4px;
+    text-align: right;
+    font-weight: 100;
+    font-size: 14px;
+    overflow-x: visible;
+    height: 1lh;
+}
+
+.machine-tile .likes {
+    position: absolute;
+    bottom: 26px;
+    left: 4px;
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.machine-tile .likes img {
+    display: inline-block;
+    height: 18px;
+    margin-left: 5px;
+    vertical-align: top;
+}
+
+.machine-tile .creation-date {
+    position: absolute;
+    bottom: 26px;
+    right: 4px;
+    font-size: 14px;
+    font-weight: 100;
+}
+
+.machine-tile .star {
+    position: absolute;
+    top: 40px;
+    right: 4px;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.machine-tile .state-btn {
+    position: absolute;
+    top: 48px;
+    right: 4px;
+    height: 18px;
+    width: 18px;
+    padding: 0;
+    color: white;
+    background-color: #00000080;
+    font-weight: 500;
+    font-size: 8px;
+    border: 1px solid white;
+}
+
+.machine-tile .db-state-info {
+    position: absolute;
+    bottom: 45px;
+    right: 4px;
+    padding: 3px 8px 3px 8px;
+    color: white;
+    font-weight: 900;
+    font-size: 14px;
+    border: 1px solid white;
+}
+
+.machine-tile .db-duplicate-info {
+    position: absolute;
+    bottom: 80px;
+    right: 4px;
+    padding: 2px 4px 2px 4px;
+    color: orangered;
+    font-weight: 900;
+    font-size: 12px;
+    border: 1px solid orangered;
+}
+
+.machine-tile .db-state-info.pending {
+    color: gray;
+    border-color: gray;
+}
+
+.machine-tile .db-state-info.ok {
+    color: lime;
+    border-color: lime;
+}
+
+.machine-tile .db-state-info.okp {
+    color: lime;
+    border-color: lime;
+}
+
+.machine-tile .db-state-info.nok {
+    color: orange;
+    border-color: orange;
+}
+
+.machine-tile .db-state-info.problem {
+    color: red;
+    border-color: red;
+}
+
+.machine-tile .db-state-info.info {
+    color: magenta;
+    border-color: magenta;
+}
+
+.panel.machine-of-the-x {
+    transition: opacity 0.4s;
+}
+
+.machine-of-the-x .machine-id {
+    position: absolute;
+    bottom: calc(var(--medium-panel-label-font-size) + 6px);
+    right: 6px;
+    font-size: var(--medium-panel-label-2-font-size);
+    font-family: Roboto;
+    font-weight: 100;
+    z-index: 1;
+}
+
+.machine-of-the-x canvas {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    z-index: 0;
+}
+
+.machine-of-the-x .likes {
+    position: absolute;
+    bottom: 26px;
+    left: 4px;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.machine-of-the-x .likes img {
+    display: inline-block;
+    height: 16px;
+    margin-left: 2px;
+    vertical-align: top;
+}
+
+.machine-of-the-x .country {
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
+    border-radius: 2px;
+    z-index: 1;
+}
+
+.machine-of-the-x .author {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    text-align: right;
+    font-weight: 100;
+    font-size: var(--medium-panel-label-2-font-size);
+    z-index: 1;
+}
+
+.machine-page-filters {
+    display: flex;
+    flex-direction: column;
+    font-weight: 300;
+    justify-content: space-evenly;
+    height: 55px;
+}
+
+.machine-page-filters span {
+    display: inline-block;
+    background-color: #35383a80;
+    padding: 2px 5px 2px 5px;
+    margin-right: -10px;
+    width: 60px;
+    font-size: 14px;
+}
+
+.filters-btn {
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    vertical-align: middle;
+    border: 1px solid gray;
+    font-weight: 100;
+    background-color: #35383a;
+    color: gray;
+    margin: 0;
+    padding: 3px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    width: 80px;
+}
+
+.filters-btn.s {
+    width: 40px;
+}
+
+.filters-btn.active {
+    border: 1px solid white;
+    background-color: #272b2e;
+    color: white;
+    font-weight: 300;
+}
+
+.filters-btn.left {
+    margin-left: 4px;
+    margin-right: -2px;
+    border-top-left-radius: 5px;
+}
+
+.filters-btn.middle {
+    margin-left: -2px;
+    margin-right: -2px;
+}
+
+.filters-btn.right {
+    margin-left: -2px;
+    margin-right: 4px;
+    border-top-right-radius: 5px;
+}
+
+.machine-page-machines {
+    height: calc(100% - 25px);
+    overflow-y: scroll;
+    scrollbar-color: #2b2821 #5d7275;
+    scrollbar-width: thin;
+    text-align: center;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+body.vertical .machine-page-machines {
+    height: calc(100% - 80px);
+}
+
+.machine-page-navigation {
+    font-size: 14px;
+    padding-top: 5px;
+}
+
+.navigation-btn {
+    display: inline-block;
+    position: relative;
+    font-size: 16px;
+    vertical-align: middle;
+    border: 1px solid white;
+    background-color: #272b2e;
+    border-radius: 5px;
+    color: white;
+    font-weight: 300;
+    margin: 0;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
+.navigation-btn.large {
+    font-size: 16px;
+    width: 80px;
+    height: 30px;
+}

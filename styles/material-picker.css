@@ -1,0 +1,47 @@
+material-picker {
+    position: fixed;
+    z-index: 10;
+    background-color: #272b2e;
+    color: white;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    outline: 2px solid white;
+    border-radius: 1svh;
+    width: 30.8svh;
+}
+
+material-picker .container {
+    margin: 1svh;
+}
+
+material-picker h2 {
+    font-size: min(2svh, 3vw);
+    margin: min(1svh, 1vw);
+    margin-left: 0;
+    font-weight: 300;
+}
+
+material-picker .square-material-buttons-container button {
+    display: inline-block;
+    width: 3vh;
+    height: 3vh;
+    margin: 0.3vh;
+    border: none;
+    outline: 1px solid white;
+}
+
+material-picker .square-material-buttons-container button.selected {
+    outline: 3px solid white;
+}
+
+material-picker select {
+    appearance: base-select;
+    width: 90%;
+}
+
+material-picker select.selected {
+    outline: 1px solid white;
+}
+
+material-picker select::picker(select) {
+    appearance: base-select;
+}

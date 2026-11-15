@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui, shrink-to-fit=no viewport-fit=cover">
+		<title>Marble Run Simulator</title>
+		<meta property="og:title" content="Marble Run Simulator" />
+		<meta property="og:image" content="https://tiaratum.com/preview.png" />
+		<!--<title>Gravitology</title>
+		<meta property="og:title" content="Gravitology" />
+		<meta property="og:image" content="https://tiaratum.com/gravitology/preview.png" />-->
+		<script>
+			// Offline Poki SDK stub: ads/community stripped; interstitial resumes, rewarded grants.
+			window.PokiSDK = {
+				init: function () { return Promise.resolve(); },
+				gameLoadingFinished: function () {},
+				gameplayStart: function () {},
+				gameplayStop: function () {},
+				commercialBreak: function (cb) { if (typeof cb === "function") cb(); return Promise.resolve(); },
+				rewardedBreak: function (cb) { if (typeof cb === "function") cb(); return Promise.resolve(true); },
+				getURLParam: function () { return ""; },
+				shareableURL: function () { return Promise.resolve(""); },
+				measure: function () {},
+				openExternalLink: function () {},
+				destroyAd: function () {}
+			};
+		</script>
+		<script src="index.js"></script>
+	</head>
+	<body class="">
+		<default-page id="home-menu" class="page menu" file="home-page.xhtml" style="display: none;"></default-page>
+		<default-page id="community-menu" class="page menu" file="community-page.xhtml" style="display: none"></default-page>
+		<default-page id="bb-puzzles-menu" class="page menu" file="bb-puzzles-page.xhtml" style="display: none"></default-page>
+		<option-page id="option-page" class="page" style="display: none;"></option-page>
+		<default-page id="user-machines-page" class="page" file="user-machines.xhtml" style="display: none;"></default-page>
+		<default-page id="eula-page" class="eula-page page" file="eula.xhtml" style="display: none;"></default-page>
+		<default-page id="credits-page" class="credits-page page" file="credits.xhtml" style="display: none;"></default-page>
+		<default-page id="dev-mode-page" class="dev-mode-page page" file="dev-mode.xhtml" style="display: none;"></default-page>
+		<div id="topbar" style="display: none">
+			<button class="cam-mode-none btn slimM inactive" title="Camera Mode : None">
+				<span class="label">MANUAL</span>
+			</button>
+			<button class="cam-mode-landscape btn slimM inactive" title="Camera Mode : Landscape">
+				<span class="label">LANDSCAPE</span>
+			</button>
+			<button class="cam-mode-ball btn slimM inactive" title="Camera Mode : Ball">
+				<span class="label">BALL</span>
+			</button>
+			<button class="cam-mode-selected btn slimM inactive" title="Camera Mode : Selected">
+				<span class="label">SELECTED</span>
+			</button>
+			<button class="cam-mode btn xs icon">
+				<svg class=" label" viewBox="0 0 100 100">
+					<path d="M10 25 L60 25 L60 75 L10 75 Z" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+					<path d="M75 60 L90 70 L90 30 L75 40 Z" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+				</svg>
+			</button>
+		</div>
+		<div id="toolbar" style="display: none;">
+			<div id="machine-reload-status">Reloading</div>
+			<div id="dev-mode-toolbar" style="display: none; margin-bottom: 5px;">
+				<button class="btn s dev-mode-btn pending active">...</button>
+				<button class="btn s dev-mode-btn ok">OK</button>
+				<button class="btn s dev-mode-btn nok">X</button>
+				<button class="btn s dev-mode-btn problem">!</button>
+				<button class="btn s dev-mode-btn info">?</button>
+				<button class="btn s dev-mode-btn star">OK+</button>
+				<button class="btn s dev-mode-btn prev">prev</button>
+				<button class="btn s dev-mode-btn next">next</button>
+			</div>
+			<button id="toolbar-boost"><span id="toolbar-boost-label"></span><span id="toolbar-boost-info">[SPACE]</span></button>
+			<button id="toolbar-play" class="btn s" title="Play">
+				<svg class="label" viewBox="0 0 100 100">
+					<path d="M30 25 L80 50 L30 80 Z" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+				</svg>
+			</button>
+
+			<button id="toolbar-pause" class="btn s" title="Pause">
+				<svg class="label" viewBox="0 0 100 100">
+					<path d="M25 25 L32 25 L32 75 L25 75 Z" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+					<path d="M68 25 L75 25 L75 75 L68 75 Z" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+				</svg>
+			</button>
+
+			<button id="toolbar-stop" class="btn s" title="Stop and reset">
+				<svg class="label" viewBox="0 0 100 100">
+					<path d="M25 25 L75 25 L75 75 L25 75 Z" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+				</svg>
+			</button>
+
+			<button id="toolbar-time-factor" class="btn m" title="Time factor">
+				<svg class="label" viewBox="0 0 100 100">
+					<path d="M80 85 L20 85 A40 40 0 1 1 80 85 Z" fill="none" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"></path>
+					<path d="M45 55 L50 6 L55 55 L50 60 Z" transform="rotate(30 50 55)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+				</svg>
+				<span class="value">42.5</span>
+			</button>
+			<div class="dropdown">
+				<input id="time-factor-value" type="range" orient="vertical" min="0" max="1" step ="0.01"/>	
+			</div>
+
+			<button id="toolbar-sound" class="btn s" title="Volume">
+				<svg class="label" viewBox="0 0 100 100">
+					<path d="M10 40 L30 40 L50 20 L50 80 L30 60 L10 60 Z" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+					<path d="M75 25 A40 40 0 0 1 75 75" fill="none" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"></path>
+				</svg>
+			</button>
+			<div class="dropdown">
+				<input id="sound-value" type="range" orient="vertical" min="0" max="1" step ="0.01"/>	
+			</div>
+
+			<button id="toolbar-zoom-out" class="btn s" title="Zoom Out">
+				<svg class="label" viewBox="0 0 100 100">
+					<circle cx="60" cy="40" r="35" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></circle>
+					<path d="M10 90 L30 70" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+					<path d="M50 40 L70 40" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+				</svg>
+			</button>
+
+			<button id="toolbar-zoom-in" class="btn s" title="Zoom In">
+				<svg class="label" viewBox="0 0 100 100">
+					<circle cx="60" cy="40" r="35" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></circle>
+					<path d="M10 90 L30 70" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+					<path d="M50 40 L70 40" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+					<path d="M60 30 L60 50" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+				</svg>
+			</button>
+
+			<button id="toolbar-layer" class="btn m"  title="Layer" style="display: none">
+				<svg class="label" viewBox="0 0 240 100">
+					<path d="M15 15 L75 5 L75 65 L15 75 Z" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+					<path d="M35 30 L95 20 L95 80 L35 90 Z" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"></path>
+					<path d="M160 25 L180 5 L200 25" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+					<path d="M160 75 L180 95 L200 75" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+					<path d="M130 50 L230 50" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+				</svg>
+			</button>
+
+			<button id="toolbar-edit" class="btn s" title="Edit">
+				<img class="label" src="./datas/icons-mrs/edit.svg"/>
+			</button>
+			<div id="toolbar-edit-dropdown" class="dropdown">
+				<div><i18n-text text-key="toolbar-edit-label"></i18n-text></div>
+				<button class="btn l" title="Edit">
+					<img class="label" src="./datas/icons-mrs/edit.svg"/>
+					<span class="value">EDITOR&nbsp;</span>
+				</button>
+			</div>
+
+			<button id="toolbar-screenshot" class="btn s"  title="Take circuit screenshot" style="display: none">
+				<img id="toolbar-screenshot-icon" class="label" src="./datas/icons-mrs/camera.svg"/>
+			</button>
+
+			<button id="toolbar-share" class="btn s" title="Share">
+				<img id="toolbar-share-icon" class="label" src="./datas/icons-mrs/share.svg"/>
+			</button>
+			<div id="toolbar-share-dropdown" class="dropdown">
+				<span id="toolbar-share-id">direct link to machine </span>
+				<div class="shared-url">
+					<input id="toolbar-share-value" class="value" type="text" readonly/>	
+					<button class="copy"></button>
+				</div>
+			</div>
+
+			<button id="toolbar-like" class="btn s" title="Like">
+				<img id="toolbar-liked-icon" class="label" style="display: none;" src="./datas/icons-mrs/like.svg"/>
+				<img id="toolbar-not-liked-icon" class="label" src="./datas/icons-mrs/like-stroked.svg"/>
+				<div id="toolbar-likes-count">42</div>
+			</button>
+		</div>
+
+		<div id="top-right" style="position: fixed; right:0; top: 0; text-align: right; z-index: 2; direction: rtl; margin: 10px; pointer-events: none; vertical-align: top;">
+			<a href="#home"><button id="home-button" class="btn s home-button"  title="Back to main menu">
+				<svg class="label" viewBox="0 0 100 100">
+					<path d="M10 10 L40 10 L40 40 L10 40 Z" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+					<path d="M60 10 L90 10 L90 40 L60 40 Z" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+					<path d="M60 60 L90 60 L90 90 L60 90 Z" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+					<path d="M10 60 L40 60 L40 90 L10 90 Z" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+				</svg>
+			</button></a>
+			<button id="option-button" class="btn s" title="Settings">
+				<svg class="label" viewBox="0 0 100 100">
+					<path d="M10 15 L90 15" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+					<circle cx="30" cy="15" r="12" stroke="none"></circle>
+					<path d="M10 50 L90 50" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+					<circle cx="80" cy="50" r="12" stroke="none"></circle>
+					<path d="M10 85 L90 85" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+					<circle cx="50" cy="85" r="12" stroke="none"></circle>
+				</svg>
+			</button>
+			<div id="machine-title" style="display: none;">
+				<div id="machine-name"></button><span class="machine-number">n° 2042</span><span class="value">The Great Machine</span><button class="edit" style="display: none;"></button></div>
+				<input id="machine-name-edit" value="The Great Machine" style="display: none;"></input>
+				<div id="machine-author"></button><span>created by </span><span class="value">Anonymous</span><button class="edit" style="display: none;"></button></div>
+				<input id="machine-author-edit" value="Anonymous" style="display: none;"></input>
+			</div>
+		</div>
+
+		<div id="machine-editor-toolbar" class="menu" style="display: none">
+			<div id="machine-editor-mode-pill"></div>
+			<div id="machine-editor-objects">
+				<div id="machine-editor-item-container">
+				</div>
+			</div>
+			
+			<div id="machine-editor-part-menu" style="display: none">
+				<button id="machine-editor-part-menu-unfold" class="btn xxs"  title="Back to main menu">
+					<svg class="label" viewBox="0 0 100 100">
+						<path d="M25 20 L50 70 L80 20" fill="none" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"></path>
+					</svg>
+				</button>
+				<button id="machine-editor-part-menu-fold" class="btn xxs"  title="Back to main menu">
+					<svg class="label" viewBox="0 0 100 100">
+						<path d="M25 70 L50 20 L80 70" fill="none" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"></path>
+					</svg>
+				</button>
+
+				<div id="machine-editor-part-menu-title">
+					<span></span>
+				</div>
+				<div id="machine-editor-part-menu-ijk" class="line">
+					<span class="label">ijk</span>
+					<span class="value i">0</span>
+					<span class="value j">0</span>
+					<span class="value k">0</span>
+				</div>
+				<div id="machine-editor-part-menu-k" class="line">
+					<span class="label">k</span>
+					<span class="value k">0</span>
+				</div>
+				<div id="machine-editor-part-menu-width" class="line">
+					<span class="label vertical-label">width</span>
+					<span class="label landscape-label">width</span>
+					
+					<button class="btn xxs minus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M20 50 L80 50" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+
+					<span class="value">1</span>
+					
+					<button class="btn xxs plus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M20 50 L80 50 M50 20 L50 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-height" class="line">
+					<span class="label vertical-label">height</span>
+					<span class="label landscape-label">height</span>
+					
+					<button class="btn xxs minus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M20 50 L80 50" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+
+					<span class="value">1</span>
+					
+					<button class="btn xxs plus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M20 50 L80 50 M50 20 L50 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-depth" class="line">
+					<span class="label vertical-label">depth</span>
+					<span class="label landscape-label">depth</span>
+					
+					<button class="btn xxs minus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M20 50 L80 50" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+
+					<span class="value">1</span>
+					
+					<button class="btn xxs plus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M20 50 L80 50 M50 20 L50 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-count" class="line">
+					<span class="label vertical-label">count</span>
+					<span class="label landscape-label">count</span>
+					
+					<button class="btn xxs minus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M20 50 L80 50" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+
+					<span class="value">1</span>
+					
+					<button class="btn xxs plus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M20 50 L80 50 M50 20 L50 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-speed" class="line">
+					<span class="label vertical-label">speed</span>
+					<span class="label landscape-label">speed</span>
+					
+					<button class="btn xxs minus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M20 50 L80 50" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+
+					<span class="value">1</span>
+					
+					<button class="btn xxs plus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M20 50 L80 50 M50 20 L50 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-color-0" class="line">
+					<span class="label vertical-label">colors</span>
+					<span class="label landscape-label">color 0</span>
+					
+					<button class="btn xxs minus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M60 20 L20 50 L60 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+
+					<span class="color-value">1</span>
+					
+					<button class="btn xxs plus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M40 20 L80 50 L40 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-color-1" class="line">
+					<span class="label landscape-label">color 1</span>
+					
+					<button class="btn xxs minus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M60 20 L20 50 L60 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+
+					<span class="color-value">1</span>
+					
+					<button class="btn xxs plus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M40 20 L80 50 L40 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-color-2" class="line">
+					<span class="label landscape-label">color 2</span>
+					
+					<button class="btn xxs minus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M60 20 L20 50 L60 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+
+					<span class="color-value">1</span>
+					
+					<button class="btn xxs plus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M40 20 L80 50 L40 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-color-3" class="line">
+					<span class="label landscape-label">color 3</span>
+					
+					<button class="btn xxs minus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M60 20 L20 50 L60 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+
+					<span class="color-value">1</span>
+					
+					<button class="btn xxs plus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M40 20 L80 50 L40 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-color-4" class="line">
+					<span class="label landscape-label">color 4</span>
+					
+					<button class="btn xxs minus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M60 20 L20 50 L60 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+
+					<span class="color-value">1</span>
+					
+					<button class="btn xxs plus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M40 20 L80 50 L40 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-color-5" class="line">
+					<span class="label landscape-label">color 5</span>
+					
+					<button class="btn xxs minus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M60 20 L20 50 L60 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+
+					<span class="color-value">1</span>
+					
+					<button class="btn xxs plus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M40 20 L80 50 L40 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-mirrorX" class="line">
+					<span class="label">mirror</span>
+					
+					<button class="btn xxs">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M25 30 L10 50 L25 70 Z" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"></path>
+							<path d="M75 30 L90 50 L75 70 Z" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"></path>
+							<path d="M15 50 L85 50" fill="none" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-mirrorZ" class="line">
+					<span class="label">mirrorZ</span>
+					
+					<button class="btn xxs">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M30 25 L50 10 L70 25 Z" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"></path>
+							<path d="M30 75 L50 90 L70 75 Z" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"></path>
+							<path d="M50 15 L50 85" fill="none" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-fill" class="line">
+					<span class="label">fill</span>
+					
+					<button class="btn xxs long-btn">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M35 20 L65 20" fill="none" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"></path>
+							<path d="M35 50 L65 50" fill="none" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"></path>
+							<path d="M35 80 L65 80" fill="none" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-focus" class="line">
+					<span class="label landscape-label">focus</span>
+					
+					<button class="btn xxs long-btn">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M10 25 L10 10 L25 10" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+							<path d="M90 25 L90 10 L75 10" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+							<path d="M90 75 L90 90 L75 90" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+							<path d="M10 75 L10 90 L25 90" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+							<circle cx="50" cy="50" r="15" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></circle>
+						</svg>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-delete" class="line">
+					<span class="label landscape-label">delete</span>
+					
+					<button class="btn xxs long-btn">
+						<span>DELETE</span>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-publish" class="line">
+					<span class="label landscape-label">share</span>
+					
+					<button id="machine-editor-part-menu-publish-button" class="btn xxs long-btn yellow">
+						<span>PUBLISH</span>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-export" class="line">
+					<span class="label landscape-label">export</span>
+					
+					<button id="machine-editor-part-menu-export-button" class="btn xxs long-btn">
+						<span>EXPORT</span>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-file" class="line">
+					<span class="label">file</span>
+					
+					<button id="machine-editor-part-menu-save" class="btn xxs medium-btn">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M15 84 L85 84 L85 90 L15 90 Z" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+							<path d="M50 5 L50 55" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"></path>
+							<path d="M35 40 L50 60 L65 40 Z" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+					
+					<button id="machine-editor-part-menu-load" class="btn xxs medium-btn">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M15 84 L85 84 L85 90 L15 90 Z" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+							<path d="M50 10 L50 60" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"></path>
+							<path d="M35 25 L50 5 L65 25 Z" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+				<input id="machine-editor-part-menu-load-input" class="line" type="file"/>
+				<div id="machine-editor-part-menu-support" class="line">
+					<span class="label vertical-label">support</span>
+					<span class="label landscape-label">support</span>
+					
+					<button class="btn xxs minus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M60 20 L20 50 L60 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+
+					<span class="value">1</span>
+					
+					<button class="btn xxs plus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M40 20 L80 50 L40 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-base" class="line">
+					<span class="label vertical-label">base</span>
+					<span class="label landscape-label">base</span>
+					
+					<button class="btn xxs minus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M60 20 L20 50 L60 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+
+					<span class="value">1</span>
+					
+					<button class="btn xxs plus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M40 20 L80 50 L40 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-room" class="line">
+					<span class="label landscape-label">room</span>
+					
+					<button class="btn xxs minus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M60 20 L20 50 L60 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+
+					<span class="value">1</span>
+					
+					<button class="btn xxs plus">
+						<svg class="label" viewBox="0 0 100 100">
+							<path d="M40 20 L80 50 L40 80" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+						</svg>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-cell-shading" class="line">
+					<span class="label landscape-label">cel-shading</span>
+					
+					<button class="btn xxs long-btn">
+						<span>OFF</span>
+					</button>
+				</div>
+				<div id="machine-editor-part-menu-machine-clear" class="line">
+					<span class="label landscape-label">clear</span>
+					
+					<button class="btn xxs long-btn">
+						<span>CLEAR</span>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div id="auto-update-graphic-alert" style="display: none;">
+			<div></div>
+		</div>
+
+		<canvas id="render-canvas"></canvas>
+		<div id="canvas-curtain" style="display: none;"></div>
+		<div id="pop-up-shade"></div>
+		<div id="screenshot-frame" style="display: none;">
+			<button id="take-photo-button"></button>
+			<div id="take-photo-mode-container">
+				<div id="take-photo-mode-photo" class="take-photo-mode active">PHOTO</div>
+				<div id="take-photo-mode-video-720" class="take-photo-mode">VIDEO 720P</div>
+				<div id="take-photo-mode-video-1080" class="take-photo-mode">VIDEO 1080P</div>
+			</div>
+			<img src="./datas/icons-mrs/photography-frame.svg" style="width: 100%; height: 100%;"/>
+		</div>
+		<nabu-popup id="challenge-tuto" duration="3" style="display: none">
+			<div></div>
+		</nabu-popup>
+		<button id="challenge-tuto-skip" style="display: none;"><i18n-text text-key="btn-skip"></i18n-text></button>
+		<nabu-popup id="challenge-next" style="display: none">
+			<a href="#home"><button>Next</button></a>
+		</nabu-popup>
+		<div id="challenge-topbar" style="display: none;">
+			<button id="challenge-topbar-help"><span style="display: inline-block; margin: 0; margin-right: 10px;">🎬</span> HELP</button>
+			<button id="challenge-topbar-reset"><img src="datas/icons-mrs/reset.svg"/>RESET</button>
+		</div>
+		<div id="bb-puzzle-input-container" style="display: none">
+			<div id="bb-puzzle-title">
+				<div id="bb-puzzle-title-stars"></div>
+				<div id="bb-puzzle-title-level"></div>
+				<div id="bb-puzzle-title-name"></div>
+			</div>
+			<button id="bb-puzzle-skip">SKIP</button>
+			<a href="#bb-puzzles"><button id="bb-puzzle-menu">MENU</button></a>
+			<button id="bb-puzzle-save" style="display: none;">SAVE</button>
+			<button id="bb-puzzle-m-save" style="display: none;">m-SAVE</button>
+			<button id="bb-puzzle-star" style="display: none;">STAR</button>
+			<div id="bb-puzzle-bottom-buttons">
+				<button id="bb-puzzle-help" class="medium">HELP</button>
+				<button id="bb-puzzle-play" class="large">GO !</button>
+				<button id="bb-puzzle-stop" class="large">STOP</button>
+				<button id="bb-puzzle-undo" class="medium"><img src="datas/icons/undo_white.png"/> UNDO</button>
+			</div>
+			<div id="bb-puzzle-toolbox">
+				<button id="bb-puzzle-toolbox-path"><span class="label">RAIL</span></button>
+				<button id="bb-puzzle-toolbox-bouncer"><span class="label">BUMPER</span></button>
+				<button id="bb-puzzle-toolbox-eraser"><span class="label">ERASER</span></button>
+			</div>
+			<div id="bb-puzzle-material" class="m-stars-count-1">
+				<div class="material-zone-cursor"></div>
+				<div class="material-zone zone-0"></div>
+				<div class="material-zone zone-1"></div>
+				<div class="material-zone zone-2"></div>
+				<div class="material-zone zone-3"></div>
+				<div class="material-zone-zero">0</div>
+				<div class="material-zone-max">90</div>
+			</div>
+		</div>
+		<div id="bb-puzzle-victory" class="text-flash" style="display: none">
+			<div class="top">SUCCESS !</div>
+			<div class="material"><span class="label">material </span><span class="value">26.3</span><span class="unit"></span><span class="medal bronze" style="display: none;">3</span></div>
+			<div class="distance" style="display: none;"><span class="label">distance </span><span class="value">10.983</span><span class="unit"> m </span><span class="medal gold" style="display: none;">1</span></div>
+			<div class="max-speed" style="display: none;"><span class="label">max speed </span><span class="value">10.234</span><span class="unit"> m/s </span><span class="medal silver" style="display: none;">2</span></div>
+			<div class="air-time" style="display: none;"><span class="label">air time </span><span class="value">58.23</span><span class="unit"> s </span><span class="medal bronze" style="display: none;">3</span></div>
+			<div class="collected-stars"><span class="label">stars </span><span class="value">1/1</span><span class="unit"> </span><span class="medal gold" style="display: none;">1</span></div>
+			<div class="score">
+				<span class="value" style="display: none;">00000</span><span class="medal gold" style="display: none;">1</span><img class="star" src="./datas/icons-bb/star.png"></img><img class="star inactive" src="./datas/icons-bb/star.png"></img><img class="star" src="./datas/icons-bb/star.png"></img>
+			</div>
+			<div class="text">Well played :)</div>
+			<div class="bottom">
+				<button class="replay">BACK</button>
+				<button class="next">NEXT</button>
+			</div>
+			<div id="bb-puzzle-progress">
+				<div class="title">Progress - 4 / 20</div>
+				<div class="stars-container">
+					<div>
+						<img class="star" src="./datas/icons-bb/star.png"></img>
+						<img class="star" src="./datas/icons-bb/star.png"></img>
+						<img class="star" src="./datas/icons-bb/star.png"></img>
+						<img class="star" src="./datas/icons-bb/star.png"></img>
+						<img class="star inactive" src="./datas/icons-bb/star.png"></img>
+						<img class="star inactive" src="./datas/icons-bb/star.png"></img>
+						<img class="star inactive" src="./datas/icons-bb/star.png"></img>
+						<img class="star inactive" src="./datas/icons-bb/star.png"></img>
+						<img class="star inactive" src="./datas/icons-bb/star.png"></img>
+						<img class="star inactive" src="./datas/icons-bb/star.png"></img>
+					</div>
+					<div>
+						<img class="star inactive" src="./datas/icons-bb/star.png"></img>
+						<img class="star inactive" src="./datas/icons-bb/star.png"></img>
+						<img class="star inactive" src="./datas/icons-bb/star.png"></img>
+						<img class="star inactive" src="./datas/icons-bb/star.png"></img>
+						<img class="star inactive" src="./datas/icons-bb/star.png"></img>
+						<img class="star inactive" src="./datas/icons-bb/star.png"></img>
+						<img class="star inactive" src="./datas/icons-bb/star.png"></img>
+						<img class="star inactive" src="./datas/icons-bb/star.png"></img>
+						<img class="star inactive" src="./datas/icons-bb/star.png"></img>
+						<img class="star inactive" src="./datas/icons-bb/star.png"></img>
+					</div>
+				</div>
+				<button class="unlocked-reward">Play Bonus Level</button>
+				<div class="text"></div>
+			</div>
+		</div>
+		<div id="bb-puzzle-dialog-container" style="display: none">
+			<audio id="voice-click" src="lib/marble-run-simulator-core/datas/sounds/marble-choc.wav"></audio>
+			<div class="avatar-container">
+				<img src="datas/icons-bb/prof_avatar_3.png"/>
+			</div>
+			<div class="text-container">
+				<div class="text">
+					<span class="visible"></span><span class="hidden" style="opacity: 50%;"></span>
+				</div>
+				<button class="btn-ok">OK</button>
+			</div>
+		</div>
+		<share-menu id="share-menu" style="display: none"></share-menu>
+		<export-menu id="export-menu"></export-menu>
+		<construction-mode-menu id="construction-mode-menu" style="display: none"></construction-mode-menu>
+		<div id="click-anywhere-screen">
+			<div class="container">
+				<img class="splash-title" src="datas/icons-mrs/title-text-only.png"/>
+				<img class="white-track" src="datas/icons-mrs/white_track.png" style="opacity: 0;"/>
+				<div class="message-description">a marble machine construction game</div>
+				<div class="message-description-2">Imagine, Build, Share !</div>
+				<div class="message-bottom">Click or press anywhere to Enter</div>
+				<div id="loading-info" class="message-loading"></div>
+			</div>
+		</div>
+		<!--
+		<div id="click-anywhere-screen">
+			<div class="container">
+				<div style="font-family: BigBottomCartoon; text-align: center; font-size: 30px; margin-top: 10%;">GRAVITOLOGY</div>
+				<img class="white-track" src="datas/icons-bb/white_bb_puzzle.png" style="opacity: 0; left: 25%; width: 50%"/>
+				<div class="message-description">a gravity puzzle game</div>
+				<div class="message-description-2">Think, Try, Solve !</div>
+				<div class="message-bottom">Click or press anywhere to Enter</div>
+				<div id="loading-info" class="message-loading"></div>
+			</div>
+		</div>
+		-->
+		<material-picker style="display: none"></material-picker>
+		<material-picker style="display: none"></material-picker>
+		<canvas id="music-display" style="display: none;"></canvas>
+		<div id="frame">
+			<div id="frame-left"></div>
+			<div id="frame-right"></div>
+		</div>
+
+		<div id="thumbnail-title" style="display: none">
+			<img id="thumbnail-title1" src="./work/title_parts/marble-run.png"/>
+			<img id="thumbnail-title2" src="./work/title_parts/simulator.png"/>
+			<img id="thumbnail-title3" src="./work/title_parts/3d.png"/>
+		</div>
+	</body>
+</html>

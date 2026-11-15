@@ -1,0 +1,194 @@
+#bb-puzzles-menu .bb-puzzles-page-body .bb-puzzles-page-logo {
+    display: inline-block;
+    width: fit-content;
+    font-size: 30px;
+    font-family: BigBottomCartoon;
+    background-color: #e96645;
+    -webkit-text-stroke: 4px black;
+    paint-order: stroke fill;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+    border: 1px solid black;
+    touch-action: none;
+}
+
+.bb-puzzles-page-body {
+    margin-top: 5px;
+    height: calc(100% - 5px);
+}
+
+.puzzle-line {
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    padding: var(--half-menu-gap);
+    gap: var(--menu-gap);
+    justify-content: space-between;
+    touch-action: pan-y;
+}
+
+.puzzle-tile {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    background-color: #45bbe9;
+    border: 1px solid white;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    touch-action: inherit;
+}
+
+.puzzle-tile.puzzle-bonus {
+    background-color: #e94545;
+}
+
+.puzzle-tile.puzzle-bonus.puzzle-locked {
+    background-color: #695757;
+    background-image: url("../datas/icons/locked.svg");
+    background-size: 22%;
+    background-repeat: no-repeat;
+    background-position: top 5px left 3px;
+
+    pointer-events: none;
+}
+
+.puzzle-tile.need-solution {
+    background-color: #e98f45;
+}
+
+.puzzle-tile canvas {
+    touch-action: inherit;
+    border: 1px solid white;
+}
+
+.menu .puzzle-tile.selectable:hover { 
+    background-color: rgb(61, 66, 70);
+    transition: background-color 0.3s;
+}
+
+.puzzle-tile .title {
+    position: relative;
+    margin: 4px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 12px;
+    height: 2lh;
+    line-height: 150%;
+    word-wrap: break-word;
+    font-family: BigBottomCartoon;
+    -webkit-text-stroke: 2px black;
+    paint-order: stroke fill;
+}
+
+.puzzle-tile .title.single-line {
+    height: 1lh;
+}
+
+
+.puzzle-tile.puzzle-bonus.puzzle-locked .title {
+    padding-left: 30px;
+}
+
+.puzzle-tile button {
+    width: 90%;
+    font-size: 12px;
+    height: 36px;
+    padding-left: 20px;;
+    margin: 5px;
+    font-family: BigBottomCartoon;
+    color: white;
+    border: 1px solid white;
+    border-radius: 8px;
+    background-color: #a2e945;
+    background-size: 20%;
+    background-position: left 2px center;
+    background-repeat: no-repeat;
+    -webkit-text-stroke: 2px black;
+    paint-order: stroke fill;
+    filter: saturate(0.1);
+}
+
+.puzzle-tile button.selected {
+    filter: none;
+    border: 2px solid white;
+    outline: 2px solid white;
+    background-image: url("../datas/icons-mrs/next.svg");
+}
+
+.puzzle-tile button.disabled {
+    filter: brightness(0.5) saturate(0.1);
+    pointer-events: none;
+    background-image: url("../datas/icons/locked.svg");
+}
+
+.puzzle-tile .separator {
+    height: 1px;
+    margin: 5px;
+    background-color: white;
+}
+
+.puzzle-tile .score {
+    position: relative;
+    text-align: left;
+    padding-left: 5px;
+    height: 22px;
+}
+.puzzle-tile .score .value {
+    display: block;
+    position: absolute;
+    right: 6px;
+    bottom: 0px;
+    font-size: 12px;
+    color: white;
+    font-weight: 100;
+    font-family: BigBottomCartoon;
+    -webkit-text-stroke: 2px black;
+    paint-order: stroke fill;
+}
+
+.puzzle-tile .score .star {
+    display: inline-block;
+    margin: 1px;
+    width: 16px;
+    height: 16px;
+    background-size: cover;
+    background-image: url("../datas/icons-bb/star.png");
+}
+
+.puzzle-tile .text {
+    font-size: 12px;
+    padding: 2px;
+    color: black;
+    font-weight: 100;
+    font-family: BigBottomCartoon;
+}
+
+.puzzle-tile .lock-info {
+    font-size: 13px;
+    line-height: 13px;
+    color: rgb(80, 0, 0);
+    font-weight: 100;
+    font-family: BigBottomCartoon;
+}
+
+.text-star {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    transform: translateY(1px);
+    background-size: contain;
+    background-image: url("../datas/icons-bb/star.png");
+}
+
+.bb-puzzles-page-machines {
+    height: calc(100% - 25px);
+    overflow-y: scroll;
+    scrollbar-color: #2b2821 white;
+    scrollbar-width: thin;
+    text-align: center;
+}

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="800px"
+   height="800px"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg875"
+   sodipodi:docname="like-stroked.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <metadata
+     id="metadata881">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>ionicons-v5-h</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs879" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="2560"
+     inkscape:window-height="1377"
+     id="namedview877"
+     showgrid="false"
+     inkscape:pagecheckerboard="true"
+     inkscape:zoom="1.26"
+     inkscape:cx="400"
+     inkscape:cy="400"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg875"
+     inkscape:document-rotation="0" />
+  <title
+     id="title869">ionicons-v5-h</title>
+  <path
+     d="m 449.13738,235.93134 c -35.25285,67.79392 -129.56174,159.99367 -182.89298,209.10661 -5.73376,5.17634 -14.45376,5.17634 -20.18751,0 C 192.42436,395.92501 98.115459,303.72526 62.862617,235.93134 -14.57312,86.784689 180.6734,-12.64642 255.99999,136.50023 331.32659,-12.64642 526.57312,86.784689 449.13738,235.93134 Z"
+     id="path2-2"
+     style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:30.1307;stroke-opacity:1" />
+</svg>

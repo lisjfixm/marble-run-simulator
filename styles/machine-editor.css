@@ -1,0 +1,467 @@
+#machine-editor-toolbar {
+    position: fixed;
+    margin: 0;
+    z-index: 7;
+    padding: 0;
+    margin: 0;
+    background-color: #161718;
+    gap: 0;
+}
+
+#machine-editor-toolbar.left {
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100%;
+}
+
+#machine-editor-toolbar.left.slim {
+    width: 115px;
+}
+
+#machine-editor-toolbar.left.mobile {
+    top: 33.4%;
+    height: 66.6%;
+}
+
+#machine-editor-toolbar.bottom {
+    height: 178px;
+    width: 100%;
+    bottom: 0px;
+    left: 0;
+    display: block;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+#machine-editor-toolbar.bottom.slim {
+    height: 75px;
+}
+
+#machine-editor-objects {
+    line-height: 0;
+    scrollbar-color: #272b2e rgba(255, 255, 255, 80%);
+    scrollbar-width: thin;
+}
+
+#machine-editor-toolbar.left #machine-editor-objects {
+    height: min-content;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#machine-editor-toolbar.bottom #machine-editor-objects {
+    display: inline-block;
+    width: calc(100% - 142px);
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    vertical-align: top;
+}
+
+#machine-editor-toolbar.slim #machine-editor-objects {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+#machine-editor-toolbar.left #machine-editor-item-container {
+    min-height: 100svh;
+}
+
+#machine-editor-toolbar.bottom #machine-editor-item-container {
+    height: 100%;
+    width: var(--machine-editor-item-container-bottom-width);
+}
+
+.machine-editor-item {
+    display: inline-block;
+    position: relative;
+    color: white;
+    background-color: #272B2E;
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: 70%;
+    background-size: 80%;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    outline: 1px solid white;
+    cursor: grab;
+}
+
+.machine-editor-item:hover {
+    outline: 2px solid white;
+}
+
+.machine-editor-item.disabled {
+    background-color: #18191a;
+    outline: 1px solid rgb(128, 128, 128);
+}
+
+.machine-editor-item-name {
+    display: block;
+    position: absolute;
+    line-height: normal;
+    top: 5%;
+    left: 10%;
+    text-align: left;
+}
+
+.machine-editor-item-new {
+    display: block;
+    position: absolute;
+    line-height: normal;
+    bottom: 0px;
+    left: 0px;
+    font-size: 14px;
+    font-weight: 900;
+    border: 1px solid white;
+    border-bottom: none;
+    border-left: none;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 2px;
+    background-color: #6BBF59F0;
+    color: white;
+}
+
+.machine-editor-item-adlocked {
+    display: block;
+    position: absolute;
+    line-height: normal;
+    top: 0px;
+    right: 0px;
+    height: 100%;
+    font-size: 13px;
+    font-weight: 900;
+    border-left: 1px solid white;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding-left: 0px;
+    padding-right: 2px;
+    background-color: #1348ae;
+    color: white;
+    text-align: center;
+    writing-mode: sideways-lr;
+}
+
+.machine-editor-item-count {
+    position: absolute;
+    line-height: normal;
+    bottom: 5%;
+    right: 10%;
+    text-align: right;
+}
+
+#machine-editor-toolbar.left .machine-editor-item{
+    font-size: 16px;
+    margin: 3px;
+    width: 109px;
+    height: 109px;
+    border-radius: 5px;
+    touch-action: pan-y;
+}
+
+#machine-editor-toolbar.bottom .machine-editor-item{
+    font-size: 14px;
+    margin: 2px;
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    touch-action: pan-x;
+}
+
+.machine-editor-item.selected {
+    outline: 2px solid white;
+}
+
+#machine-editor-item-container {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --machine-editor-item-container-bottom-width: 200%;
+}
+
+#machine-editor-part-menu {
+    direction: ltr;
+    text-align: left;
+    z-index: 3;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    color: white;
+    background-color: rgb(39, 43, 46);
+    pointer-events: all;
+    margin: 0;
+}
+
+#machine-editor-toolbar.left #machine-editor-part-menu {
+    display: block;
+    width: calc(100% - 2 * 10px - 3px);
+    min-width: 216px;
+    padding: 10px 10px 10px 10px;
+    border-top: 3px double white;
+    border-right: 3px double white;
+}
+
+#machine-editor-toolbar.bottom #machine-editor-part-menu {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 120px;
+    padding: 10px 10px 5px 10px;
+    height: fit-content;
+    min-height: 159px;
+    border-top: 3px double white;
+    border-left: 3px double white;
+}
+
+#machine-editor-toolbar.bottom.slim #machine-editor-part-menu {
+    min-height: 62px;
+}
+
+#machine-editor-part-menu-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    vertical-align: middle;
+    font-weight: 100;
+}
+
+#machine-editor-toolbar.bottom #machine-editor-part-menu-title {
+    display: none;
+}
+
+#machine-editor-part-menu.vertical {
+    left: auto;
+    right: 0;
+}
+
+#machine-editor-part-menu .line {
+    font-size: 14px;
+    margin-bottom: 5px;
+    vertical-align: middle;
+}
+
+#machine-editor-toolbar.bottom #machine-editor-part-menu .line {
+    font-size: 14px;
+}
+
+#machine-editor-part-menu .btn {
+    vertical-align: middle;
+}
+
+#machine-editor-part-menu span.label {
+    display: inline-block;
+    color: rgba(255, 255, 255, 70%);
+    width: 90px;
+    vertical-align: middle;
+    font-weight: 100;
+}
+
+#machine-editor-toolbar.bottom #machine-editor-part-menu span.label {
+    margin-bottom: 1px;
+    font-size: 14px;
+    width: 38px;
+}
+
+#machine-editor-toolbar.bottom #machine-editor-part-menu span.label.vertical-label {
+    display: block;
+}
+
+#machine-editor-toolbar.bottom #machine-editor-part-menu span.label.landscape-label {
+    display: none;
+}
+
+#machine-editor-toolbar.left #machine-editor-part-menu span.label.vertical-label {
+    display: none;
+}
+
+#machine-editor-toolbar.left #machine-editor-part-menu span.label.landscape-label {
+    display: inline-block;
+}
+
+#machine-editor-part-menu .value {
+    display: inline-block;
+    width: 62px;
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+    vertical-align: middle;
+}
+
+#machine-editor-part-menu #machine-editor-part-menu-ijk .value {
+    width: 36px;
+    text-align: center;
+}
+
+#machine-editor-toolbar.bottom #machine-editor-part-menu .value {
+    width: 55px;
+    font-size: 12px;
+}
+
+#machine-editor-part-menu .color-value {
+    display: inline-block;
+    width: 56px;
+    height: calc(var(--button-xxs-size) - 0px);
+    text-align: center;
+    margin-left: 3px;
+    margin-right: 3px;
+    
+    outline: 1px solid white;
+    border-radius: 0.5vh;
+    vertical-align: middle;
+}
+
+#machine-editor-toolbar.bottom #machine-editor-part-menu .color-value {
+    width: 49px;
+    height: calc(var(--button-xxs-size) - 4px);
+}
+
+#machine-editor-part-menu .color-value.selected {
+    outline: 2px solid white;
+}
+
+#machine-editor-toolbar.bottom #machine-editor-part-menu .long-btn {
+    width: 115px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+#machine-editor-part-menu .long-btn {
+    width: 115px;
+}
+
+#machine-editor-toolbar.bottom #machine-editor-part-menu .medium-btn {
+    width: 35px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+#machine-editor-part-menu .medium-btn {
+    width: 35px;
+}
+
+#machine-editor-part-menu-unfold {
+    display: none;
+    position: absolute;
+    top: 7px;
+    right: 5px;
+}
+
+#machine-editor-part-menu-fold {
+    display: none;
+    position: absolute;
+    top: 7px;
+    right: 5px;
+}
+
+#machine-editor-mode-pill {
+    position: fixed;
+    top: 0px;
+    padding: 1px;
+    right: calc(50vw - 40px);
+    width: 80px;
+    pointer-events: none;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: #00000080;
+    opacity: 60%;
+}
+
+construction-mode-menu {
+    outline: 2px solid white;
+    border-radius: 5px;
+    position: fixed;
+    padding: 0px;
+    padding-top: 20px;
+    padding-bottom: 5px;
+    width: min(calc(100vw - 40px - 10px), 400px);
+    top: calc(max(30px, 50svh - 190px));
+    left: calc((100vw - min(calc(100vw - 40px - 10px), 400px)) * 0.5);
+    font-family: Roboto;
+    color: white;
+    background-color: #272b2e;
+    user-select: text;
+    font-size: 16px;
+    font-weight: 300;
+    text-align: center;
+    z-index: 7;
+}
+
+construction-mode-menu h1 {
+    font-size: 24px;
+    margin: 2px;
+    position: absolute;
+    left: 15px;
+    top: -20px;
+    outline: 2px solid white;
+    border-radius: 5px;
+    background-color: #272b2e;
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+}
+
+construction-mode-menu .construction-mode-panel {
+    display: inline-block;
+    width: min(35vw, 140px);
+    margin: 10px;
+    vertical-align: text-top;
+}
+
+construction-mode-menu .construction-mode-button {
+    position: relative;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+construction-mode-menu .construction-mode-button.selected {
+    outline: 3px double white;
+    background-color: #ffffff10;
+}
+
+construction-mode-menu .construction-mode-button .recommended {
+    position: absolute;
+    top: 36px;
+    right: 10px;
+    font-weight: 100;
+    font-size: 14px;
+}
+
+construction-mode-menu .construction-mode-panel h2 {
+    margin: 5px;
+}
+
+construction-mode-menu .construction-mode-panel p {
+    margin: 5px;
+    text-align: left;
+}
+
+construction-mode-menu .construction-mode-panel img {
+    width: 100px;
+    height: 100px;
+}
+
+construction-mode-menu .large-button {
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 65%;
+    margin-left: 17.5%;
+    text-align: center;
+    border: 1px solid white;
+    background-color: #2a5175;
+    color: white;
+    border-radius: 5px;
+}

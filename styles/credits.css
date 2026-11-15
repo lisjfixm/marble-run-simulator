@@ -1,0 +1,90 @@
+.credits-page {
+    background-color: #272b2e;
+    color: white;
+    z-index: 3;
+    outline: 2px solid white;
+    border-radius: 1svh;
+    top: 6svh;
+    left: calc((100vw - (min(100svh, 100vw) - 2svh)) * 0.5);
+    width: calc(min(100svh, 100vw) - 4svh);
+    height: 80svh;
+    padding: 1svh;
+}
+
+.credits-page h1 {
+    font-size: 5svh;
+    margin: 0;
+    margin-left: min(4svh, 4vw);
+}
+
+.credits-page h2 {
+    margin: 0;
+    margin-left: min(4svh, 4vw);
+}
+
+.credits-page h2.label {
+    margin: 0;
+    margin-left: min(4svh, 4vw);
+    font-weight: 300;
+}
+
+.credits-page h3 {
+    text-align: justify;
+    margin-left: min(4svh, 4vw);
+}
+
+.credits-page p {
+    font-size: 1.7svh;
+    text-align: center;
+    font-weight: 300;
+}
+
+.credits-page .spacer {
+    height: 5%;
+}
+
+.credits-page .container-head {
+    position: relative;
+    height: 15%;
+}
+
+.credits-page .container-frame {
+    position: relative;
+    height: 70%;
+    user-select: none;
+}
+
+.credits-page .container-foot {
+    position: relative;
+    height: 15%;
+}
+
+.credits-page button {
+    margin: 3%;
+
+    border-radius: min(1.5svh, 1.5vw);
+    font-size: min(3svh, 5vw);
+    background: #1f2022;
+    border: min(0.3svh, 0.3vw) solid white;
+    color: white;
+    padding: min(1svh, 1vw);
+    width: min(18svh, 30vw);
+    bottom: min(3svh, 3vw);
+    left: calc((100% - min(18svh, 30vw)) * 0.5);
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.credits-page button:hover { 
+    background-color: #35373a;
+}
+
+.credits-page img.large {
+    display: inline-block;
+    height: 15%;
+}
+
+.credits-page img.medium {
+    display: inline-block;
+    height: 10%;
+}

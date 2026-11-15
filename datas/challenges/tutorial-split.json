@@ -1,0 +1,27 @@
+{
+    "machine": {
+        "title": "Tutorial 6 / 7",
+        "author": "Tiaratum Games",
+        "country": "fr",
+        "v": 12,
+        "mode": 2,
+        "content": "02hyti7yi0004hwji74i0003090ai2i0i40i3i2i1220140fi6i0i00i2i1i112034400fhui0i02i2i1i1120355018hwi0i30i1i1i112025518hvi0i42i1i1i112025500hwi0i40i3i0i0120150ehxi0ib0i1i0i11201011hwi0ia0i3i5i1120300018hvi0ib2i1i1i112020000000100z003",
+        "sp": { "grndAnchors": true, "grndAnchorsMaxY": 0.35, "spacing": 0.03 }
+    },
+    "help": [
+        [-37, 125, 0, -23, 125, 0, -19, 125, 0, -15, 124, 0, -13, 123, 0, -11, 123, 0, -10, 122, 0],
+        [9, 104, 0, 11, 103, 0, 13, 102, 0, 15, 101, 0, 17, 101, 0, 21, 100, 0, 25, 100, 0, 38, 100, 0],
+        [-37, 100, 0, -23, 100, 0, -19, 100, 0, -15, 101, 0, -13, 102, 0, -11, 102, 0, -10, 103, 0],
+        [-19, 141, 0, -17, 141, 0, -13, 139, 0, -9, 138, 0, -5, 136, 0, -2, 134, 0, 2, 132, 0, 5, 129, 0, 8, 127, 0, 11, 124, 0]
+    ],
+    "mode": 0,
+    "gridIMin": -4,
+    "gridIMax": 4,
+    "gridJMin": 0,
+    "gridJMax": 0,
+    "gridKMin": 1,
+    "gridKMax": 8,
+    "elements": ["split"],
+    "allowAutoMirrorXOnDrag": true,
+    "allowEditMachinePart": true
+}

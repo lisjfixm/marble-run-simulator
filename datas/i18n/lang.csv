@@ -1,0 +1,153 @@
+editor-title; PLAY; JOUER
+editor-title-2; MACHINE BUILDER; CONSTRUCTEUR DE MACHINE
+editor-subtitle; Come and make your own machine !; Construis ta machine ! 
+community-title; SHOWROOM; SHOWROOM
+community-title-2; COMMUNITY MACHINES; VOS CREATIONS
+community-subtitle; Enjoy the finest creations; Enjoie les machines !
+machine-of-the-week-title; MACHINE OF THE WEEK; MACHINE DE LA SEMAINE
+machine-of-the-month-title; MACHINE OF THE MONTH; MACHINE DU MOIS
+machine-of-the-year-title; MACHINE OF THE YEAR; MACHINE DE L'ANNEE
+options-title; OPTIONS; OPTIONS
+credits-title; CREDITS; CREDITS
+btn-home; HOME; MENU
+btn-home-subtitle; Back to Main Menu; Retour Menu Principal
+btn-back; RETURN; RETOUR
+btn-skip; Skip; Passer
+option-cat-gameplay; Gameplay; Jouabilité
+option-cat-graphic; Graphic; Graphismes
+option-cat-control; Control; Contrôles
+option-cat-ui; User Interface; Interface Utilisateur
+option-cat-dev; Dev; Dev
+option-lang; Language; Langue
+option-newBallMat; New Ball Material; Insertion Bille
+option-newBallMat-0; Steel; Acier
+option-newBallMat-1; Random; Aléatoire
+option-newBallMat-2; Last Used; Dernière
+option-autoGraphicQ; Graphic Auto; Qualité Graphique Automatique
+option-graphicQ; Graphic Quality; Qualité Graphique
+option-zoom-precision; Zoom Precision; Precision Zoom Camera
+option-pan-precision; Pan Precision; Precision Déplacement Camera
+tutorial-simple-title; Tutorial; Tutoriel
+tutorial-simple-subtitle; First Element; Premier Element
+tutorial-rotate-title; Tutorial; Tutoriel
+tutorial-rotate-subtitle; Mirror; Miroir
+tutorial-speed-title; Tutorial; Tutoriel
+tutorial-speed-subtitle; Speed; Speed
+tutorial-lift-title; Tutorial; Tutoriel
+tutorial-lift-subtitle; Elevator; Elevateur
+tutorial-join-title; Tutorial; Tutoriel
+tutorial-join-subtitle; Join; Join
+tutorial-split-title; Tutorial; Tutoriel
+tutorial-split-subtitle; Split; Split
+tutorial-loop-title; Tutorial; Tutoriel
+tutorial-loop-subtitle; Loop; Looping
+parkour-1-title; Arcade 1; Arcade 1
+parkour-1-subtitle; Up and Down; Up and Down
+parkour-2-title; Arcade 2; Arcade 2
+parkour-2-subtitle; Up and Down (x2); Up and Down (x2)
+parkour-3-title; Arcade 3; Arcade 3
+parkour-3-subtitle; Slow Down !; Slow Down !
+parkour-4-title; Arcade 4; Arcade 4
+parkour-4-subtitle; Walls; Le Mur
+parkour-5-title; Arcade 5; Arcade 5
+parkour-5-subtitle; Pump it; Pump it
+parkour-6-title; Arcade 6; Arcade 6
+parkour-6-subtitle; Jump;Saut
+parkour-7-title; Arcade 7; Arcade 7
+parkour-7-subtitle; Stairway; Stairway
+parkour-8-title; Arcade 8; Arcade 8
+parkour-8-subtitle; Half-Pipe; Half-Pipe
+parkour-9-title; Arcade 9; Arcade 9
+parkour-9-subtitle; Leap; Bond
+parkour-10-title; Arcade 10; Arcade 10
+parkour-10-subtitle; Laps; Tours
+puzzle-1-title; Puzzle 1; Puzzle 1
+puzzle-1-subtitle; Hill or Hole ?; Hill or Hole ?
+puzzle-2-title; Puzzle 2; Puzzle 2
+puzzle-2-subtitle; Fast or Slow ?; Fast or Slow ?
+puzzle-3-title; Puzzle 3; Puzzle 3
+puzzle-3-subtitle; Through the Coil; Enfilé
+puzzle-4-title; Puzzle 4; Puzzle 4
+puzzle-4-subtitle; Sort; Tri
+puzzle-5-title; Puzzle 5; Puzzle 5
+puzzle-5-subtitle; Knot; Noeud
+tutorial-play-to-run; Press Play to run the machine.; Presse Play pour lancer la machine.
+tutorial-completed; It works ! Well done !; Ça marche ! Félicitations !
+parkour-completed; Success !; Success !
+puzzle-completed; Great job !; Bien joué !
+tutorial-continue; Continue Tutorial; Continuer le tutoriel
+parkour-continue; Next Level.; Niveau suivant.
+puzzle-continue; Next Puzzle.; Puzzle suivant.
+challenge-tutorial; Learn Tutorial !; Tutoriel
+challenge-parkour; Play Arcade !; Mode Arcade
+challenge-puzzle; Solve Puzzle !; Mode Puzzle
+challenge-editor; Build your Machine !; Editeur
+challenge-showcase; Watch Machines !; Voir les Démos !
+challenge-next-0; Next level !; Niveau suivant !
+challenge-next-1; Another one ?; Un autre ?
+challenge-next-2; What's next ?; Et ensuite ?
+challenge-next-3; Let's go !; On y va !
+challenge-next-4; Continue; Continuer
+challenge-next-5; Next !; Suivant !
+tutorial-tips-rotate-touch; Tips : Swipe the screen to rotate the camera.; Tips : Touche l'écran pour tourner la caméra.
+tutorial-tips-rotate-mouse; Tips : Move the mouse with left button pressed to rotate the camera.; Tips : Utilise le bouton gauche de la souris pour tourner la caméra.
+tutorial-tips-pan-touch; Tips : Two-fingers swipe the screen to translate the camera.; Tips : Touche l'écran à 2 doigts pour déplacer la caméra.
+tutorial-tips-pan-mouse; Tips : Move the mouse with right button pressed to translate the camera.; Tips : Utilise le bouton droit de la souris pour déplacer la caméra.
+tutorial-puzzle-one-ball-one-end; Complete the Machine to bring the Ball to its destination ; Complete la Machine pour amener la Bille à destination 
+tutorial-puzzle-many-balls-one-end; Complete the Machine to bring the Balls to the destination ; Complete la Machine pour amener les Billes à destination 
+tutorial-simple-step-0; Welcome to Marble Run Simulator Tutorial !; Bienvenue dans Marble Run Simulator !
+tutorial-simple-step-1; Complete the Machine to bring the Ball to its destination.; Complète la Machine pour amener la Bille à destination 
+tutorial-simple-step-2; Drag and Drop the Ramp here.; Glisse et dépose la Ramp ici.
+tutorial-simple-step-3; Clic and Drag the ramp into position.; Clique et déplace la Ramp vers sa position.
+tutorial-rotate-step-0; Drag and drop the UTurns in the scene.; Glisse et dépose les UTurns dans la scène.
+tutorial-rotate-step-1; Click and drag a UTurn on a free circuit end to align it.; Clique et déplace le UTurn pour le connecter à un autre élément.
+tutorial-speed-step-0; A speeding Ball will leave the track in a curve; Une bille trop rapide risque la sortie de route.
+tutorial-speed-step-1; Drag and drop the Tracks in the scene.; Glisse et dépose les pièces dans la scène.
+tutorial-speed-step-2; The Ball needs to engage on the Snake track at a low speed.; La bille doit parcourir le Snake à une vitesse réduite.
+tutorial-speed-step-3; You may press RESET to try again.; Utilise RESET pour recommencer.
+tutorial-lift-step-0; Drag and drop the Elevator in the scene.; Glisse et dépose l'Elevator dans la scène.
+tutorial-lift-step-1; Click and drag the Elevator on a free circuit end to align it.; Clique et déplace l'Elevator pour le connecter à un autre élément.
+tutorial-lift-step-2; Drag the free tip of the Elevator to increase its height.; Clique et déplace l'extrémité de l'Elevator pour modifier sa hauteur.
+tutorial-join-step-0; Two Tracks can be merged together using a Join element.; Deux pistes peuvent être jointes en utilisant un element Join.
+tutorial-join-step-1; Drag and drop the Joins in the scene.; Glisse et dépose les Joins dans la scène.
+tutorial-join-step-2; Click and drag a Join on a free circuit end to align it.; Clique et déplace un Join pour le connecter à un autre élément.
+tutorial-split-step-0; Build the machine that brings each ball to its destination.; Complète la machine qui amène chaque bille vers sa destination.
+tutorial-split-step-1; A Split element divides a track into two tracks.; Un élement Split divise un circuit en deux circuits.
+tutorial-loop-step-0; Ball needs speed to pass the loop; Une bille a besoin de vitesse pour passer la boucle.
+tutorial-loop-step-1; Drag and drop the Tracks in the scene.; Glisse et dépose les pièces dans la scène.
+tutorial-100-step-0; Drag and drop the Ramp in the scene.; Glisse et dépose la Ramp dans la scène.
+tutorial-100-step-1; Drag the free tip of the Ramp to connect it to another element.; Clique et déplace l'extrémité de la Ramp pour la connecter à un autre élément.
+share-menu-title; SHARE; PARTAGE
+share-menu-notice; Press <b>SHARE</b> below to save your construction on Tiaratum Games server and get a URL to share it online.; Cliquez <b>PARTAGER</b> ci-dessous pour sauvegarder votre construction sur les serveurs de Tiaratum Games, et recevoir une URL pour la partager.
+share-menu-read-btn; Read End User Licence Agreement (EULA); Lire les Conditions Générales d'Utilisation (CGU)
+share-menu-checkbox-label; I have read and agree with the EULA; J'ai lu et accepte les CGU
+share-menu-btn-confirm; SHARE; PARTAGER
+share-menu-btn-save; SAVE; SAUVEGARDE
+share-menu-btn-comm; UPLOADING...; UPLOADAGE...
+share-menu-error; Error : Failed to reach server.; Erreur : Serveur indisponible.
+share-menu-title-badword; Error : Title seems to contain cursing.; Erreur : Title semble contenir une injure.
+share-menu-author-badword; Error : Author seems to contain cursing.; Erreur : Author semble contenir une injure.
+share-menu-save-notice; If you do not wish to send your construction on Tiaratum Games server you can also download a file containing your construction using <b>SAVE</b>.; Si vous ne souhaitez pas uploader votre construction, vous pouvez télécharger localement une sauvegarde en cliquant sur <b>SAUVEGARDER</b>.
+share-menu-outro; Thanks for sharing your machine with us !; Merci d'avoir partagé votre construction avec nous !
+ball-count-helper; In order to help Marble Run Simulator run smoothly, not every ball will be animated, unless you increase the <b>Graphic Quality</b> setting.; Afin d'optimiser les performances de Marble Run Simulator, toutes les billes ne seront pas animées. Vous pouvez incrémenter l'option <b>Qualité Graphique</b> pour simuler un plus grand nombre de billes.
+graphicQ-helper-raise-1; Marble Run Simulator works great on your device in the; Marble Run Simulator est fluide sur votre appareil avec une Qualité Graphique réglée sur
+graphicQ-helper-raise-2; Graphic Quality setting.;.
+graphicQ-helper-raise-3; You can click <b>OK</b> or use the Settings Panel to raise the Graphic Quality setting to; Vous pouvez cliquer <b>OK</b> ou utiliser le Menu Options pour régler la Qualité Graphique sur
+graphicQ-helper-raise-4; .;.
+graphicQ-helper-lower-1; Marble Run Simulator seems slow on your device in the;Marble Run Simulator semble lent sur votre appareil avec une Qualité Graphique réglée sur
+graphicQ-helper-lower-2; Graphic Quality setting.;.
+graphicQ-helper-lower-3; You can click <b>OK</b> or use the Settings Panel to lower the Graphic Quality setting to;Vous pouvez cliquer <b>OK</b> ou utiliser le Menu Options pour régler la Qualité Graphique sur
+graphicQ-helper-lower-4; .;.
+challenge-helper-video;Do you want to watch a Video Ad in exchange for a tip to solve this Challenge ?;Voulez vous regarder une publicité en échange d'un coup de pouce pour passer ce Challenge ?
+challenge-helper-info-parkour;Press WEIGHT when the ball is in the highlighted Area, good luck !;Presses WEIGHT quand la bille est dans une zone indiqué en rouge !
+challenge-helper-info-puzzle;Build the highlighted path with the available parts to solve the Puzzle, good luck !;Construis le long du chemin indiqué avec les pièces disponibles pour résoudre le Puzzle.
+community-sort-label; sort by; trier par
+community-sort-best-label; Best; Top
+community-sort-latest-label; Latest; Récent
+community-sort-size-label; Size; Taille
+community-date-label; date; date
+community-date-alltime-label; All Time; Tous
+community-date-month-label; Month; Mois
+community-date-week-label; Week; Semaine
+toolbar-edit-label; open in Editor ; ouvrir dans l'Editeur
+toolbar-share-label; direct link to machine n° ; adresse de la machine n° 
