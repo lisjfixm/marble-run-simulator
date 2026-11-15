@@ -2916,6 +2916,10 @@ class Game {
         this.router = new MarbleRouter(this);
         this.router.initialize();
         await this.router.waitForAllPagesLoaded();
+        if (this.OFFLINE_MODE) {
+            const __communityPanel = this.router.homeMenu.page.querySelector(".community");
+            if (__communityPanel) __communityPanel.style.display = "none";
+        }
         this.router.optionsPage.setConfiguration(this.config);
         this.router.optionsPage.titleElement.innerHTML = '<i18n-text text-key="options-title"></i18n-text>';
         this.router.optionsPage.backButton.innerHTML = '<i18n-text text-key="btn-back"></i18n-text>';
@@ -4164,8 +4168,10 @@ class Game {
     }
     async checkLiveServiceAvailability() {
         console.log("checkLiveServiceAvailability");
+        const __probeController = new AbortController();
+        const __probeTimeout = setTimeout(() => { __probeController.abort(); }, 6000);
         try {
-            let dataResponse = await fetch(SHARE_SERVICE_PATH + "machine/" + CHECK_SERVICE_MACHINE_ID.toFixed(0));
+            let dataResponse = await fetch(SHARE_SERVICE_PATH + "machine/" + CHECK_SERVICE_MACHINE_ID.toFixed(0), { signal: __probeController.signal });
             if (dataResponse) {
                 let data = await dataResponse.json();
                 if (data.id === CHECK_SERVICE_MACHINE_ID) {
@@ -4175,6 +4181,9 @@ class Game {
         }
         catch (e) {
             this.setOFFLINE_MODE(true);
+        }
+        finally {
+            clearTimeout(__probeTimeout);
         }
     }
     setOFFLINE_MODE(OFFLINE_MODE) {
@@ -18314,7 +18323,7 @@ class ShareMenuView extends HTMLElement {
             this._shareInfo.style.display = "block";
             this._eulaLine.style.display = "block";
             this._saveInfo.style.display = "block";
-            this._shareBtn.style.display = "block";
+            this._shareBtn.style.display = this.game.OFFLINE_MODE ? "none" : "block";
             this._saveBtn.style.display = "none";
             this._returnBtn.style.display = "inline-block";
             this._sharedUrl.style.display = "none";
