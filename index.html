@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui, shrink-to-fit=no viewport-fit=cover">
-		<title>Marble Run Simulator v1.0.0</title>
+		<title>Marble Run Simulator v1.1.0</title>
 		<meta property="og:title" content="Marble Run Simulator" />
 		<meta property="og:image" content="https://tiaratum.com/preview.png" />
 		<!--<title>Gravitology</title>
@@ -37,17 +37,17 @@
 		<default-page id="credits-page" class="credits-page page" file="credits.xhtml" style="display: none;"></default-page>
 		<default-page id="dev-mode-page" class="dev-mode-page page" file="dev-mode.xhtml" style="display: none;"></default-page>
 		<div id="topbar" style="display: none">
-			<button class="cam-mode-none btn slimM inactive" title="Camera Mode : None">
-				<span class="label">MANUAL</span>
+			<button class="cam-mode-none btn slimM inactive" title="相機模式：手動">
+				<span class="label">手動</span>
 			</button>
-			<button class="cam-mode-landscape btn slimM inactive" title="Camera Mode : Landscape">
-				<span class="label">LANDSCAPE</span>
+			<button class="cam-mode-landscape btn slimM inactive" title="相機模式：水平">
+				<span class="label">水平</span>
 			</button>
-			<button class="cam-mode-ball btn slimM inactive" title="Camera Mode : Ball">
-				<span class="label">BALL</span>
+			<button class="cam-mode-ball btn slimM inactive" title="相機模式：彈珠">
+				<span class="label">彈珠</span>
 			</button>
-			<button class="cam-mode-selected btn slimM inactive" title="Camera Mode : Selected">
-				<span class="label">SELECTED</span>
+			<button class="cam-mode-selected btn slimM inactive" title="相機模式：選取">
+				<span class="label">選取</span>
 			</button>
 			<button class="cam-mode btn xs icon">
 				<svg class=" label" viewBox="0 0 100 100">
@@ -57,7 +57,7 @@
 			</button>
 		</div>
 		<div id="toolbar" style="display: none;">
-			<div id="machine-reload-status">Reloading</div>
+			<div id="machine-reload-status">重建中</div>
 			<div id="dev-mode-toolbar" style="display: none; margin-bottom: 5px;">
 				<button class="btn s dev-mode-btn pending active">...</button>
 				<button class="btn s dev-mode-btn ok">OK</button>
@@ -68,7 +68,7 @@
 				<button class="btn s dev-mode-btn prev">prev</button>
 				<button class="btn s dev-mode-btn next">next</button>
 			</div>
-			<button id="toolbar-boost"><span id="toolbar-boost-label"></span><span id="toolbar-boost-info">[SPACE]</span></button>
+			<button id="toolbar-boost"><span id="toolbar-boost-label"></span><span id="toolbar-boost-info">[空白鍵]</span></button>
 			<button id="toolbar-play" class="btn s" title="Play">
 				<svg class="label" viewBox="0 0 100 100">
 					<path d="M30 25 L80 50 L30 80 Z" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -189,10 +189,10 @@
 				</svg>
 			</button>
 			<div id="machine-title" style="display: none;">
-				<div id="machine-name"></button><span class="machine-number">n° 2042</span><span class="value">The Great Machine</span><button class="edit" style="display: none;"></button></div>
-				<input id="machine-name-edit" value="The Great Machine" style="display: none;"></input>
-				<div id="machine-author"></button><span>created by </span><span class="value">Anonymous</span><button class="edit" style="display: none;"></button></div>
-				<input id="machine-author-edit" value="Anonymous" style="display: none;"></input>
+				<div id="machine-name"></button><span class="machine-number">編號 2042</span><span class="value">偉大機械</span><button class="edit" style="display: none;"></button></div>
+				<input id="machine-name-edit" value="偉大機械" style="display: none;"></input>
+				<div id="machine-author"></button><span>作者：</span><span class="value">匿名</span><button class="edit" style="display: none;"></button></div>
+				<input id="machine-author-edit" value="匿名" style="display: none;"></input>
 			</div>
 		</div>
 
@@ -229,8 +229,8 @@
 					<span class="value k">0</span>
 				</div>
 				<div id="machine-editor-part-menu-width" class="line">
-					<span class="label vertical-label">width</span>
-					<span class="label landscape-label">width</span>
+					<span class="label vertical-label">寬度</span>
+					<span class="label landscape-label">寬度</span>
 					
 					<button class="btn xxs minus">
 						<svg class="label" viewBox="0 0 100 100">
@@ -247,8 +247,8 @@
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-height" class="line">
-					<span class="label vertical-label">height</span>
-					<span class="label landscape-label">height</span>
+					<span class="label vertical-label">高度</span>
+					<span class="label landscape-label">高度</span>
 					
 					<button class="btn xxs minus">
 						<svg class="label" viewBox="0 0 100 100">
@@ -265,8 +265,8 @@
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-depth" class="line">
-					<span class="label vertical-label">depth</span>
-					<span class="label landscape-label">depth</span>
+					<span class="label vertical-label">深度</span>
+					<span class="label landscape-label">深度</span>
 					
 					<button class="btn xxs minus">
 						<svg class="label" viewBox="0 0 100 100">
@@ -283,8 +283,8 @@
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-count" class="line">
-					<span class="label vertical-label">count</span>
-					<span class="label landscape-label">count</span>
+					<span class="label vertical-label">數量</span>
+					<span class="label landscape-label">數量</span>
 					
 					<button class="btn xxs minus">
 						<svg class="label" viewBox="0 0 100 100">
@@ -301,8 +301,8 @@
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-speed" class="line">
-					<span class="label vertical-label">speed</span>
-					<span class="label landscape-label">speed</span>
+					<span class="label vertical-label">速度</span>
+					<span class="label landscape-label">速度</span>
 					
 					<button class="btn xxs minus">
 						<svg class="label" viewBox="0 0 100 100">
@@ -319,8 +319,8 @@
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-color-0" class="line">
-					<span class="label vertical-label">colors</span>
-					<span class="label landscape-label">color 0</span>
+					<span class="label vertical-label">顏色</span>
+					<span class="label landscape-label">顏色 0</span>
 					
 					<button class="btn xxs minus">
 						<svg class="label" viewBox="0 0 100 100">
@@ -337,7 +337,7 @@
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-color-1" class="line">
-					<span class="label landscape-label">color 1</span>
+					<span class="label landscape-label">顏色 1</span>
 					
 					<button class="btn xxs minus">
 						<svg class="label" viewBox="0 0 100 100">
@@ -354,7 +354,7 @@
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-color-2" class="line">
-					<span class="label landscape-label">color 2</span>
+					<span class="label landscape-label">顏色 2</span>
 					
 					<button class="btn xxs minus">
 						<svg class="label" viewBox="0 0 100 100">
@@ -371,7 +371,7 @@
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-color-3" class="line">
-					<span class="label landscape-label">color 3</span>
+					<span class="label landscape-label">顏色 3</span>
 					
 					<button class="btn xxs minus">
 						<svg class="label" viewBox="0 0 100 100">
@@ -388,7 +388,7 @@
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-color-4" class="line">
-					<span class="label landscape-label">color 4</span>
+					<span class="label landscape-label">顏色 4</span>
 					
 					<button class="btn xxs minus">
 						<svg class="label" viewBox="0 0 100 100">
@@ -405,7 +405,7 @@
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-color-5" class="line">
-					<span class="label landscape-label">color 5</span>
+					<span class="label landscape-label">顏色 5</span>
 					
 					<button class="btn xxs minus">
 						<svg class="label" viewBox="0 0 100 100">
@@ -422,7 +422,7 @@
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-mirrorX" class="line">
-					<span class="label">mirror</span>
+					<span class="label">鏡像</span>
 					
 					<button class="btn xxs">
 						<svg class="label" viewBox="0 0 100 100">
@@ -433,7 +433,7 @@
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-mirrorZ" class="line">
-					<span class="label">mirrorZ</span>
+					<span class="label">Z 鏡像</span>
 					
 					<button class="btn xxs">
 						<svg class="label" viewBox="0 0 100 100">
@@ -444,7 +444,7 @@
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-fill" class="line">
-					<span class="label">fill</span>
+					<span class="label">填滿</span>
 					
 					<button class="btn xxs long-btn">
 						<svg class="label" viewBox="0 0 100 100">
@@ -455,7 +455,7 @@
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-focus" class="line">
-					<span class="label landscape-label">focus</span>
+					<span class="label landscape-label">焦點</span>
 					
 					<button class="btn xxs long-btn">
 						<svg class="label" viewBox="0 0 100 100">
@@ -468,24 +468,24 @@
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-delete" class="line">
-					<span class="label landscape-label">delete</span>
+					<span class="label landscape-label">刪除</span>
 					
 					<button class="btn xxs long-btn">
-						<span>DELETE</span>
+						<span>刪除</span>
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-publish" class="line">
-					<span class="label landscape-label">share</span>
+					<span class="label landscape-label">分享</span>
 					
 					<button id="machine-editor-part-menu-publish-button" class="btn xxs long-btn yellow">
-						<span>PUBLISH</span>
+						<span>分享</span>
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-export" class="line">
-					<span class="label landscape-label">export</span>
+					<span class="label landscape-label">匯出</span>
 					
 					<button id="machine-editor-part-menu-export-button" class="btn xxs long-btn">
-						<span>EXPORT</span>
+						<span>匯出</span>
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-file" class="line">
@@ -509,8 +509,8 @@
 				</div>
 				<input id="machine-editor-part-menu-load-input" class="line" type="file"/>
 				<div id="machine-editor-part-menu-support" class="line">
-					<span class="label vertical-label">support</span>
-					<span class="label landscape-label">support</span>
+					<span class="label vertical-label">支撐</span>
+					<span class="label landscape-label">支撐</span>
 					
 					<button class="btn xxs minus">
 						<svg class="label" viewBox="0 0 100 100">
@@ -527,8 +527,8 @@
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-base" class="line">
-					<span class="label vertical-label">base</span>
-					<span class="label landscape-label">base</span>
+					<span class="label vertical-label">底座</span>
+					<span class="label landscape-label">底座</span>
 					
 					<button class="btn xxs minus">
 						<svg class="label" viewBox="0 0 100 100">
@@ -545,7 +545,7 @@
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-room" class="line">
-					<span class="label landscape-label">room</span>
+					<span class="label landscape-label">空間</span>
 					
 					<button class="btn xxs minus">
 						<svg class="label" viewBox="0 0 100 100">
@@ -562,17 +562,17 @@
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-cell-shading" class="line">
-					<span class="label landscape-label">cel-shading</span>
+					<span class="label landscape-label">卡通著色</span>
 					
 					<button class="btn xxs long-btn">
-						<span>OFF</span>
+						<span>關閉</span>
 					</button>
 				</div>
 				<div id="machine-editor-part-menu-machine-clear" class="line">
-					<span class="label landscape-label">clear</span>
+					<span class="label landscape-label">清除</span>
 					
 					<button class="btn xxs long-btn">
-						<span>CLEAR</span>
+						<span>清除</span>
 					</button>
 				</div>
 			</div>
@@ -602,8 +602,8 @@
 			<a href="#home"><button>Next</button></a>
 		</nabu-popup>
 		<div id="challenge-topbar" style="display: none;">
-			<button id="challenge-topbar-help"><span style="display: inline-block; margin: 0; margin-right: 10px;">🎬</span> HELP</button>
-			<button id="challenge-topbar-reset"><img src="datas/icons-mrs/reset.svg"/>RESET</button>
+			<button id="challenge-topbar-help">提示</button>
+			<button id="challenge-topbar-reset"><img src="datas/icons-mrs/reset.svg"/>重置</button>
 		</div>
 		<div id="bb-puzzle-input-container" style="display: none">
 			<div id="bb-puzzle-title">
@@ -611,21 +611,21 @@
 				<div id="bb-puzzle-title-level"></div>
 				<div id="bb-puzzle-title-name"></div>
 			</div>
-			<button id="bb-puzzle-skip">SKIP</button>
-			<a href="#bb-puzzles"><button id="bb-puzzle-menu">MENU</button></a>
-			<button id="bb-puzzle-save" style="display: none;">SAVE</button>
-			<button id="bb-puzzle-m-save" style="display: none;">m-SAVE</button>
-			<button id="bb-puzzle-star" style="display: none;">STAR</button>
+			<button id="bb-puzzle-skip">跳過</button>
+			<a href="#bb-puzzles"><button id="bb-puzzle-menu">選單</button></a>
+			<button id="bb-puzzle-save" style="display: none;">儲存</button>
+			<button id="bb-puzzle-m-save" style="display: none;">機關儲存</button>
+			<button id="bb-puzzle-star" style="display: none;">星星</button>
 			<div id="bb-puzzle-bottom-buttons">
-				<button id="bb-puzzle-help" class="medium">HELP</button>
-				<button id="bb-puzzle-play" class="large">GO !</button>
-				<button id="bb-puzzle-stop" class="large">STOP</button>
-				<button id="bb-puzzle-undo" class="medium"><img src="datas/icons/undo_white.png"/> UNDO</button>
+				<button id="bb-puzzle-help" class="medium">提示</button>
+				<button id="bb-puzzle-play" class="large">開始</button>
+				<button id="bb-puzzle-stop" class="large">停止</button>
+				<button id="bb-puzzle-undo" class="medium"><img src="datas/icons/undo_white.png"/> 復原</button>
 			</div>
 			<div id="bb-puzzle-toolbox">
-				<button id="bb-puzzle-toolbox-path"><span class="label">RAIL</span></button>
-				<button id="bb-puzzle-toolbox-bouncer"><span class="label">BUMPER</span></button>
-				<button id="bb-puzzle-toolbox-eraser"><span class="label">ERASER</span></button>
+				<button id="bb-puzzle-toolbox-path"><span class="label">軌道</span></button>
+				<button id="bb-puzzle-toolbox-bouncer"><span class="label">彈撞</span></button>
+				<button id="bb-puzzle-toolbox-eraser"><span class="label">橡皮擦</span></button>
 			</div>
 			<div id="bb-puzzle-material" class="m-stars-count-1">
 				<div class="material-zone-cursor"></div>
@@ -638,22 +638,22 @@
 			</div>
 		</div>
 		<div id="bb-puzzle-victory" class="text-flash" style="display: none">
-			<div class="top">SUCCESS !</div>
-			<div class="material"><span class="label">material </span><span class="value">26.3</span><span class="unit"></span><span class="medal bronze" style="display: none;">3</span></div>
-			<div class="distance" style="display: none;"><span class="label">distance </span><span class="value">10.983</span><span class="unit"> m </span><span class="medal gold" style="display: none;">1</span></div>
-			<div class="max-speed" style="display: none;"><span class="label">max speed </span><span class="value">10.234</span><span class="unit"> m/s </span><span class="medal silver" style="display: none;">2</span></div>
-			<div class="air-time" style="display: none;"><span class="label">air time </span><span class="value">58.23</span><span class="unit"> s </span><span class="medal bronze" style="display: none;">3</span></div>
+			<div class="top">成功！</div>
+			<div class="material"><span class="label">材料 </span><span class="value">26.3</span><span class="unit"></span><span class="medal bronze" style="display: none;">3</span></div>
+			<div class="distance" style="display: none;"><span class="label">距離 </span><span class="value">10.983</span><span class="unit"> m </span><span class="medal gold" style="display: none;">1</span></div>
+			<div class="max-speed" style="display: none;"><span class="label">最高速度 </span><span class="value">10.234</span><span class="unit"> m/s </span><span class="medal silver" style="display: none;">2</span></div>
+			<div class="air-time" style="display: none;"><span class="label">滯空時間 </span><span class="value">58.23</span><span class="unit"> s </span><span class="medal bronze" style="display: none;">3</span></div>
 			<div class="collected-stars"><span class="label">stars </span><span class="value">1/1</span><span class="unit"> </span><span class="medal gold" style="display: none;">1</span></div>
 			<div class="score">
 				<span class="value" style="display: none;">00000</span><span class="medal gold" style="display: none;">1</span><img class="star" src="./datas/icons-bb/star.png"></img><img class="star inactive" src="./datas/icons-bb/star.png"></img><img class="star" src="./datas/icons-bb/star.png"></img>
 			</div>
-			<div class="text">Well played :)</div>
+			<div class="text">玩得漂亮 :)</div>
 			<div class="bottom">
-				<button class="replay">BACK</button>
-				<button class="next">NEXT</button>
+				<button class="replay">返回</button>
+				<button class="next">下一則</button>
 			</div>
 			<div id="bb-puzzle-progress">
-				<div class="title">Progress - 4 / 20</div>
+				<div class="title">進度 - 4 / 20</div>
 				<div class="stars-container">
 					<div>
 						<img class="star" src="./datas/icons-bb/star.png"></img>
@@ -680,7 +680,7 @@
 						<img class="star inactive" src="./datas/icons-bb/star.png"></img>
 					</div>
 				</div>
-				<button class="unlocked-reward">Play Bonus Level</button>
+				<button class="unlocked-reward">玩獎勵關卡</button>
 				<div class="text"></div>
 			</div>
 		</div>
@@ -703,9 +703,9 @@
 			<div class="container">
 				<img class="splash-title" src="datas/icons-mrs/title-text-only.png"/>
 				<img class="white-track" src="datas/icons-mrs/white_track.png" style="opacity: 0;"/>
-				<div class="message-description">a marble machine construction game</div>
-				<div class="message-description-2">Imagine, Build, Share !</div>
-				<div class="message-bottom">Click or press anywhere to Enter</div>
+				<div class="message-description">彈珠軌道機械建造遊戲</div>
+				<div class="message-description-2">想像、建造、分享！</div>
+				<div class="message-bottom">點擊或按任意鍵進入</div>
 				<div id="loading-info" class="message-loading"></div>
 			</div>
 		</div>
@@ -716,7 +716,7 @@
 				<img class="white-track" src="datas/icons-bb/white_bb_puzzle.png" style="opacity: 0; left: 25%; width: 50%"/>
 				<div class="message-description">a gravity puzzle game</div>
 				<div class="message-description-2">Think, Try, Solve !</div>
-				<div class="message-bottom">Click or press anywhere to Enter</div>
+				<div class="message-bottom">點擊或按任意鍵進入</div>
 				<div id="loading-info" class="message-loading"></div>
 			</div>
 		</div>

@@ -1525,10 +1525,10 @@ class ChallengeStepsFactory {
                 steps[0].noRepeat = true;
                 steps[1] = ChallengeStep.Text(challenge, '<i18n-text text-key="parkour-1-title"></i18n-text> - <i18n-text text-key="parkour-1-subtitle"></i18n-text>', challenge.delay * 0.8);
                 steps[1].noRepeat = true;
-                steps[2] = ChallengeStep.Text(challenge, "In ARCADE mode, you can increase the ball weight by holding the WEIGHT button.", challenge.delay * 1);
+                steps[2] = ChallengeStep.Text(challenge, "在街機模式中，按住「加重」按鈕可增加彈珠重量。", challenge.delay * 1);
                 steps[2].noRepeat = true;
                 steps[3] = [
-                    ChallengeStep.Text(challenge, "Press WEIGHT to increase the ball weight and gain speed while rolling downhill", challenge.delay * 1),
+                    ChallengeStep.Text(challenge, "按「加重」增加彈珠重量，在下坡時獲得速度", challenge.delay * 1),
                     ChallengeStep.Action(challenge, () => {
                         challenge.game.machine.pause();
                     }),
@@ -1551,7 +1551,7 @@ class ChallengeStepsFactory {
                     return false;
                 };
                 steps[5] = [
-                    ChallengeStep.Text(challenge, "Release WEIGHT to use the accumulated speed to climb the ramp.", challenge.delay * 1),
+                    ChallengeStep.Text(challenge, "放開「加重」，利用累積的速度爬坡。", challenge.delay * 1),
                     ChallengeStep.Action(challenge, () => {
                         challenge.game.machine.pause();
                     }),
@@ -1868,7 +1868,7 @@ class DebugPerf {
         console.log("-");
     }
 }
-var fallbackMachine = { n: "Missing Machine", a: "Tiaratum Games", v: 3, d: "01i57hz4i1o0706hwi1hz203111000hyi1hz403121000hyi0hz211111006i0hzhz314121006hxhzhz304111000i0hzhz20110100bi2hyhz2311010" };
+var fallbackMachine = { n: "遺失機械", a: "Tiaratum Games", v: 3, d: "01i57hz4i1o0706hwi1hz203111000hyi1hz403121000hyi0hz211111006i0hzhz314121006hxhzhz304111000i0hzhz20110100bi2hyhz2311010" };
 // Spiral
 // Stairway
 // Elevator
@@ -1890,7 +1890,7 @@ var Default2DTracks = [
     { v: 12, mode: 2, content: "03hwti2ti0000hwti4xi0000hwti71i00000908i6i0i02i1i2i11202c008i9i0i20i1i2i11202c00bhxi0i32i2i8i11204cc0002i7i0i42i9i0i31001c00hzi0ib0i4i0i01201c08i9i0i00i1i7i11202c000i3i0i70i5i0i01201c12i3i0i90i1i2i11101c08i1i0i72i1i2i11202c000000100z003", sp: { grndAnchors: true, grndAnchorsMaxY: 0.35, spacing: 0.03 } },
     { v: 12, mode: 2, content: "02i77i7xi0000i7ci2wi0000081ahyi0i12i1i4i1120101ai1i0i50i1i3i1120101ahyi0i82i1i2i1120100iiai0i10i1iai10205000000oi5i0i60i4hyi01201000i0i0i10i5i5i01201000i2i0i92i3i1i0120100oi8i0ib2i6hyi01201000000100z003", sp: { grndAnchors: true, grndAnchorsMaxY: 0.35, spacing: 0.03 } },
 ];
-var DefaultBBPuzzleTrack = { title: "around", author: "Tiaratum Games", country: "us", v: 13, mode: 2, content: "01i0oiagi000k031hi1i0i10i1i1i11201a1ei0i0i10igigi182037891ii4i0i80i9i2i112017000000d100z003", sp: { grndAnchors: true, grndAnchorsMaxY: 0.35, spacing: 0.03 } };
+var DefaultBBPuzzleTrack = { title: "環繞", author: "Tiaratum Games", country: "us", v: 13, mode: 2, content: "01i0oiagi000k031hi1i0i10i1i1i11201a1ei0i0i10igigi182037891ii4i0i80i9i2i112017000000d100z003", sp: { grndAnchors: true, grndAnchorsMaxY: 0.35, spacing: 0.03 } };
 function RandomDefault3DTrack() {
     let n = Math.floor(Math.random() * Default3DTracks.length);
     return Default3DTracks[n];
@@ -2021,7 +2021,7 @@ class DevMode {
                 if (!pokiLabel) {
                     pokiLabel = document.createElement("div");
                     pokiLabel.id = "video-mode-poki-label";
-                    pokiLabel.innerHTML = "only on";
+                    pokiLabel.innerHTML = "僅限於";
                     document.body.appendChild(pokiLabel);
                 }
                 if (pokiLabel) {
@@ -3711,7 +3711,7 @@ class Game {
                                 let r = pokiLogo.width / pokiLogo.height;
                                 context.drawImage(pokiLogo, size * 0.87, size * 0.94, 0.10 * size, 0.10 * size / r);
                                 context.font = "100 " + (fontSize * 0.8).toFixed(0) + "px Roboto";
-                                let pokiText = "only on";
+                                let pokiText = "僅限於";
                                 context.fillStyle = "white";
                                 context.fillText(pokiText, Math.floor(0.9 * size), Math.floor(0.93 * size));
                                 var tmpLink = document.createElement('a');
@@ -4049,19 +4049,19 @@ class Game {
             alert.innerText = message;
         }
         else if (this.getGraphicQ() === Core.GraphicQuality.VeryLow) {
-            alert.innerText = "Graphic Quality set to VERY LOW";
+            alert.innerText = "圖像品質設為「極低」";
         }
         else if (this.getGraphicQ() === Core.GraphicQuality.Low) {
-            alert.innerText = "Graphic Quality set to LOW";
+            alert.innerText = "圖像品質設為「低」";
         }
         else if (this.getGraphicQ() === Core.GraphicQuality.Medium) {
-            alert.innerText = "Graphic Quality set to MEDIUM";
+            alert.innerText = "圖像品質設為「中」";
         }
         else if (this.getGraphicQ() === Core.GraphicQuality.High) {
-            alert.innerText = "Graphic Quality set to HIGH";
+            alert.innerText = "圖像品質設為「高」";
         }
         else if (this.getGraphicQ() === Core.GraphicQuality.VeryHigh) {
-            alert.innerText = "Graphic Quality set to VERY HIGH";
+            alert.innerText = "圖像品質設為「極高」";
         }
         alert.style.opacity = "0";
         alert.style.display = "block";
@@ -4346,6 +4346,24 @@ class MarbleConfiguration extends Nabu.Configuration {
         ];
     }
     _buildElementsArray() {
+        Nabu.SimpleInputLabels = {
+            "EDITOR_MOVE_RIGHT": "編輯器向右移動",
+            "EDITOR_MOVE_LEFT": "編輯器向左移動",
+            "EDITOR_MOVE_UP": "編輯器向上移動",
+            "EDITOR_MOVE_DOWN": "編輯器向下移動",
+            "EDITOR_MOVE_FORWARD": "編輯器向前移動",
+            "EDITOR_MOVE_BACKWARD": "編輯器向後移動",
+            "EDITOR_ROTATE": "編輯器旋轉",
+            "EDITOR_ROTATE_BACK": "編輯器反向旋轉",
+            "EDITOR_DELETE": "編輯器刪除",
+            "EDITOR_FOCUS_CAM": "編輯器鏡頭對焦",
+            "MOVIE_MAKER_ADD_DEL_VP": "影片：加入／刪除視角",
+            "MOVIE_MAKER_PREV_VP": "影片：上一個視角",
+            "MOVIE_MAKER_NEXT_VP": "影片：下一個視角",
+            "BALL_BOOST": "彈珠加重",
+            "CTRL_DOWN": "按住 Control",
+            "EDITOR_SELECT_ALL": "編輯器全選"
+        };
         this.configurationElements = [
             new Nabu.ConfigurationElement("graphicQ", Nabu.ConfigurationElementType.Enum, Core.GraphicQuality.Medium, Nabu.ConfigurationElementCategory.Graphic, {
                 displayName: '<i18n-text text-key="option-graphicQ"></i18n-text>',
@@ -4353,19 +4371,19 @@ class MarbleConfiguration extends Nabu.Configuration {
                 max: Core.GraphicQuality.VeryHigh,
                 toString: (v) => {
                     if (v === Core.GraphicQuality.VeryLow) {
-                        return "VERY LOW";
+                        return "極低";
                     }
                     if (v === Core.GraphicQuality.Low) {
-                        return "LOW";
+                        return "低";
                     }
                     if (v === Core.GraphicQuality.Medium) {
-                        return "MEDIUM";
+                        return "中";
                     }
                     if (v === Core.GraphicQuality.High) {
-                        return "HIGH";
+                        return "高";
                     }
                     if (v === Core.GraphicQuality.VeryHigh) {
-                        return "VERY HIGH";
+                        return "極高";
                     }
                 }
             }, async (newValue, oldValue, fromUI) => {
@@ -4629,7 +4647,7 @@ function COUNTCOUNTRYS() {
             existing.count++;
         }
         else {
-            countryCount.push({ country: country, count: 1, fullName: ExistingCountryFlags.find(c => c.code === country)?.name || "Unknown" });
+            countryCount.push({ country: country, count: 1, fullName: ExistingCountryFlags.find(c => c.code === country)?.name || "未知" });
         }
     });
     countryCount.sort((a, b) => b.count - a.count);
@@ -4704,7 +4722,7 @@ class PhotoMaker {
                 requestAnimationFrame(this._recordTimerUpdate);
             }
             else {
-                btn.innerHTML = "VIDEO " + this.videoRes.toFixed(0) + "P";
+                btn.innerHTML = "影片 " + this.videoRes.toFixed(0) + "P";
             }
         };
         this._screenshotFrame = document.getElementById("screenshot-frame");
@@ -5646,6 +5664,14 @@ var BB_PUZZLE_PETS_GIFTS = [
     "animal-panda",
     "animal-lion",
 ];
+var BB_PET_NAMES = {
+    "beaver": "河狸", "bee": "蜜蜂", "bunny": "兔子", "cat": "貓",
+    "caterpillar": "毛毛蟲", "chick": "小雞", "cow": "牛", "crab": "螃蟹",
+    "deer": "鹿", "dog": "狗", "elephant": "大象", "fish": "魚",
+    "fox": "狐狸", "giraffe": "長頸鹿", "hog": "野豬", "koala": "無尾熊",
+    "lion": "獅子", "monkey": "猴子", "panda": "熊貓", "parrot": "鸚鵡",
+    "penguin": "企鵝", "pig": "豬", "polar": "北極熊", "tiger": "老虎"
+};
 class BBPuzzlePet extends BABYLON.Mesh {
     constructor(bbPuzzlePets, petName) {
         super(petName);
@@ -5905,8 +5931,8 @@ class BBPuzzleProgress {
             this.currentMaxStars = 30;
         }
         this.currentMaxStars = Math.min(this.currentMaxStars, 30);
-        this.titleElement.innerHTML = "Progress - " + this.totalCollectedStars.toFixed(0) + " / " + this.thresholds[this.currentThresholdIndex].toFixed(0);
-        this.textElement.innerHTML = "Find " + this.thresholds[this.currentThresholdIndex].toFixed(0) + " stars to unlock a secret !";
+        this.titleElement.innerHTML = "進度 - " + this.totalCollectedStars.toFixed(0) + " / " + this.thresholds[this.currentThresholdIndex].toFixed(0);
+        this.textElement.innerHTML = "收集 " + this.thresholds[this.currentThresholdIndex].toFixed(0) + " 顆星星解鎖隱藏關卡！";
         this.textElement.classList.remove("inline");
         this.starElements = [];
         this.starsContainer.style.display = "inline-block";
@@ -5946,20 +5972,20 @@ class BBPuzzleProgress {
             }
         }
         this.starsContainer.style.display = "none";
-        this.titleElement.innerHTML = "Congratulations !";
-        this.textElement.innerHTML = "Bonus Level unlocked :)";
-        this.rewardElement.innerHTML = "Play Bonus Level";
+        this.titleElement.innerHTML = "恭喜！";
+        this.textElement.innerHTML = "解鎖獎勵關卡 :)";
+        this.rewardElement.innerHTML = "玩獎勵關卡";
         this.rewardElement.classList.remove("square");
         this.rewardElement.style.backgroundImage = "";
         if (rewardHref && rewardHref === "bouncermode") {
-            this.textElement.innerHTML = "BOUNCER Game Mode unlocked :)";
-            this.rewardElement.innerHTML = "Play BOUNCER Mode";
+            this.textElement.innerHTML = "解鎖彈撞模式 :)";
+            this.rewardElement.innerHTML = "玩彈撞模式";
         }
         else if (rewardHref && rewardHref.startsWith("animal-")) {
             this.rewardElement.innerHTML = "";
             this.rewardElement.classList.add("square");
             this.rewardElement.style.backgroundImage = "url('./datas/icons-bb/pets/" + rewardHref + ".png')";
-            this.textElement.innerHTML = "You received a " + rewardHref.replace("animal-", "") + " toy !</br>(made by Kenney)";
+            this.textElement.innerHTML = "獲得 " + (BB_PET_NAMES[rewardHref.replace("animal-", "")] || rewardHref.replace("animal-", "")) + " 玩具！</br>（Kenney 製作）";
             this.textElement.classList.add("inline");
         }
     }
@@ -6000,7 +6026,7 @@ class BBPuzzleProgress {
                     let starElement = this.starElements[this.totalCollectedStars - this.currentStarsOffset];
                     if (starElement) {
                         this.totalCollectedStars++;
-                        this.titleElement.innerHTML = "Progress - " + this.totalCollectedStars.toFixed(0) + " / " + this.thresholds[this.currentThresholdIndex].toFixed(0);
+                        this.titleElement.innerHTML = "進度 - " + this.totalCollectedStars.toFixed(0) + " / " + this.thresholds[this.currentThresholdIndex].toFixed(0);
                         await step(starElement);
                     }
                 }
@@ -6574,12 +6600,12 @@ BBPuzzleTutorialsList["bb-puzzle-two-tracks"] = (bbPuzzle) => {
     tuto._run = async () => {
         let d = 2500;
         tuto.softSkipped = () => { return tuto.bbPuzzle.getCurrentBBElementCount() >= 2; };
-        await tuto.showText("You're doing *great* ! Let's continue !", d, true);
+        await tuto.showText("你表現得*很棒*！繼續吧！", d, true);
         if (tuto.aborted) {
             return;
         }
         ;
-        await tuto.showText("This time, you should use *2 Tracks* to complete the puzzle.", d, true);
+        await tuto.showText("這次你需要使用*兩段軌道*來破解謎題。", d, true);
         if (tuto.aborted) {
             return;
         }
@@ -6588,14 +6614,14 @@ BBPuzzleTutorialsList["bb-puzzle-two-tracks"] = (bbPuzzle) => {
         if (star) {
             star.flash();
             //tuto.highLightMesh("STAR", star, new BABYLON.Vector3(0.01, 0.01, 0), d);
-            await tuto.showText("Did you notice the *Star* ? Why don't you try to *catch it* ?", d);
+            await tuto.showText("你注意到*星星*了嗎？何不試著*接住它*？", d);
             star.stopFlash();
         }
         if (tuto.aborted) {
             return;
         }
         ;
-        await tuto.showText("Make the *Ball* hit the *Star* to win a bonus !", d, true);
+        await tuto.showText("讓*彈珠*撞上*星星*，就能獲得獎勵！", d, true);
         if (tuto.aborted) {
             return;
         }
@@ -6604,7 +6630,7 @@ BBPuzzleTutorialsList["bb-puzzle-two-tracks"] = (bbPuzzle) => {
             return tuto.bbPuzzle.getCurrentBBElementCount() >= 2 || tuto.bbPuzzle.getCurrentBBElementCount() >= 1 && tuto.game.machine.playing;
         });
         tuto.softSkipped = () => { return tuto.game.machine.playing; };
-        await tuto.showText("Press *GO !* to let the ball roll.", d);
+        await tuto.showText("按「*開始*」讓彈珠滾動。", d);
         if (tuto.aborted) {
             return;
         }
@@ -6623,7 +6649,7 @@ BBPuzzleTutorialsList["bb-puzzle-two-tracks"] = (bbPuzzle) => {
         while (!done) {
             if (result === 1) {
                 done = true;
-                await tuto.showText("*Great job !*", d, true);
+                await tuto.showText("*做得好！*", d, true);
                 if (tuto.aborted) {
                     return;
                 }
@@ -6632,7 +6658,7 @@ BBPuzzleTutorialsList["bb-puzzle-two-tracks"] = (bbPuzzle) => {
             }
             else if (result === 2) {
                 tuto.bbPuzzle.undoButton.classList.add("hinted");
-                await tuto.showText("Something went wrong... Maybe you can try again ?", d);
+                await tuto.showText("出了點問題…也許可以再試一次？", d);
                 if (tuto.aborted) {
                     return;
                 }
@@ -6664,18 +6690,18 @@ BBPuzzleTutorialsList["bb-puzzle-easy-s-curve"] = (bbPuzzle) => {
         let d = 2500;
         tuto.softSkipped = () => { return tuto.bbPuzzle.getCurrentBBElementCount() >= 3; };
         tuto.bbPuzzle.materialCounter.container.classList.add("hinted");
-        await tuto.showText("Look at this *Material Counter* on the right.", d, true);
+        await tuto.showText("看右邊的*材料計數器*。", d, true);
         if (tuto.aborted) {
             return;
         }
         ;
-        await tuto.showText("If you manage to complete the puzzle without using too many *Rails*,", d, true);
+        await tuto.showText("若能在不使用過多*軌道*的情況下完成謎題，", d, true);
         if (tuto.aborted) {
             return;
         }
         ;
         tuto.bbPuzzle.materialCounter.container.classList.remove("hinted");
-        await tuto.showText("You win a *bonus Star* !", d, true);
+        await tuto.showText("就能贏得*獎勵星星*！", d, true);
         if (tuto.aborted) {
             return;
         }
@@ -6697,17 +6723,17 @@ BBPuzzleTutorialsList["bb-puzzle-easy-aim"] = (bbPuzzle) => {
         };
         let d = 2500;
         tuto.softSkipped = () => { return tuto.bbPuzzle.getCurrentBBElementCount() >= 3; };
-        await tuto.showText("This *Star* might be hard to reach.", d, true);
+        await tuto.showText("這顆*星星*可能很難拿到。", d, true);
         if (tuto.aborted) {
             return;
         }
         ;
-        await tuto.showText("Dont worry if you can't, there are plenty of other *Stars* to collect !", d, true);
+        await tuto.showText("拿不到也別擔心，還有很多其他*星星*可以收集！", d, true);
         if (tuto.aborted) {
             return;
         }
         ;
-        await tuto.showText("Good luck !", d, true);
+        await tuto.showText("祝你好運！", d, true);
         if (tuto.aborted) {
             return;
         }
@@ -6723,17 +6749,17 @@ BBPuzzleTutorialsList["bb-puzzle-bonus-easy-zig-zag"] = (bbPuzzle) => {
     tuto._run = async () => {
         let d = 3000;
         tuto.softSkipped = () => { return tuto.bbPuzzle.getCurrentBBElementCount() > 0; };
-        await tuto.showText("Let's make another experiment !", d, true);
+        await tuto.showText("再來做個實驗吧！", d, true);
         if (tuto.aborted) {
             return;
         }
         ;
-        await tuto.showText("Can the ball reach the destination with so many obstacles in between ?", d, true);
+        await tuto.showText("這麼多障礙物之間，彈珠能抵達終點嗎？", d, true);
         if (tuto.aborted) {
             return;
         }
         ;
-        await tuto.showText("Like previously, draw a *Track* on the board !", d, true);
+        await tuto.showText("和之前一樣，在畫板上畫出*軌道*！", d, true);
         if (tuto.aborted) {
             return;
         }
@@ -6742,7 +6768,7 @@ BBPuzzleTutorialsList["bb-puzzle-bonus-easy-zig-zag"] = (bbPuzzle) => {
             return tuto.bbPuzzle.getCurrentBBElementCount() > 0;
         });
         tuto.softSkipped = () => { return tuto.game.machine.playing; };
-        await tuto.showText("Ok, let's try, press *GO !* to let the ball roll.", d, true);
+        await tuto.showText("好，試試看，按「*開始*」讓彈珠滾動。", d, true);
         if (tuto.aborted) {
             return;
         }
@@ -6761,7 +6787,7 @@ BBPuzzleTutorialsList["bb-puzzle-bonus-easy-zig-zag"] = (bbPuzzle) => {
         while (!done) {
             if (result === 1) {
                 done = true;
-                await tuto.showText("*Great job !* It works ! You can let the ball roll on obstacles to reach its destination !", d, true);
+                await tuto.showText("*做得好！*成功了！你可以讓彈珠沿著障礙物滾到終點！", d, true);
                 if (tuto.aborted) {
                     return;
                 }
@@ -6770,7 +6796,7 @@ BBPuzzleTutorialsList["bb-puzzle-bonus-easy-zig-zag"] = (bbPuzzle) => {
             }
             else if (result === 2) {
                 tuto.bbPuzzle.undoButton.classList.add("hinted");
-                await tuto.showText("Something went wrong... Maybe you can try again ?", d, true);
+                await tuto.showText("出了點問題…也許可以再試一次？", d, true);
                 if (tuto.aborted) {
                     return;
                 }
@@ -6801,17 +6827,17 @@ var DefaultTutorial1 = (bbPuzzle) => {
         };
         let d = 2500;
         tuto.softSkipped = () => { return tuto.bbPuzzle.getCurrentBBElementCount() >= 3; };
-        await tuto.showText("Look at this *Material Counter* on the right.", d, true);
+        await tuto.showText("看右邊的*材料計數器*。", d, true);
         if (tuto.aborted) {
             return;
         }
         ;
-        await tuto.showText("If you manage to complete the puzzle without using too many *Rails*,", d, true);
+        await tuto.showText("若能在不使用過多*軌道*的情況下完成謎題，", d, true);
         if (tuto.aborted) {
             return;
         }
         ;
-        await tuto.showText("You win a *bonus Star* !", d, true);
+        await tuto.showText("就能贏得*獎勵星星*！", d, true);
         if (tuto.aborted) {
             return;
         }
@@ -6829,23 +6855,23 @@ BBPuzzleTutorialsList["bb-puzzle-easy-bumper"] = (bbPuzzle: BlackBoardPuzzle) =>
         let d = 2500;
 
         tuto.softSkipped = () => { return tuto.bbPuzzle.getCurrentBBElementCount() > 0; };
-        await tuto.showText("Hi ! Welcome to the *Gravitology Laboratory*.", d, true);
+        await tuto.showText("你好！歡迎來到*彈珠重力實驗室*。", d, true);
         if (tuto.aborted) { return; };
 
-        await tuto.showText("I'm *Professor P.*, Head of the Gravitology Departement, nice to meet you.", d, true);
+        await tuto.showText("我是*P 教授*，重力實驗室的負責人，幸會。", d, true);
         if (tuto.aborted) { return; };
         
         tuto.bbPuzzle.hintsActivated = true;
         tuto.bbPuzzle.showHints();
         tuto.bbPuzzle.runAllHints(true);
-        await tuto.showText("This time, use a *Bumper* to bounce the ball.", d);
+        await tuto.showText("這次用*彈撞*把彈珠彈開。", d);
         if (tuto.aborted) { return; };
         await tuto.waitForCondition(() => {
             return tuto.bbPuzzle.getCurrentBBElementCount() > 0;
         })
 
         tuto.softSkipped = () => { return tuto.game.machine.playing; };
-        await tuto.showText("Good, now press *GO !* to let the ball roll.", d, true);
+        await tuto.showText("很好，現在按「*開始*」讓彈珠滾動。", d, true);
         if (tuto.aborted) { return; };
 
         tuto.softSkipped = undefined;
@@ -6863,13 +6889,13 @@ BBPuzzleTutorialsList["bb-puzzle-easy-bumper"] = (bbPuzzle: BlackBoardPuzzle) =>
         while (!done) {
             if (result === 1) {
                 done = true;
-                await tuto.showText("*Great job !* It works ! Gravity makes a Ball roll on a Rail.", d, true);
+                await tuto.showText("*做得好！*成功了！重力讓彈珠沿軌道滾動。", d, true);
                 if (tuto.aborted) { return; };
                 tuto.bbPuzzle.win();
             }
             else if (result === 2) {
                 tuto.bbPuzzle.undoButton.classList.add("hinted");
-                await tuto.showText("Something went wrong... Maybe you can try again ?", d, true);
+                await tuto.showText("出了點問題…也許可以再試一次？", d, true);
                 if (tuto.aborted) { return; };
             }
                 
@@ -7899,7 +7925,7 @@ class BlackBoardPuzzle {
                 this.titleStarsElement.innerHTML += "<div class='title-collected-star'></div>";
             }
         }
-        this.titleLevelElement.innerHTML = "Level " + (this.index % 1000).toFixed(0);
+        this.titleLevelElement.innerHTML = "第 " + (this.index % 1000).toFixed(0) + " 關";
         this.titleNameElement.innerHTML = BBPuzzlesMenu.FileNameToDisplayName(IndexToBBPuzzleLevel(this.index, this.isBonusLevel).replace("bb-puzzle-", ""));
     }
     dispose() {
@@ -8209,16 +8235,16 @@ class BlackBoardPuzzle {
             //if (!this.completed) { return; }
         }
         if (totalStars === 0) {
-            this.completionText.innerHTML = "It works :)";
+            this.completionText.innerHTML = "成功 :)";
         }
         else if (totalStars === 1) {
-            this.completionText.innerHTML = "Nice job :)";
+            this.completionText.innerHTML = "表現不錯 :)";
         }
         else if (totalStars === 2) {
-            this.completionText.innerHTML = "Well played ! :)";
+            this.completionText.innerHTML = "玩得漂亮！:)";
         }
         else if (totalStars === 3) {
-            this.completionText.innerHTML = "Perfect ! :)";
+            this.completionText.innerHTML = "完美！:)";
         }
         this.progressPanel.updateTotalStars();
         for (let n = totalStars; n < 3; n++) {
@@ -10301,10 +10327,10 @@ class MachineEditor {
             else {
                 constructionModePill.style.display = "";
                 if (this.is3DMode) {
-                    constructionModePill.innerHTML = "3D mode";
+                    constructionModePill.innerHTML = "3D 模式";
                 }
                 if (this.is2DMode) {
-                    constructionModePill.innerHTML = "2D mode";
+                    constructionModePill.innerHTML = "2D 模式";
                 }
             }
         }
@@ -10320,7 +10346,7 @@ class MachineEditor {
             this.items.set("ball", ballItem);
             let itemNameElement = document.createElement("div");
             itemNameElement.classList.add("machine-editor-item-name");
-            itemNameElement.innerHTML = "Ball";
+            itemNameElement.innerHTML = "彈珠";
             ballItem.appendChild(itemNameElement);
             ballItem.addEventListener("pointerdown", (ev) => {
                 this._pointerDownX = (ev.clientX - this.game.canvasLeft) * window.devicePixelRatio;
@@ -10355,7 +10381,7 @@ class MachineEditor {
                 this.items.set("block", blockItem);
                 let blockItemNameElement = document.createElement("div");
                 blockItemNameElement.classList.add("machine-editor-item-name");
-                blockItemNameElement.innerHTML = "Block";
+                blockItemNameElement.innerHTML = "方塊";
                 blockItem.appendChild(blockItemNameElement);
                 blockItem.addEventListener("pointerdown", (ev) => {
                     let block = new Core.Block(this.machine);
@@ -10375,7 +10401,7 @@ class MachineEditor {
                 this.items.set("draw-blackboard", drawBlackboardItem);
                 let drawBlackboardNameElement = document.createElement("div");
                 drawBlackboardNameElement.classList.add("machine-editor-item-name");
-                drawBlackboardNameElement.innerHTML = "Draw Blackboard";
+                drawBlackboardNameElement.innerHTML = "畫板";
                 drawBlackboardItem.appendChild(drawBlackboardNameElement);
                 drawBlackboardItem.addEventListener("pointerdown", (ev) => {
                     this.drawBlackboardMode = !this.drawBlackboardMode;
@@ -10392,7 +10418,7 @@ class MachineEditor {
                 this.items.set("xylophone", xylophoneItem);
                 let xylophoneItemNameElement = document.createElement("div");
                 xylophoneItemNameElement.classList.add("machine-editor-item-name");
-                xylophoneItemNameElement.innerHTML = "xylophone";
+                xylophoneItemNameElement.innerHTML = "木琴";
                 xylophoneItem.appendChild(xylophoneItemNameElement);
                 xylophoneItem.addEventListener("pointerdown", (ev) => {
                     if (this.draggedObject instanceof Core.Ball || this.draggedObject instanceof Core.MachinePart || this.draggedObject instanceof Core.MachineDecor) {
@@ -10493,7 +10519,7 @@ class MachineEditor {
             if (isNew) {
                 let itemNewElement = document.createElement("div");
                 itemNewElement.classList.add("machine-editor-item-new");
-                itemNewElement.innerHTML = "NEW";
+                itemNewElement.innerHTML = "新";
                 item.appendChild(itemNewElement);
                 this.itemContainer.insertBefore(item, firstNonNewElement ? firstNonNewElement : this.itemContainer.firstElementChild);
             }
@@ -10503,7 +10529,7 @@ class MachineEditor {
             if (isAdLocked) {
                 let itemAdLockedElement = document.createElement("div");
                 itemAdLockedElement.classList.add("machine-editor-item-adlocked");
-                itemAdLockedElement.innerHTML = "🎬 Unlock";
+                itemAdLockedElement.innerHTML = "解鎖";
                 item.appendChild(itemAdLockedElement);
             }
             let itemCountElement = document.createElement("div");
@@ -11837,52 +11863,52 @@ var MachineEditorPartsListDebug = [
     { part: "bitsplit", mode: MachineMode.AllD },
 ];
 var MachineEditorDisplayNames = [
-    { partName: "ramp", displayName: "Ramp" },
-    { partName: "wave", displayName: "Wave" },
-    { partName: "snake", displayName: "Snake" },
-    { partName: "join", displayName: "Join" },
-    { partName: "flatjoin", displayName: "Flat Join" },
-    { partName: "split", displayName: "Split" },
-    { partName: "sort", displayName: "Filter" },
-    { partName: "forwardSplit", displayName: "Forward Split" },
-    { partName: "uturn", displayName: "U-Turn" },
-    { partName: "uturnsharp", displayName: "U-Vert" },
-    { partName: "wall", displayName: "Wall" },
-    { partName: "loop", displayName: "Loop" },
-    { partName: "spiral", displayName: "Spiral" },
-    { partName: "spiralUTurn", displayName: "Spiral U-Turn" },
-    { partName: "coil", displayName: "Coil" },
-    { partName: "elevator", displayName: "Elevator" },
-    { partName: "stairway", displayName: "Stairway" },
-    { partName: "screw", displayName: "Screw" },
-    { partName: "start", displayName: "Start" },
-    { partName: "end", displayName: "End" },
-    { partName: "blackboard", displayName: "Black Board" },
-    { partName: "jumper", displayName: "Jumper" },
-    { partName: "gravitywell", displayName: "Gravity Well" },
-    { partName: "shooter", displayName: "Shooter" },
-    { partName: "controler", displayName: "Controler" },
-    { partName: "spawner", displayName: "Spawner" },
-    { partName: "screen", displayName: "Screen" },
-    { partName: "speeder", displayName: "Speeder" },
-    { partName: "ladder", displayName: "Ladder" },
-    { partName: "teardropTurn", displayName: "Teardrop Turn" },
-    { partName: "tsplit", displayName: "T-Split" },
-    { partName: "tjoin", displayName: "T-Join" },
-    { partName: "cross2d", displayName: "Crossroad" },
-    { partName: "dropside", displayName: "Drop Curb" },
-    { partName: "dropback", displayName: "Drop UTurn" },
-    { partName: "curb", displayName: "Curb" },
-    { partName: "piperamp", displayName: "Tube" },
-    { partName: "pipeuturn", displayName: "U-Turn Tube" },
-    { partName: "pipecurb", displayName: "Curb Tube" },
-    { partName: "pipeuturnsharp", displayName: "U-Vert Tube" },
-    { partName: "pipeloop", displayName: "Loop Tube" },
-    { partName: "pipeunderloop", displayName: "Inv-Loop Tube" },
-    { partName: "multiJoin", displayName: "Multi Join" },
-    { partName: "piperamp", displayName: "Tube" },
-    { partName: "woodramp", displayName: "Racetrack" },
-    { partName: "woodcurb", displayName: "Racetrack Curb" },
+    { partName: "ramp", displayName: "坡道" },
+    { partName: "wave", displayName: "波浪軌道" },
+    { partName: "snake", displayName: "蛇形軌道" },
+    { partName: "join", displayName: "連接" },
+    { partName: "flatjoin", displayName: "平直連接" },
+    { partName: "split", displayName: "分流" },
+    { partName: "sort", displayName: "分類" },
+    { partName: "forwardSplit", displayName: "前置分流" },
+    { partName: "uturn", displayName: "U 型轉彎" },
+    { partName: "uturnsharp", displayName: "U 型直立" },
+    { partName: "wall", displayName: "牆壁" },
+    { partName: "loop", displayName: "迴圈" },
+    { partName: "spiral", displayName: "螺旋" },
+    { partName: "spiralUTurn", displayName: "螺旋 U 型轉彎" },
+    { partName: "coil", displayName: "盤繞" },
+    { partName: "elevator", displayName: "升降機" },
+    { partName: "stairway", displayName: "階梯" },
+    { partName: "screw", displayName: "螺旋桿" },
+    { partName: "start", displayName: "起點" },
+    { partName: "end", displayName: "終點" },
+    { partName: "blackboard", displayName: "畫板" },
+    { partName: "jumper", displayName: "跳躍器" },
+    { partName: "gravitywell", displayName: "重力井" },
+    { partName: "shooter", displayName: "發射器" },
+    { partName: "controler", displayName: "控制器" },
+    { partName: "spawner", displayName: "生成器" },
+    { partName: "screen", displayName: "螢幕" },
+    { partName: "speeder", displayName: "加速器" },
+    { partName: "ladder", displayName: "梯子" },
+    { partName: "teardropTurn", displayName: "水滴轉彎" },
+    { partName: "tsplit", displayName: "T 型分流" },
+    { partName: "tjoin", displayName: "T 型連接" },
+    { partName: "cross2d", displayName: "十字路口" },
+    { partName: "dropside", displayName: "下降導流" },
+    { partName: "dropback", displayName: "下降轉彎" },
+    { partName: "curb", displayName: "導流護欄" },
+    { partName: "piperamp", displayName: "管道" },
+    { partName: "pipeuturn", displayName: "管道 U 型轉彎" },
+    { partName: "pipecurb", displayName: "管道導流" },
+    { partName: "pipeuturnsharp", displayName: "管道 U 型直立" },
+    { partName: "pipeloop", displayName: "管道迴圈" },
+    { partName: "pipeunderloop", displayName: "倒置管道迴圈" },
+    { partName: "multiJoin", displayName: "多向連接" },
+    { partName: "piperamp", displayName: "管道" },
+    { partName: "woodramp", displayName: "賽道" },
+    { partName: "woodcurb", displayName: "賽道護欄" },
 ];
 var MachineEditorTutorialPartColor = [
     { partName: "elevator", colors: [5, 5] },
@@ -11892,65 +11918,65 @@ var MachineEditorTutorialPartColor = [
     { partName: "default", colors: [5] },
 ];
 var MachineEditorPartColors = [
-    { colorName: "Steel", index: 0 },
-    { colorName: "Brass", index: 1 },
-    { colorName: "Copper", index: 15 },
-    { colorName: "White (M)", index: 17 },
-    { colorName: "Black (M)", index: 2 },
-    { colorName: "Red (M)", index: 3 },
-    { colorName: "Yellow (M)", index: 16 },
-    { colorName: "Green (M)", index: 4 },
-    { colorName: "Blue (M)", index: 5 },
-    { colorName: "Black (P)", index: 6 },
-    { colorName: "White (P)", index: 18 },
-    { colorName: "Red (P)", index: 7 },
-    { colorName: "Orange (P)", index: 8 },
-    { colorName: "Yellow (P)", index: 9 },
-    { colorName: "Green (P)", index: 10 },
-    { colorName: "Cyan (P)", index: 11 },
-    { colorName: "Blue (P)", index: 12 },
-    { colorName: "Purple (P)", index: 13 },
-    { colorName: "Pink (P)", index: 14 },
+    { colorName: "鋼鐵", index: 0 },
+    { colorName: "黃銅", index: 1 },
+    { colorName: "銅", index: 15 },
+    { colorName: "白色（金屬）", index: 17 },
+    { colorName: "黑色（金屬）", index: 2 },
+    { colorName: "紅色（金屬）", index: 3 },
+    { colorName: "黃色（金屬）", index: 16 },
+    { colorName: "綠色（金屬）", index: 4 },
+    { colorName: "藍色（金屬）", index: 5 },
+    { colorName: "黑色（塑膠）", index: 6 },
+    { colorName: "白色（塑膠）", index: 18 },
+    { colorName: "紅色（塑膠）", index: 7 },
+    { colorName: "橙色（塑膠）", index: 8 },
+    { colorName: "黃色（塑膠）", index: 9 },
+    { colorName: "綠色（塑膠）", index: 10 },
+    { colorName: "青色（塑膠）", index: 11 },
+    { colorName: "藍色（塑膠）", index: 12 },
+    { colorName: "紫色（塑膠）", index: 13 },
+    { colorName: "粉紅（塑膠）", index: 14 },
 ];
 var MachineEditorBallColors = [
-    { colorName: "Steel", index: 0 },
-    { colorName: "Brass", index: 1 },
-    { colorName: "Copper", index: 9 },
-    { colorName: "White (M)", index: 10 },
-    { colorName: "Black (M)", index: 11 },
-    { colorName: "Red (M)", index: 12 },
-    { colorName: "Yellow (M)", index: 13 },
-    { colorName: "Green (M)", index: 14 },
-    { colorName: "Blue (M)", index: 15 },
-    { colorName: "Black (P)", index: 16 },
-    { colorName: "Red (P)", index: 17 },
-    { colorName: "Orange (P)", index: 18 },
-    { colorName: "Yellow (P)", index: 19 },
-    { colorName: "Green (P)", index: 20 },
-    { colorName: "Cyan (P)", index: 21 },
-    { colorName: "Blue (P)", index: 22 },
-    { colorName: "Purple (P)", index: 23 },
-    { colorName: "Pink (P)", index: 24 },
-    { colorName: "Square", index: 2 },
-    { colorName: "Circle", index: 3 },
-    { colorName: "Star", index: 4 },
+    { colorName: "鋼鐵", index: 0 },
+    { colorName: "黃銅", index: 1 },
+    { colorName: "銅", index: 9 },
+    { colorName: "白色（金屬）", index: 10 },
+    { colorName: "黑色（金屬）", index: 11 },
+    { colorName: "紅色（金屬）", index: 12 },
+    { colorName: "黃色（金屬）", index: 13 },
+    { colorName: "綠色（金屬）", index: 14 },
+    { colorName: "藍色（金屬）", index: 15 },
+    { colorName: "黑色（塑膠）", index: 16 },
+    { colorName: "紅色（塑膠）", index: 17 },
+    { colorName: "橙色（塑膠）", index: 18 },
+    { colorName: "黃色（塑膠）", index: 19 },
+    { colorName: "綠色（塑膠）", index: 20 },
+    { colorName: "青色（塑膠）", index: 21 },
+    { colorName: "藍色（塑膠）", index: 22 },
+    { colorName: "紫色（塑膠）", index: 23 },
+    { colorName: "粉紅（塑膠）", index: 24 },
+    { colorName: "方形", index: 2 },
+    { colorName: "圓形", index: 3 },
+    { colorName: "星星", index: 4 },
     { colorName: "Tiaratum", index: 5 },
-    { colorName: "Html5", index: 6 },
+    { colorName: "HTML5", index: 6 },
     { colorName: "Tiaratum", index: 7 },
     { colorName: "Poki", index: 8 },
 ];
 var MachineEditorRooms = [
-    { roomName: "Museum", index: 0 },
-    { roomName: "Calm", index: 9 },
-    { roomName: "Azur", index: 13 },
-    { roomName: "Cliff", index: 14 },
-    { roomName: "River", index: 15 },
-    { roomName: "Simple", index: 11 },
-    { roomName: "Black", index: 12 },
-    { roomName: "BubbleGum", index: 2 },
-    { roomName: "Psychic", index: 3 },
-    { roomName: "Leaf", index: 4 },
-    { roomName: "Science", index: 5 }
+    { roomName: "博物館", index: 0 },
+    { roomName: "寧靜", index: 9 },
+    { roomName: "湛藍", index: 13 },
+    { roomName: "峭壁", index: 14 },
+    { roomName: "河流", index: 15 },
+    { roomName: "簡約", index: 11 },
+    { roomName: "黑色", index: 12 },
+    { roomName: "泡泡糖", index: 2 },
+    { roomName: "靈異", index: 3 },
+    { roomName: "葉綠", index: 4 },
+    { roomName: "科學", index: 5 }
 ];
 function RandomMachineEditorRoomIndex() {
     let r = Math.random();
@@ -11967,13 +11993,13 @@ function RandomMachineEditorRoomIndex() {
 var ExistingCountryFlags = [
     {
         code: "un",
-        name: "United Nations",
+        name: "聯合國",
         c1: "#4b92db",
         c2: "#fff"
     },
     {
         code: "xx",
-        name: "Unknown or Undisclosed",
+        name: "未知/未公開",
         c1: "#fff",
         c2: "#adb5bd"
     },
@@ -14490,7 +14516,7 @@ class MachinePartEditorMenu {
                 this._shown = true;
                 this.unfoldButton.style.display = this._unfolded ? "none" : "";
                 this.foldButton.style.display = this._unfolded ? "" : "none";
-                this.titleElement.innerText = "Global";
+                this.titleElement.innerText = "全部";
                 this.ijkLine.style.display = "none";
                 this.kLine.style.display = "none";
                 this.widthLine.style.display = "none";
@@ -14696,7 +14722,7 @@ class MachinePartEditorMenu {
                         this.machineEditor.game.ballMaterialPicker.target = this.currentObject;
                         this.machineEditor.game.ballMaterialPicker.setCurrentColorIndex(this.currentObject.materialIndex);
                     }
-                    this.titleElement.innerText = "Marble";
+                    this.titleElement.innerText = "彈珠";
                     this.kElement.innerText = this.currentObject.k.toFixed(0);
                     this.colorValues[0].style.backgroundColor = this.machineEditor.game.materials.getBallMaterialHexBaseColor(this.currentObject.materialIndex, this.machineEditor.game.getMaterialQ());
                     this.colorValues[0].innerText = "";
@@ -14942,7 +14968,7 @@ class BBPuzzlesMenu {
                         let title1 = document.createElement("div");
                         title1.classList.add("title", "single-line");
                         panel.appendChild(title1);
-                        title1.innerText = "PROGRESS";
+                        title1.innerText = "進度";
                         let starCount = document.createElement("div");
                         starCount.classList.add("text");
                         starCount.innerHTML = "<span class='text-star'></span>&nbsp;&nbsp;" + this.game.bbPuzzle.progressPanel.totalCollectedStars + " / " + (3 * BB_PUZZLES_TOTAL_COUNT).toFixed(0) + "";
@@ -14953,17 +14979,17 @@ class BBPuzzlesMenu {
                         let title2 = document.createElement("div");
                         title2.classList.add("title", "single-line");
                         panel.appendChild(title2);
-                        title2.innerText = "GAME MODE";
+                        title2.innerText = "遊戲模式";
                         this.gameModeRailsButton = document.createElement("button");
                         //this.gameModeRailsButton.classList.add("selected");
-                        this.gameModeRailsButton.innerText = "RAILS";
+                        this.gameModeRailsButton.innerText = "軌道";
                         this.gameModeRailsButton.onclick = () => { this.setGameMode(0); this.redraw(); };
                         panel.appendChild(this.gameModeRailsButton);
                         this.gameModeBouncerButton = document.createElement("button");
                         if (!this.game.bbPuzzle.progressPanel.bouncerModeUnlocked) {
                             this.gameModeBouncerButton.classList.add("disabled");
                         }
-                        this.gameModeBouncerButton.innerText = "BOUNCER";
+                        this.gameModeBouncerButton.innerText = "彈撞";
                         this.gameModeBouncerButton.onclick = () => { this.setGameMode(1); this.redraw(); };
                         panel.appendChild(this.gameModeBouncerButton);
                         if (!this.game.bbPuzzle.progressPanel.bouncerModeUnlocked) {
@@ -15065,8 +15091,8 @@ class BBPuzzlesMenu {
             this.machinesContainer.appendChild(creditTitleContainer);
             creditTitleContainer.innerHTML = `
                 <button class="puzzle-tile">
-                    <div class="title">CREDITS</div>
-                    <div class="text">Version ` + CONFIGURATION_VERSION.toFixed(0) + `</div>
+                    <div class="title">製作人員</div>
+                    <div class="text">版本 ` + CONFIGURATION_VERSION.toFixed(0) + `</div>
                 </button>
             `;
             let creditContainer = document.createElement("div");
@@ -15491,7 +15517,7 @@ class CommunityMenu {
                         let machineId = document.createElement("div");
                         machineId.classList.add("machine-id");
                         if (isFinite(machine.id)) {
-                            machineId.innerHTML = "n°" + machine.id.toFixed(0);
+                            machineId.innerHTML = "編號" + machine.id.toFixed(0);
                         }
                         panel.appendChild(machineId);
                         let href = "#machine?id=" + machine.id.toFixed(0);
@@ -15523,7 +15549,7 @@ class CommunityMenu {
                             author.innerHTML = machine.author;
                         }
                         else {
-                            author.innerHTML = "Anonymous";
+                            author.innerHTML = "匿名";
                         }
                         let likes = document.createElement("div");
                         likes.classList.add("likes");
@@ -15567,7 +15593,7 @@ class CommunityMenu {
                             panel.appendChild(dbStateInfo);
                             if (machine.duplicate > 0) {
                                 let dbDuplicate = document.createElement("div");
-                                dbDuplicate.innerText = "DUPLICATE";
+                                dbDuplicate.innerText = "重複";
                                 dbDuplicate.classList.add("db-duplicate-info");
                                 panel.appendChild(dbDuplicate);
                             }
@@ -15646,7 +15672,7 @@ class ConstructionModeView extends HTMLElement {
     setRecommandedMode(mode) {
         let recommended = document.createElement("div");
         recommended.classList.add("recommended");
-        recommended.innerHTML = "(recommended)";
+        recommended.innerHTML = "（建議）";
         if (mode === Core.MachineConstructionMode.Mode3D) {
             this._button3D.appendChild(recommended);
             this._container.insertBefore(this._panel3D, this._panel2D);
@@ -15685,12 +15711,12 @@ class ConstructionModeView extends HTMLElement {
         this.addEventListener("pointermove", StopPointerProgatation);
         this.addEventListener("pointerup", StopPointerProgatationAndMonkeys);
         this._title = document.createElement("h1");
-        this._title.innerHTML = "Machine Builder";
+        this._title.innerHTML = "機械建造工具";
         this.appendChild(this._title);
         this._container = document.createElement("div");
         this.appendChild(this._container);
         let intro = document.createElement("p");
-        intro.innerHTML = "Choose a construction mode for the Editor.";
+        intro.innerHTML = "選擇編輯器的建造模式。";
         this._container.appendChild(intro);
         this._panel3D = document.createElement("div");
         this._panel3D.classList.add("construction-mode-panel");
@@ -15699,16 +15725,16 @@ class ConstructionModeView extends HTMLElement {
         this._button3D.classList.add("construction-mode-button");
         this._panel3D.appendChild(this._button3D);
         let title3D = document.createElement("h2");
-        title3D.innerHTML = "3D mode";
+        title3D.innerHTML = "3D 模式";
         this._button3D.appendChild(title3D);
         let icon3D = document.createElement("img");
         icon3D.src = "datas/icons-mrs/construction-mode-3D.png";
         this._button3D.appendChild(icon3D);
         let label3D_1 = document.createElement("p");
-        label3D_1.innerHTML = "All features included";
+        label3D_1.innerHTML = "完整功能";
         this._panel3D.appendChild(label3D_1);
         let label3D_2 = document.createElement("p");
-        label3D_2.innerHTML = "Best for desktop";
+        label3D_2.innerHTML = "適合電腦";
         this._panel3D.appendChild(label3D_2);
         this._panel2D = document.createElement("div");
         this._panel2D.classList.add("construction-mode-panel");
@@ -15717,23 +15743,23 @@ class ConstructionModeView extends HTMLElement {
         this._button2D.classList.add("construction-mode-button");
         this._panel2D.appendChild(this._button2D);
         let title2D = document.createElement("h2");
-        title2D.innerHTML = "2D mode";
+        title2D.innerHTML = "2D 模式";
         this._button2D.appendChild(title2D);
         let icon2D = document.createElement("img");
         icon2D.src = "datas/icons-mrs/construction-mode-2D.png";
         this._button2D.appendChild(icon2D);
         let label2D_1 = document.createElement("p");
-        label2D_1.innerHTML = "Easy-access";
+        label2D_1.innerHTML = "操作簡單";
         this._panel2D.appendChild(label2D_1);
         let label2D_2 = document.createElement("p");
-        label2D_2.innerHTML = "Best for mobile";
+        label2D_2.innerHTML = "適合手機";
         this._panel2D.appendChild(label2D_2);
         //let label2D_3 = document.createElement("p");
         //label2D_3.innerHTML = "Build in the vertical plane";
         //this._panel2D.appendChild(label2D_3);
         let buildButton = document.createElement("button");
         buildButton.classList.add("large-button", "hide-in-low-res");
-        buildButton.innerHTML = "START BUILDING !";
+        buildButton.innerHTML = "開始建造！";
         this._container.appendChild(buildButton);
         this._button2D.onclick = () => {
             if (this.selectedMode === Core.MachineConstructionMode.Mode2D) {
@@ -15914,16 +15940,16 @@ class ExportMenuView extends HTMLElement {
         this.addEventListener("pointerup", StopPointerProgatationAndMonkeys);
         this._title = document.createElement("h1");
         this._title.classList.add("share-menu-title");
-        this._title.innerHTML = 'EXPORT';
+        this._title.innerHTML = '匯出';
         this.appendChild(this._title);
         let container;
         container = document.createElement("div");
         this.appendChild(container);
         this._shareInfo = document.createElement("div");
         this._shareInfo.innerHTML = `
-            <p>This feature is in development.</p>
-            <p>Press EXPORT below to download your machine as a .gtlf and .bin file.</p>
-            <p>Please note this exporter might crash on large machines, save your work before use !</p>
+            <p>此功能開發中。</p>
+            <p>按下方「匯出」，可將你的機械下載為 .gltf 與 .bin 檔案。</p>
+            <p>請注意：大型機械匯出時可能當機，使用前請先儲存作品！</p>
         `;
         container.appendChild(this._shareInfo);
         this._exportBallLine = document.createElement("div");
@@ -15936,12 +15962,12 @@ class ExportMenuView extends HTMLElement {
         this._exportBallLine.appendChild(this.exportBallCheckbox);
         let exportBallLabel = document.createElement("span");
         exportBallLabel.classList.add("label");
-        exportBallLabel.innerHTML = ' Include Balls';
+        exportBallLabel.innerHTML = ' 包含彈珠';
         this._exportBallLine.appendChild(exportBallLabel);
         container.appendChild(this._exportBallLine);
         this._exportBtn = document.createElement("button");
         this._exportBtn.classList.add("large-button");
-        this._shareBtnDefaultHTML = 'EXPORT' + `&nbsp;&nbsp;&nbsp;<span style="font-weight: 100">(.gltf)</span>`;
+        this._shareBtnDefaultHTML = '匯出' + `&nbsp;&nbsp;&nbsp;<span style="font-weight: 100">(.gltf)</span>`;
         this._shareBtnWorkingHTML = '<i18n-text text-key="share-menu-btn-comm"></i18n-text>';
         this._exportBtn.innerHTML = this._shareBtnDefaultHTML;
         container.appendChild(this._exportBtn);
@@ -16393,7 +16419,7 @@ class HomeMenu {
         let machineId = document.createElement("div");
         machineId.classList.add("machine-id");
         if (isFinite(machine.id)) {
-            machineId.innerHTML = "n°" + machine.id.toFixed(0);
+            machineId.innerHTML = "編號" + machine.id.toFixed(0);
         }
         panel.appendChild(machineId);
         let miniature = Core.Machine.MakeMiniature(this.game.machine, machine, { size: 256, backgroundColor: "#272b2e00" });
@@ -16415,10 +16441,10 @@ class HomeMenu {
         author.classList.add("author");
         panel.appendChild(author);
         if (machine.author) {
-            author.innerHTML = "by " + machine.author;
+            author.innerHTML = "作者：" + machine.author;
         }
         else {
-            author.innerHTML = "Anonymous";
+            author.innerHTML = "匿名";
         }
         let likes = document.createElement("div");
         likes.classList.add("likes");
@@ -16779,7 +16805,7 @@ var I18NTextLangs;
     I18NTextLangs[I18NTextLangs["French"] = 1] = "French";
     I18NTextLangs[I18NTextLangs["MAXIMUM"] = 2] = "MAXIMUM";
 })(I18NTextLangs || (I18NTextLangs = {}));
-var I18NTextLangNames = ["english", "français", "português"];
+var I18NTextLangNames = ["中文", "français", "português"];
 var I18NTextLangFileNames = ["english", "french", "portuguese"];
 var I18NTextLangAttr = ["en", "fr", "pt"];
 class I18NText extends HTMLElement {
@@ -16902,7 +16928,7 @@ class I18NText extends HTMLElement {
             clearTimeout(this._retryTimeout);
             let text = await I18NText.GetTextForLang(this._lang, this._textKey);
             if (text === undefined) {
-                this.innerHTML = "no text";
+                this.innerHTML = "無文字";
                 this._attemps++;
                 this._retryTimeout = setTimeout(() => {
                     this.updateContent();
@@ -17524,13 +17550,13 @@ class MaterialPicker extends HTMLElement {
         this.container.classList.add("container");
         this.appendChild(this.container);
         this._metalTitle = document.createElement("h2");
-        this._metalTitle.innerHTML = "Metal";
+        this._metalTitle.innerHTML = "金屬";
         this.container.appendChild(this._metalTitle);
         this.metalMaterialButtons = document.createElement("div");
         this.metalMaterialButtons.classList.add("square-material-buttons-container");
         this.container.appendChild(this.metalMaterialButtons);
         this._plasticTitle = document.createElement("h2");
-        this._plasticTitle.innerHTML = "Plastic";
+        this._plasticTitle.innerHTML = "塑膠";
         this.container.appendChild(this._plasticTitle);
         this.plasticMaterialButtons = document.createElement("div");
         this.plasticMaterialButtons.classList.add("square-material-buttons-container");
@@ -17572,7 +17598,7 @@ class MaterialPicker extends HTMLElement {
         }
     }
     initBallMaterialButtons(game) {
-        this._plasticTitle.innerHTML = "Logo";
+        this._plasticTitle.innerHTML = "標誌";
         this.buttons = [];
         for (let i = 0; i < MachineEditorBallColors.length; i++) {
             let editorColor = MachineEditorBallColors[i];
@@ -17618,7 +17644,7 @@ class MaterialPicker extends HTMLElement {
             };
         }
         let countryTitle = document.createElement("h2");
-        countryTitle.innerHTML = "Country Flag";
+        countryTitle.innerHTML = "國旗";
         this.container.appendChild(countryTitle);
         this.selectInput = document.createElement("select");
         this.selectInput.innerHTML = `
@@ -17904,7 +17930,7 @@ class ShareMenuView extends HTMLElement {
         container.appendChild(titleDiv);
         this._machineTitleLabel = document.createElement("span");
         this._machineTitleLabel.classList.add("share-label");
-        this._machineTitleLabel.innerHTML = "title";
+        this._machineTitleLabel.innerHTML = "標題";
         titleDiv.appendChild(this._machineTitleLabel);
         this._machineTitleInput = document.createElement("input");
         this._machineTitleInput.type = "text";
@@ -17914,7 +17940,7 @@ class ShareMenuView extends HTMLElement {
         container.appendChild(authorDiv);
         this._machineAuthorLabel = document.createElement("span");
         this._machineAuthorLabel.classList.add("share-label");
-        this._machineAuthorLabel.innerHTML = "author";
+        this._machineAuthorLabel.innerHTML = "作者";
         authorDiv.appendChild(this._machineAuthorLabel);
         this._machineAuthorInput = document.createElement("input");
         this._machineAuthorInput.type = "text";
@@ -17924,7 +17950,7 @@ class ShareMenuView extends HTMLElement {
         container.appendChild(countryDiv);
         this._machineCountryLabel = document.createElement("span");
         this._machineCountryLabel.classList.add("share-label");
-        this._machineCountryLabel.innerHTML = "country";
+        this._machineCountryLabel.innerHTML = "國家/地區";
         countryDiv.appendChild(this._machineCountryLabel);
         this._machineCountryInput = document.createElement("select");
         this._machineCountryInput.innerHTML = `
@@ -17989,7 +18015,7 @@ class ShareMenuView extends HTMLElement {
         container.appendChild(this._eulaLine);
         this._shareBtn = document.createElement("button");
         this._shareBtn.classList.add("large-button", "disabled");
-        this._shareBtnDefaultHTML = '<i18n-text text-key="share-menu-btn-confirm"></i18n-text>' + `&nbsp;&nbsp;&nbsp;<span style="font-weight: 100">(web)</span>`;
+        this._shareBtnDefaultHTML = '<i18n-text text-key="share-menu-btn-confirm"></i18n-text>' + `&nbsp;&nbsp;&nbsp;<span style="font-weight: 100">（網路）</span>`;
         this._shareBtnWorkingHTML = '<i18n-text text-key="share-menu-btn-comm"></i18n-text>';
         this._shareBtn.innerHTML = this._shareBtnDefaultHTML;
         container.appendChild(this._shareBtn);
@@ -18071,7 +18097,7 @@ class ShareMenuView extends HTMLElement {
         this.devUpdateBtn = document.createElement("button");
         this.devUpdateBtn.style.display = "none";
         this.devUpdateBtn.classList.add("large-button");
-        this._devUpdateBtnDefaultHTML = 'UPDATE' + `&nbsp;&nbsp;&nbsp;<span style="font-weight: 100">(dev)</span>`;
+        this._devUpdateBtnDefaultHTML = '更新' + `&nbsp;&nbsp;&nbsp;<span style="font-weight: 100">（開發）</span>`;
         this._devUpdateBtnWorkingHTML = '<i18n-text text-key="share-menu-btn-comm"></i18n-text>';
         this.devUpdateBtn.innerHTML = this._devUpdateBtnDefaultHTML;
         container.appendChild(this.devUpdateBtn);
@@ -18459,12 +18485,12 @@ class TextHelper {
         this.contentBox.appendChild(footer);
         let ignore = document.createElement("button");
         ignore.classList.add("ignore");
-        ignore.innerText = "IGNORE";
+        ignore.innerText = "忽略";
         ignore.onclick = this._onIgnoreBtnClick;
         footer.appendChild(ignore);
         let okBtn = document.createElement("button");
         okBtn.classList.add("accept");
-        okBtn.innerText = "OK";
+        okBtn.innerText = "確定";
         okBtn.onclick = this._onOkBtnClick;
         footer.appendChild(okBtn);
         this.contentBox.style.display = "none";
@@ -18516,19 +18542,19 @@ class Toolbar {
                 this.reloadingContainer.style.display = (!PlayerHasInteracted || this.game.machine.instantiated) ? "none" : "block";
                 if (this.reloadingContainer.style.display === "block") {
                     if (this._tick < this._tickDuration * 1) {
-                        this.reloadingContainer.innerHTML = "rebuilding";
+                        this.reloadingContainer.innerHTML = "重建中";
                     }
                     else if (this._tick < this._tickDuration * 2) {
-                        this.reloadingContainer.innerHTML = "rebuilding.";
+                        this.reloadingContainer.innerHTML = "重建中.";
                     }
                     else if (this._tick < this._tickDuration * 3) {
-                        this.reloadingContainer.innerHTML = "rebuilding..";
+                        this.reloadingContainer.innerHTML = "重建中..";
                     }
                     else if (this._tick < this._tickDuration * 4) {
-                        this.reloadingContainer.innerHTML = "rebuilding...";
+                        this.reloadingContainer.innerHTML = "重建中...";
                     }
                     else if (this._tick < this._tickDuration * 5) {
-                        this.reloadingContainer.innerHTML = "rebuilding....";
+                        this.reloadingContainer.innerHTML = "重建中....";
                     }
                     else if (this._tick > this._tickDuration * 5) {
                         this._tick = 0;
@@ -18540,11 +18566,11 @@ class Toolbar {
                 }
                 if (this.boostButton.style.display === "") {
                     if (this.game.machine.stopped) {
-                        this.boostButtonLabel.innerHTML = "START";
+                        this.boostButtonLabel.innerHTML = "開始";
                         this.boostButton.setAttribute("state", "start");
                     }
                     else {
-                        this.boostButtonLabel.innerHTML = "WEIGHT";
+                        this.boostButtonLabel.innerHTML = "加重";
                         let ball = this.game.machine.balls[0];
                         if (ball) {
                             this.boostButton.setAttribute("state", ball.boosting ? "boost" : "");
@@ -19017,7 +19043,7 @@ class UserMachinesPage {
         container.appendChild(e);
         let label = document.createElement("span");
         label.classList.add("label");
-        label.innerText = "MIGRATE";
+        label.innerText = "移轉";
         e.appendChild(label);
         let open = document.createElement("button");
         open.classList.add("square-button", "next");

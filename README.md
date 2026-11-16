@@ -4,7 +4,7 @@ Babylon.js 3D 彈珠軌道建造遊戲，原作 **Tiaratum Games / Sven Taton**�
 
 - 線上版本（GitHub Pages）：<https://lisjfixm.github.io/marble-run-simulator/>
 - 原始 Poki 來源：<https://poki.com/zh/g/marble-run-simulator>
-- 版本：**v1.0.0**（版本常量見 `index.js` 的 `GAME_VERSION`）
+- 版本：**v1.1.0**（版本常量見 `index.js` 的 `GAME_VERSION`）
 
 ## 本機啟動
 
@@ -46,6 +46,11 @@ py -m http.server 8775
 - 首頁標題拆圖（`work/title_parts/`）與星星、頭像佔位圖為由既有資源裁切或以 PIL 重建，非原作原圖。
 
 ## Changelog
+
+### v1.1.0（2026-11-16）
+
+- 遊戲內可見介面全面改為繁體中文：i18n 語言檔、選單與按鈕、編輯器零件與材質名稱、關卡提示與教學訊息、分享與匯出選單、載入畫面訊息。
+- 語言切換中的英文槽預設顯示中文；法文內容保留。EULA 法律條文僅譯標題與按鈕，本文維持原文。
 
 ### v1.0.0（2026-11-15）
 

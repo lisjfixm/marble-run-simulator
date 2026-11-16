@@ -1,4 +1,4 @@
-var GAME_VERSION = "1.0.0";
+var GAME_VERSION = "1.1.0";
 var USE_POKI_SDK = false;
 var BB_PUZZLE_ONLY = false;
 var THE_ORIGIN_OF_TIME_ms = 0;
@@ -122,12 +122,12 @@ function loadStep() {
         displayed_progress = displayed_progress * (1 - f) + next_progress * f;
 
         document.querySelector("#click-anywhere-screen .white-track").style.opacity = displayed_progress;
-        document.querySelector("#click-anywhere-screen .message-bottom").innerHTML = "loading... " + (displayed_progress * 100).toFixed(0) + "%";
+        document.querySelector("#click-anywhere-screen .message-bottom").innerHTML = "載入中… " + (displayed_progress * 100).toFixed(0) + "%";
         requestAnimationFrame(loadStep);
     }
     else {
         document.querySelector("#click-anywhere-screen .white-track").style.opacity = "1";
-        document.querySelector("#click-anywhere-screen .message-bottom").innerHTML = "Click or press anywhere to Enter";
+        document.querySelector("#click-anywhere-screen .message-bottom").innerHTML = "點擊或按任意鍵進入";
     }
 }
 
@@ -228,25 +228,25 @@ window.addEventListener("DOMContentLoaded", async () => {
 });
 
 const loadingTexts = [
-    "computing g 7th digit",
-    "waiting for wikipedia 'Isaac Newton' page to load",
-    "implementing CNRS latest researches on point dynamic",
-    "recalculating Pi 56th decimal",
-    "calibrating pixels #3, #71, #99 and #204",
-    "baking lightmaps temp 7",
-    "indexing the vertices by size",
-    "verticing the indexes by color",
-    "checking procedural generation procedures",
-    "running 1 (one) unitary unit test",
-    "please do not touch screen while loading",
-    "initializing the initializer",
-    "managing master manager disposal",
-    "thanking user for his patience",
-    "waiting for loading screen to update",
-    "updating loading screen offscreen features",
-    "running last minute bug removal script",
-    "cleaning up unused assets at runtime",
-    "cleaning up unused assets at runtime",
-    "pretending to do something useful",
-    "allowing the loader to take a short break"
+    "正在計算重力加速度第 7 位小數",
+    "等待維基百科「牛頓」頁面載入",
+    "導入法國國家科學研究中心最新質點動態研究",
+    "重新計算圓周率第 56 位小數",
+    "校正像素 #3、#71、#99 與 #204",
+    "烘焙第 7 組光影貼圖",
+    "依大小為頂點編號",
+    "依顏色為索引建立頂點",
+    "檢查程序化生成流程",
+    "執行 1（一）項單元測試",
+    "載入中，請勿觸碰螢幕",
+    "正在初始化初始化程式",
+    "處理總管理器的處置",
+    "感謝玩家的耐心等候",
+    "等待載入畫面更新",
+    "更新載入畫面的幕後功能",
+    "執行最後一刻的除錯腳本",
+    "執行時清理未使用素材",
+    "執行時清理未使用素材",
+    "假裝在做有用的事",
+    "讓載入程式稍作休息"
 ]
