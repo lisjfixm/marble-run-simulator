@@ -16228,23 +16228,15 @@ class HighlightArrow extends BABYLON.Mesh {
 class HomeMenu {
     constructor(game) {
         this.game = game;
-        this.noCommunityPanel = true;
         this.tutorialIndex = 0;
         this.tutorialCount = 0;
         this.arcadeIndex = 0;
         this.arcadeCount = 0;
         this.puzzleIndex = 0;
         this.puzzleCount = 0;
-        this.currentMachineOfThe = 0;
         this.page = document.querySelector("#home-menu");
     }
     async initialize() {
-        if (!this.noCommunityPanel) {
-            setInterval(() => {
-                this.currentMachineOfThe = (this.currentMachineOfThe + 1) % 3;
-                this.updateMachineOfThe();
-            }, 8000);
-        }
         return new Promise(resolve => {
             this.page.onLoad = async () => {
                 this.tutorialContainer = document.querySelector("#tutorial-container");
@@ -16326,151 +16318,9 @@ class HomeMenu {
                     this.setPuzzleScrollIndex(this.puzzleIndex + 1);
                 });
                 this.reinitScrolls();
-                let offThread = async () => {
-                    let machineOfTheWeekPanel = this.page.querySelector(".machine-of-the-week");
-                    machineOfTheWeekPanel.innerHTML = "";
-                    if (machineOfTheWeekPanel) {
-                        let state = 1 << Core.MachineDBState.Ok | 1 << Core.MachineDBState.Star;
-                        let data;
-                        if (this.game.OFFLINE_MODE) {
-                            data = await this.game.offlineDatabase.offlineFetch(0, 1, ShowcasePageSortBy.Best);
-                        }
-                        else {
-                            let dataResponse = await fetch(SHARE_SERVICE_PATH + "get_machines/0/1/" + state.toFixed(0) + "/" + ShowcasePageSortBy.Best.toFixed(0) + "/8", {
-                                method: "GET",
-                                mode: "cors"
-                            });
-                            let dataText = await dataResponse.text();
-                            data = JSON.parse(dataText);
-                        }
-                        if (data.machines) {
-                            if (data.machines[0]) {
-                                let machine = data.machines[0];
-                                this.makeMachinePanel(machineOfTheWeekPanel, machine, '<i18n-text text-key="machine-of-the-week-title">', ShowcasePageFilterRange.Week);
-                            }
-                        }
-                    }
-                    let machineOfTheMonthPanel = this.page.querySelector(".machine-of-the-month");
-                    machineOfTheMonthPanel.innerHTML = "";
-                    if (machineOfTheMonthPanel) {
-                        let state = 1 << Core.MachineDBState.Ok | 1 << Core.MachineDBState.Star;
-                        let data;
-                        if (this.game.OFFLINE_MODE) {
-                            data = await this.game.offlineDatabase.offlineFetch(0, 1, ShowcasePageSortBy.Best);
-                        }
-                        else {
-                            let dataResponse = await fetch(SHARE_SERVICE_PATH + "get_machines/0/1/" + state.toFixed(0) + "/" + ShowcasePageSortBy.Best.toFixed(0) + "/31", {
-                                method: "GET",
-                                mode: "cors"
-                            });
-                            let dataText = await dataResponse.text();
-                            data = JSON.parse(dataText);
-                        }
-                        if (data.machines) {
-                            if (data.machines[0]) {
-                                let machine = data.machines[0];
-                                this.makeMachinePanel(machineOfTheMonthPanel, machine, '<i18n-text text-key="machine-of-the-month-title">', ShowcasePageFilterRange.Month);
-                            }
-                        }
-                    }
-                    machineOfTheMonthPanel.style.display = "none";
-                    let machineOfTheYearPanel = this.page.querySelector(".machine-of-the-year");
-                    machineOfTheYearPanel.innerHTML = "";
-                    if (machineOfTheYearPanel) {
-                        let state = 1 << Core.MachineDBState.Ok | 1 << Core.MachineDBState.Star;
-                        let data;
-                        if (this.game.OFFLINE_MODE) {
-                            data = await this.game.offlineDatabase.offlineFetch(0, 1, ShowcasePageSortBy.Best);
-                        }
-                        else {
-                            let dataResponse = await fetch(SHARE_SERVICE_PATH + "get_machines/0/1/" + state.toFixed(0) + "/" + ShowcasePageSortBy.Best.toFixed(0) + "/365", {
-                                method: "GET",
-                                mode: "cors"
-                            });
-                            let dataText = await dataResponse.text();
-                            data = JSON.parse(dataText);
-                        }
-                        if (data.machines) {
-                            if (data.machines[0]) {
-                                let machine = data.machines[0];
-                                this.makeMachinePanel(machineOfTheYearPanel, machine, '<i18n-text text-key="machine-of-the-year-title">', ShowcasePageFilterRange.AllTime);
-                            }
-                        }
-                    }
-                    machineOfTheYearPanel.style.display = "none";
-                    if (this.noCommunityPanel) {
-                        this.page.querySelector(".community").style.display = "none";
-                        machineOfTheWeekPanel.style.display = "";
-                        machineOfTheMonthPanel.style.display = "";
-                        machineOfTheYearPanel.style.display = "";
-                    }
-                };
-                offThread();
                 resolve();
             };
         });
-    }
-    makeMachinePanel(panel, machine, labelText, filterRange) {
-        let label = document.createElement("span");
-        label.classList.add("label", "hide-in-low-res");
-        label.innerHTML = labelText;
-        label.style.textAlign = "left";
-        panel.appendChild(label);
-        let machineId = document.createElement("div");
-        machineId.classList.add("machine-id");
-        if (isFinite(machine.id)) {
-            machineId.innerHTML = "編號" + machine.id.toFixed(0);
-        }
-        panel.appendChild(machineId);
-        let miniature = Core.Machine.MakeMiniature(this.game.machine, machine, { size: 256, backgroundColor: "#272b2e00" });
-        if (miniature) {
-            panel.appendChild(miniature);
-        }
-        let countryCode = "xx";
-        if (machine.country) {
-            countryCode = machine.country;
-        }
-        let countryIcon = document.createElement("span");
-        countryIcon.classList.add("country", "fi", "fi-" + countryCode);
-        let flag = ExistingCountryFlags.find(f => { return f.code === countryCode; });
-        if (flag) {
-            countryIcon.title = flag.name;
-        }
-        panel.appendChild(countryIcon);
-        let author = document.createElement("div");
-        author.classList.add("author");
-        panel.appendChild(author);
-        if (machine.author) {
-            author.innerHTML = "作者：" + machine.author;
-        }
-        else {
-            author.innerHTML = "匿名";
-        }
-        let likes = document.createElement("div");
-        likes.classList.add("likes");
-        panel.appendChild(likes);
-        likes.innerText = (machine.likes + Core.Machine.CreationStringToExtraLikes(machine.creation)).toFixed(0);
-        let likeIcon = document.createElement("img");
-        if (this.game.likeManager.isLiked(machine.id)) {
-            likeIcon.src = "./datas/icons-mrs/like.svg";
-        }
-        else {
-            likeIcon.src = "./datas/icons-mrs/like-stroked.svg";
-        }
-        likes.appendChild(likeIcon);
-        if (this.noCommunityPanel) {
-            panel.onclick = (ev) => {
-                this.game.router.communityMenu.setSortByValue(ShowcasePageSortBy.Best, false);
-                this.game.router.communityMenu.setFilterRangeValue(filterRange);
-                location.href = "#community";
-            };
-        }
-        else {
-            let href = "#machine?id=" + machine.id.toFixed(0);
-            panel.onclick = (ev) => {
-                location.href = href;
-            };
-        }
     }
     updateTutorialPrevNextVisibility() {
         if (this.tutorialIndex > 0) {
@@ -16773,30 +16623,6 @@ class HomeMenu {
         this.setTutorialScrollIndex(this.getFirstNotCompletedTutorialIndex() - offset);
         this.setArcadeScrollIndex(this.getFirstNotCompletedParkourIndex() - offset);
         this.setPuzzleScrollIndex(this.getFirstNotCompletedPuzzleIndex() - offset);
-    }
-    updateMachineOfThe() {
-        let panels = [
-            this.page.querySelector(".machine-of-the-week"),
-            this.page.querySelector(".machine-of-the-month"),
-            this.page.querySelector(".machine-of-the-year")
-        ];
-        for (let i = 0; i < panels.length; i++) {
-            panels[i].style.opacity = "1";
-            panels[i].style.display = "";
-        }
-        return;
-        for (let i = 0; i < panels.length; i++) {
-            panels[i].style.opacity = "0";
-        }
-        setTimeout(() => {
-            for (let i = 0; i < panels.length; i++) {
-                panels[i].style.display = "none";
-            }
-            panels[this.currentMachineOfThe].style.display = "";
-            requestAnimationFrame(() => {
-                panels[this.currentMachineOfThe].style.opacity = "1";
-            });
-        }, 500);
     }
 }
 var I18NTextLangs;

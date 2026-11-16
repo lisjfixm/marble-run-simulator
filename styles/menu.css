@@ -338,61 +338,6 @@ body:not(.vertical) .machine-page-body .machine-page-logo {
     border-color: magenta;
 }
 
-.panel.machine-of-the-x {
-    transition: opacity 0.4s;
-}
-
-.machine-of-the-x .machine-id {
-    position: absolute;
-    bottom: calc(var(--medium-panel-label-font-size) + 6px);
-    right: 6px;
-    font-size: var(--medium-panel-label-2-font-size);
-    font-family: Roboto;
-    font-weight: 100;
-    z-index: 1;
-}
-
-.machine-of-the-x canvas {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    z-index: 0;
-}
-
-.machine-of-the-x .likes {
-    position: absolute;
-    bottom: 26px;
-    left: 4px;
-    font-weight: 300;
-    font-size: 14px;
-}
-
-.machine-of-the-x .likes img {
-    display: inline-block;
-    height: 16px;
-    margin-left: 2px;
-    vertical-align: top;
-}
-
-.machine-of-the-x .country {
-    position: absolute;
-    left: 4px;
-    bottom: 4px;
-    border-radius: 2px;
-    z-index: 1;
-}
-
-.machine-of-the-x .author {
-    position: absolute;
-    right: 4px;
-    bottom: 4px;
-    text-align: right;
-    font-weight: 100;
-    font-size: var(--medium-panel-label-2-font-size);
-    z-index: 1;
-}
-
 .machine-page-filters {
     display: flex;
     flex-direction: column;

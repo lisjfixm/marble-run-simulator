@@ -1,4 +1,4 @@
-var GAME_VERSION = "1.1.0";
+var GAME_VERSION = "1.1.1";
 var USE_POKI_SDK = false;
 var BB_PUZZLE_ONLY = false;
 var THE_ORIGIN_OF_TIME_ms = 0;
