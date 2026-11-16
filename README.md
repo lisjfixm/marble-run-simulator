@@ -4,7 +4,7 @@ Babylon.js 3D 彈珠軌道建造遊戲，原作 **Tiaratum Games / Sven Taton**�
 
 - 線上版本（GitHub Pages）：<https://lisjfixm.github.io/marble-run-simulator/>
 - 原始 Poki 來源：<https://poki.com/zh/g/marble-run-simulator>
-- 版本：**v1.1.1**（版本常量見 `index.js` 的 `GAME_VERSION`）
+- 版本：**v1.1.2**（版本常量見 `index.js` 的 `GAME_VERSION`）
 
 ## 本機啟動
 
@@ -46,6 +46,12 @@ py -m http.server 8775
 - 首頁標題拆圖（`work/title_parts/`）與星星、頭像佔位圖為由既有資源裁切或以 PIL 重建，非原作原圖。
 
 ## Changelog
+
+### v1.1.2（2026-11-16）
+
+- 移除廣告牆：編輯器原本需觀看廣告解鎖的零件改為直接開放，移除「解鎖」標籤與回勵廣告解鎖流程。
+- 關卡提示不再詢問觀看廣告，按確認直接顯示提示；對話文案移除廣告字眼。
+- 遠端 Poki SDK 維持停用，不載入任何廣告腳本。
 
 ### v1.1.1（2026-11-16）
 

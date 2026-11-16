@@ -126,26 +126,6 @@
     color: white;
 }
 
-.machine-editor-item-adlocked {
-    display: block;
-    position: absolute;
-    line-height: normal;
-    top: 0px;
-    right: 0px;
-    height: 100%;
-    font-size: 13px;
-    font-weight: 900;
-    border-left: 1px solid white;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    padding-left: 0px;
-    padding-right: 2px;
-    background-color: #1348ae;
-    color: white;
-    text-align: center;
-    writing-mode: sideways-lr;
-}
-
 .machine-editor-item-count {
     position: absolute;
     line-height: normal;

@@ -4914,51 +4914,18 @@ class TextHelpersManager {
                 this.graphicQHelper.hide();
             }
         };
-        this.challengeHelper = new TextHelper('<p>🎬 <i18n-text text-key="challenge-helper-video"></i18n-text></p>', this.game);
+        this.challengeHelper = new TextHelper('<p><i18n-text text-key="challenge-helper-video"></i18n-text></p>', this.game);
         this.challengeHelper.onOkCallback = () => {
-            let runRewardedBreak = true;
-            if (location.host.startsWith("127.0.0.1")) {
-                runRewardedBreak = false;
-            }
-            if (USE_POKI_SDK && runRewardedBreak) {
-                let prevMainVolume = BABYLON.Engine.audioEngine.getGlobalVolume();
-                if (this.game.challenge.mode === ChallengeMode.Parkour) {
-                    this.game.challenge.reset();
-                }
-                else {
-                    this.game.machine.pause();
-                }
-                PokiSDK.rewardedBreak(() => {
-                    BABYLON.Engine.audioEngine.setGlobalVolume(0);
-                }).then((success) => {
-                    if (success) {
-                        this.game.challenge.helper.show();
-                        this.challengeHelperInfo.contentBox.classList.add("green");
-                        this.challengeHelperInfo.setTarget(document.querySelector("#challenge-topbar-help"));
-                        if (this.game.challenge.mode === ChallengeMode.Parkour) {
-                            this.challengeHelperInfo.setContent('<p><i18n-text text-key="challenge-helper-info-parkour"></i18n-text></p>');
-                        }
-                        else {
-                            this.challengeHelperInfo.setContent('<p><i18n-text text-key="challenge-helper-info-puzzle"></i18n-text></p>');
-                        }
-                        this.challengeHelperInfo.show();
-                    }
-                    console.log("Rewarded break finished, proceeding to game");
-                    BABYLON.Engine.audioEngine.setGlobalVolume(prevMainVolume);
-                });
+            this.game.challenge.helper.show();
+            this.challengeHelperInfo.contentBox.classList.add("green");
+            this.challengeHelperInfo.setTarget(document.querySelector("#challenge-topbar-help"));
+            if (this.game.challenge.mode === ChallengeMode.Parkour) {
+                this.challengeHelperInfo.setContent('<p><i18n-text text-key="challenge-helper-info-parkour"></i18n-text></p>');
             }
             else {
-                this.game.challenge.helper.show();
-                this.challengeHelperInfo.contentBox.classList.add("green");
-                this.challengeHelperInfo.setTarget(document.querySelector("#challenge-topbar-help"));
-                if (this.game.challenge.mode === ChallengeMode.Parkour) {
-                    this.challengeHelperInfo.setContent('<p><i18n-text text-key="challenge-helper-info-parkour"></i18n-text></p>');
-                }
-                else {
-                    this.challengeHelperInfo.setContent('<p><i18n-text text-key="challenge-helper-info-puzzle"></i18n-text></p>');
-                }
-                this.challengeHelperInfo.show();
+                this.challengeHelperInfo.setContent('<p><i18n-text text-key="challenge-helper-info-puzzle"></i18n-text></p>');
             }
+            this.challengeHelperInfo.show();
         };
         this.challengeHelper.onClickOutsideCallback = () => {
             if (performance.now() - this.challengeHelper.lastShownTime > this.outsideClickDelay) {
@@ -10497,8 +10464,6 @@ class MachineEditor {
         for (let i = 0; i < availableTracks.length; i++) {
             let trackname = availableTracks[i];
             let isNew = MachineEditorNewPartsList.find(o => { return o.part === trackname; }) != undefined;
-            let adLocked = MachineEditorAdLockedPartsList.find(o => { return o.part === trackname; });
-            let isAdLocked = adLocked && adLocked.locked;
             let item = document.createElement("div");
             item.classList.add("machine-editor-item");
             item.setAttribute("track", trackname);
@@ -10526,12 +10491,6 @@ class MachineEditor {
             else if (!firstNonNewElement) {
                 firstNonNewElement = item;
             }
-            if (isAdLocked) {
-                let itemAdLockedElement = document.createElement("div");
-                itemAdLockedElement.classList.add("machine-editor-item-adlocked");
-                itemAdLockedElement.innerHTML = "解鎖";
-                item.appendChild(itemAdLockedElement);
-            }
             let itemCountElement = document.createElement("div");
             itemCountElement.classList.add("machine-editor-item-count");
             itemCountElement.innerHTML = "&#8734;";
@@ -10547,23 +10506,6 @@ class MachineEditor {
                 this._pointerDownY = ev.clientY * window.devicePixelRatio;
                 ev.stopPropagation();
                 if (this.getItemCount(trackname) <= 0) {
-                    return;
-                }
-                if (USE_POKI_SDK && adLocked && adLocked.locked && !location.host.startsWith("127.0.0.1")) {
-                    let prevMainVolume = BABYLON.Engine.audioEngine.getGlobalVolume();
-                    PokiSDK.rewardedBreak(() => {
-                        BABYLON.Engine.audioEngine.setGlobalVolume(0);
-                    }).then((success) => {
-                        if (success) {
-                            adLocked.locked = false;
-                            let adLockedTag = item.querySelector(".machine-editor-item-adlocked");
-                            if (adLockedTag instanceof HTMLElement) {
-                                adLockedTag.style.display = "none";
-                            }
-                        }
-                        console.log("Rewarded break finished, proceeding to game");
-                        BABYLON.Engine.audioEngine.setGlobalVolume(prevMainVolume);
-                    });
                     return;
                 }
                 if (this.draggedObject instanceof Core.Ball || this.draggedObject instanceof Core.MachinePart) {
@@ -11840,15 +11782,7 @@ var MachineEditorPartsList = [
     { part: "jumper_1", mode: MachineMode.AllD },
 ];
 var MachineEditorNewPartsList = [];
-var MachineEditorAdLockedPartsList = [
-    { part: "ladder_4.4", locked: true },
-    { part: "cross2d", locked: true },
-    { part: "pipeloop_6.1.1", locked: true },
-    { part: "pipeloop_5.0.1", locked: true },
-    { part: "pipeunderloop_6.1.1", locked: true },
-    { part: "pipeunderloop_5.0.1", locked: true },
-    { part: "coil_5.3", locked: true }
-];
+var MachineEditorAdLockedPartsList = [];
 var MachineEditorPartsListDebug = [
     { part: "blackboard_16.16.1", mode: MachineMode.Only2D },
     { part: "box_2.2", mode: MachineMode.Only2D },
