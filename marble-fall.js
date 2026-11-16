@@ -91,6 +91,21 @@ var TutorialsList = [
     "join",
     "split"
 ];
+// 建造關自動解答包（預存解答佈局）。
+// 鍵：Tutorial:<索引>（對照 TutorialsList）或 Puzzle:<1..5>。
+// 零件：{ name, i, j, k, r, colors? }；name 保留尺寸後綴，[R]n 後綴會拆到 r。
+// 格點須與軌道端點對齊；內容需在有 WebGL 的實機環境擺好並通關驗證後再填入，
+// 未驗證前保持空物件，自動模式不會擺入任何零件。
+//
+// 官方教學條件可考證的參考格點（尚未實機驗證，回填前請逐一確認尺寸與銜接）：
+//   Tutorial:0 simple  ramp_5.-1.0   i=-2 j=0 k=3 r=0
+//   Tutorial:1 rotate  uturnsharp_5  i= 5 j=0 k=8 r=0
+//                      uturnsharp_5  i=-5 j=0 k=3 r=2
+//   Tutorial:4 lift    shooter_9      i=-5 j=0 k=2 r=2
+//   Tutorial:5 join    join          i= 0 j=0 k=3 r=0
+//                      flatjoin      i= 8 j=0 k=5 r=2
+var ChallengeSolutions = {
+};
 var ChallengeMode;
 (function (ChallengeMode) {
     ChallengeMode[ChallengeMode["Tutorial"] = 0] = "Tutorial";
@@ -2605,6 +2620,59 @@ class Game {
                 }
             }
         }
+    }
+    challengeSolutionKey() {
+        if (this.mode !== GameMode.Challenge || !this.challenge) { return null; }
+        if (this.challenge.mode === ChallengeMode.Tutorial) { return "Tutorial:" + this.challenge.currentChallengeIndex; }
+        if (this.challenge.mode === ChallengeMode.Puzzle) { return "Puzzle:" + this.challenge.currentChallengeIndex; }
+        return null;
+    }
+    async applyChallengeSolution() {
+        let key = this.challengeSolutionKey();
+        if (!key) { return false; }
+        let specs = ChallengeSolutions[key];
+        if (!specs || !specs.length) { return false; }
+        for (let n = 0; n < specs.length; n++) {
+            let spec = specs[n];
+            let rawName = spec.name || "";
+            let r = isFinite(spec.r) ? spec.r : 0;
+            if (rawName.endsWith("[R]1")) { r = 1; }
+            if (rawName.endsWith("[R]2")) { r = 2; }
+            if (rawName.endsWith("[R]3")) { r = 3; }
+            let name = rawName.split("[R]")[0];
+            let prop = { i: spec.i || 0, j: spec.j || 0, k: spec.k || 0, r: r };
+            if (spec.colors) { prop.c = spec.colors; }
+            let track = this.machine.trackFactory.createTrack(name, prop);
+            if (!track) { continue; }
+            track.isPlaced = true;
+            track.isSelectable = true;
+            this.machine.parts.push(track);
+            await track.instantiate(true);
+            track.generateWires();
+            track.recomputeAbsolutePath();
+        }
+        this.machine.generateBaseMesh();
+        return true;
+    }
+    exportChallengeSolution() {
+        let key = this.challengeSolutionKey();
+        let list = [];
+        if (this.machine) {
+            for (let n = 0; n < this.machine.parts.length; n++) {
+                let p = this.machine.parts[n];
+                if (!p.isSelectable) { continue; }
+                list.push({
+                    name: p.fullPartName || p.partName,
+                    i: p.i, j: p.j, k: p.k, r: p.r,
+                    colors: p.colors
+                });
+            }
+        }
+        let out = {};
+        out[key || "unknown"] = list;
+        let json = JSON.stringify(out, null, 2);
+        console.log(json);
+        return json;
     }
     getScene() {
         return this.scene;
@@ -18325,9 +18393,7 @@ class AutoPlayer {
                 let delay = challenge.state >= 100 ? 2.5 : 1.5;
                 if (this._replayTimer > delay) {
                     this._replayTimer = 0;
-                    if (challenge.state >= 100) { challenge.state = 0; }
-                    challenge.failure = false;
-                    challenge.start();
+                    this._replayChallenge(challenge);
                 }
                 return;
             }
@@ -18389,6 +18455,21 @@ class AutoPlayer {
                 machine.play();
             }
         }
+    }
+    _replayChallenge(challenge) {
+        if (challenge.state >= 100) { challenge.state = 0; }
+        challenge.failure = false;
+        let useSolution = (challenge.mode === ChallengeMode.Tutorial || challenge.mode === ChallengeMode.Puzzle)
+            && ChallengeSolutions[this.game.challengeSolutionKey()];
+        if (!useSolution) {
+            challenge.start();
+            return;
+        }
+        challenge.reset();
+        this.game.applyChallengeSolution().then((ok) => {
+            if (!ok) { challenge.start(); }
+            else { this.game.machine.play(); }
+        });
     }
 }
 class Toolbar {
