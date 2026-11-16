@@ -18332,8 +18332,21 @@ class AutoPlayer {
                 return;
             }
             this._replayTimer = 0;
-            if (challenge.mode === ChallengeMode.Parkour && this.game.machine.playing) {
-                this._autoBoost(challenge);
+            if (this.game.machine.playing) {
+                this._runTimer += rawDT;
+                if (this._runTimer > 90) {
+                    this._runTimer = 0;
+                    if (challenge.state >= 100) { challenge.state = 0; }
+                    challenge.failure = false;
+                    challenge.start();
+                    return;
+                }
+                if (challenge.mode === ChallengeMode.Parkour) {
+                    this._autoBoost(challenge);
+                }
+            }
+            else {
+                this._runTimer = 0;
             }
             return;
         }
