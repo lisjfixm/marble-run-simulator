@@ -23,6 +23,7 @@ option-newBallMat;新彈珠材質; Insertion Bille
 option-newBallMat-0;鋼鐵; Acier
 option-newBallMat-1;隨機; Aléatoire
 option-newBallMat-2;上次使用; Dernière
+option-auto-play;自動遊玩; Jeu Automatique
 option-autoGraphicQ;圖像自動; Qualité Graphique Automatique
 option-graphicQ;圖像品質; Qualité Graphique
 option-zoom-precision;縮放靈敏度; Precision Zoom Camera

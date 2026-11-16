@@ -4,7 +4,7 @@ Babylon.js 3D 彈珠軌道建造遊戲，原作 **Tiaratum Games / Sven Taton**�
 
 - 線上版本（GitHub Pages）：<https://lisjfixm.github.io/marble-run-simulator/>
 - 原始 Poki 來源：<https://poki.com/zh/g/marble-run-simulator>
-- 版本：**v1.1.2**（版本常量見 `index.js` 的 `GAME_VERSION`）
+- 版本：**v1.2.0**（版本常量見 `index.js` 的 `GAME_VERSION`）
 
 ## 本機啟動
 
@@ -46,6 +46,12 @@ py -m http.server 8775
 - 首頁標題拆圖（`work/title_parts/`）與星星、頭像佔位圖為由既有資源裁切或以 PIL 重建，非原作原圖。
 
 ## Changelog
+
+### v1.2.0（2026-11-16）
+
+- 新增「自動遊玩」模式：工具列循環按鈕或設定選單開關切換，狀態本機保存。
+- 挑戰與展示模式下，彈珠跑完或失敗後自動重置並重新播放，循環觀賞；展示模式卡住超時會自動重置。
+- Parkour 反應關在自動模式下依彈珠垂直速度自動切換加重，代玩家按壓。
 
 ### v1.1.2（2026-11-16）
 

@@ -2870,6 +2870,7 @@ class Game {
             this.textHelpersManager.initialize();
         }
         this.challenge = new Challenge(this);
+        this.autoPlayer = new AutoPlayer(this);
         this.bbPuzzleLoader = new BBPuzzlesLoader(this);
         this.bbPuzzle = new BlackBoardPuzzle(this);
         this.toonSoundManager = new ToonSoundManager(this);
@@ -3183,6 +3184,9 @@ class Game {
         }
         if (this.challenge && this.mode === GameMode.Challenge) {
             this.challenge.update(rawDT);
+        }
+        if (this.autoPlayer) {
+            this.autoPlayer.update(rawDT);
         }
         if (this.bbPuzzle && this.mode === GameMode.BBPuzzle) {
             this.bbPuzzle.update(rawDT);
@@ -4426,6 +4430,9 @@ class MarbleConfiguration extends Nabu.Configuration {
                         return '<i18n-text text-key="option-newBallMat-2"></i18n-text>';
                     }
                 }
+            }),
+            new Nabu.ConfigurationElement("autoPlay", Nabu.ConfigurationElementType.Boolean, false, Nabu.ConfigurationElementCategory.Gameplay, {
+                displayName: '<i18n-text text-key="option-auto-play"></i18n-text>'
             }),
             new Nabu.ConfigurationElement("zoom-precision", Nabu.ConfigurationElementType.Number, 20, Nabu.ConfigurationElementCategory.Control, {
                 displayName: '<i18n-text text-key="option-zoom-precision"></i18n-text>',
@@ -18287,6 +18294,90 @@ class TextHelper {
         }
     }
 }
+class AutoPlayer {
+    constructor(game) {
+        this.game = game;
+        this._replayTimer = 0;
+        this._runTimer = 0;
+        this._wasPlaying = false;
+    }
+    get enabled() {
+        return this.game.config && this.game.config.getValue("autoPlay") == true;
+    }
+    update(rawDT) {
+        if (!this.game.machine) { return; }
+        if (!isFinite(rawDT)) { return; }
+        if (!this.enabled) {
+            this._replayTimer = 0;
+            this._runTimer = 0;
+            this._wasPlaying = false;
+            return;
+        }
+        let mode = this.game.mode;
+        if (mode === GameMode.Home || mode === GameMode.BBPuzzle || mode === GameMode.Create) { return; }
+        if (mode === GameMode.Challenge) {
+            let challenge = this.game.challenge;
+            if (!challenge) { return; }
+            let finished = challenge.state >= 100 || challenge.failure;
+            if (finished) {
+                this._runTimer = 0;
+                this._replayTimer += rawDT;
+                let delay = challenge.state >= 100 ? 2.5 : 1.5;
+                if (this._replayTimer > delay) {
+                    this._replayTimer = 0;
+                    if (challenge.state >= 100) { challenge.state = 0; }
+                    challenge.failure = false;
+                    challenge.start();
+                }
+                return;
+            }
+            this._replayTimer = 0;
+            if (challenge.mode === ChallengeMode.Parkour && this.game.machine.playing) {
+                this._autoBoost(challenge);
+            }
+            return;
+        }
+        this._spectator(rawDT);
+    }
+    _autoBoost(challenge) {
+        let ball = this.game.machine.balls[0];
+        if (!ball || !ball.velocity) { return; }
+        let vy = ball.velocity.y;
+        if (vy < -0.02) { ball.boosting = true; }
+        else if (vy > 0.02) { ball.boosting = false; }
+    }
+    _spectator(rawDT) {
+        let machine = this.game.machine;
+        if (machine.playing) {
+            this._runTimer += rawDT;
+            this._wasPlaying = true;
+            this._replayTimer = 0;
+            if (this._runTimer > 120) {
+                this._runTimer = 0;
+                machine.stop();
+                machine.play();
+            }
+            return;
+        }
+        if (this._wasPlaying) {
+            this._runTimer = 0;
+            this._replayTimer += rawDT;
+            if (this._replayTimer > 1.5) {
+                this._replayTimer = 0;
+                this._wasPlaying = false;
+                machine.play();
+            }
+        }
+        else {
+            this._replayTimer += rawDT;
+            if (this._replayTimer > 1.0) {
+                this._replayTimer = 0;
+                this._wasPlaying = false;
+                machine.play();
+            }
+        }
+    }
+}
 class Toolbar {
     constructor(game) {
         this.game = game;
@@ -18295,6 +18386,7 @@ class Toolbar {
         this.soundInputShown = false;
         this.editInputShown = false;
         this.shareInputShown = false;
+        this.autoButton = null;
         this._tick = 0;
         this._tickDuration = 15;
         this._udpate = () => {
@@ -18350,6 +18442,7 @@ class Toolbar {
                     this.resize();
                 }
                 this.timeFactorValue.innerText = this.game.currentTimeFactor.toFixed(2);
+                this._syncAutoButton();
             }
         };
         this.onBoostDown = () => {
@@ -18389,6 +18482,17 @@ class Toolbar {
             if (!this.stopButton.classList.contains("inactive")) {
                 this.game.machine.stop();
             }
+        };
+        this.onAutoToggle = () => {
+            let current = this.game.config.getValue("autoPlay") == true;
+            this.game.config.setValue("autoPlay", current ? 0 : 1);
+            this._syncAutoButton();
+        };
+        this._syncAutoButton = () => {
+            if (!this.autoButton) { return; }
+            let on = this.game.config && this.game.config.getValue("autoPlay") == true;
+            this.autoButton.classList.toggle("active", on);
+            this.autoButton.setAttribute("state", on ? "on" : "");
         };
         this.onTimeFactorButton = () => {
             this.timeFactorInputShown = !this.timeFactorInputShown;
@@ -18499,6 +18603,11 @@ class Toolbar {
         this.pauseButton.addEventListener("click", this.onPause);
         this.stopButton = document.querySelector("#toolbar-stop");
         this.stopButton.addEventListener("click", this.onStop);
+        this.autoButton = document.querySelector("#toolbar-auto");
+        if (this.autoButton) {
+            this.autoButton.addEventListener("click", this.onAutoToggle);
+        }
+        this._syncAutoButton();
         this.timeFactorButton = document.querySelector("#toolbar-time-factor");
         this.timeFactorButton.addEventListener("click", this.onTimeFactorButton);
         this.timeFactorValue = document.querySelector("#toolbar-time-factor .value");
@@ -18551,6 +18660,7 @@ class Toolbar {
     }
     updateButtonsVisibility() {
         this.devModeToolbar.style.display = "none";
+        if (this.autoButton) { this.autoButton.style.display = "none"; }
         if (BB_PUZZLE_ONLY) {
             this.container.style.display = "none";
         }
@@ -18571,6 +18681,7 @@ class Toolbar {
             this.shareButton.style.display = "none";
             this.likeButton.style.display = "none";
             this.boostButton.style.display = "none";
+            this.autoButton.style.display = "";
         }
         else if (this.game.mode === GameMode.Create) {
             this.container.style.display = "block";
@@ -18598,6 +18709,7 @@ class Toolbar {
             else {
                 this.boostButton.style.display = "none";
             }
+            this.autoButton.style.display = "";
         }
         else if (this.game.mode === GameMode.Demo) {
             if (this.game.devMode.activated && !this.game.devMode.isVideoModeSquareOn()) {
@@ -18619,6 +18731,7 @@ class Toolbar {
             }
             document.querySelector("#toolbar-likes-count").innerText = this.game.machine.dbLikes.toFixed(0);
             this.boostButton.style.display = "none";
+            this.autoButton.style.display = "";
         }
         else if (this.game.mode === GameMode.BBPuzzle) {
             this.container.style.display = "none";
