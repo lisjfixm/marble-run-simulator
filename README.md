@@ -4,7 +4,7 @@ Babylon.js 3D 彈珠軌道建造遊戲，原作 **Tiaratum Games / Sven Taton**�
 
 - 線上版本（GitHub Pages）：<https://lisjfixm.github.io/marble-run-simulator/>
 - 原始 Poki 來源：<https://poki.com/zh/g/marble-run-simulator>
-- 版本：**v1.2.2**（版本常量見 `index.js` 的 `GAME_VERSION`）
+- 版本：**v1.2.3**（版本常量見 `index.js` 的 `GAME_VERSION`）
 
 ## 本機啟動
 
@@ -40,12 +40,29 @@ py -m http.server 8775
 - `datas/offline_db.json` 為空的離線展示資料庫（無玩家作品）。
 - Poki SDK 已停用（`USE_POKI_SDK = false`），廣告與回勵廣告不會載入。
 
+## 自動解關解答包（建造關）
+
+- 自動模式目前只會重播循環與 Parkour 加重；建造關（教學／解謎）的解答佈局存放在 `marble-fall.js` 的 `ChallengeSolutions`，預設為空。
+- 回填流程（需在有 WebGL 的實機環境）：
+  1. 打開該關卡，手動把軌道接好並確認能通關。
+  2. 瀏覽器 console 執行 `Game.Instance.exportChallengeSolution()`，複製輸出的 JSON（鍵為 `Tutorial:<索引>` 或 `Puzzle:<1..5>`）。
+  3. 把零件陣列貼回 `ChallengeSolutions` 對應鍵；之後開啟自動模式會自動擺這套解答再播放。
+- 零件規格：`{ name, i, j, k, r, colors? }`；`name` 保留尺寸後綴，`[R]n` 後綴會拆到 `r`；格點必須與軌道端點對齊。
+- 官方教學條件可考證的 4 關參考格點寫在 `ChallengeSolutions` 上方註解，尚未實機驗證，回填前請逐一確認尺寸與銜接；5 個 Puzzle 關與其餘教學關需實機錄製。
+
 ## 已知缺口
 
-- BB Puzzle 模式相關資源未完整保存：`datas/bb-puzzles/` 關卡 JSON、`datas/demos/`、`datas/icons-bb/pets/` 寵物圖，以及 `play.png`、`stop.png`、`path.png`、`bouncer.png`、`eraser.svg` 等圖示。
-- 首頁標題拆圖（`work/title_parts/`）與星星、頭像佔位圖為由既有資源裁切或以 PIL 重建，非原作原圖。
+- BB Puzzle 模式相關資源未完整保存：`datas/bb-puzzles/` 關卡 JSON、`datas/demos/`、`datas/icons-bb/pets/` 寵物圖，以及 `play.png`、`stop.png`、`path.png`、`bouncer.png`、`eraser.svg` 等圖示；這些屬未保存的原始素材，離線無法重建。
+- 首頁標題拆圖（`work/title_parts/`）為既有資源裁切／重建；星星與預設頭像佔位圖為程式繪製的平滑重繪版，非原作原圖。
 
 ## Changelog
+
+### v1.2.3（2026-11-17）
+
+- 自動模式卡住超時兜底改走解答感知的重播流程；解答載入失敗時回退重新開關卡。
+- 解答包補上實機匯出→回填說明，並在註解留下 4 個教學關尚未驗證的參考草稿。
+- 星星與預設頭像佔位圖重繪為平滑版本；其餘 BB Puzzle 原始素材缺口維持標註，離線無法重建。
+- 盤點插屏／回勵廣告路徑：全數由 `USE_POKI_SDK` 旗標守衛隔離，預設不載入遠端 SDK。
 
 ### v1.2.2（2026-11-17）
 

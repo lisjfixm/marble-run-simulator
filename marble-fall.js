@@ -97,13 +97,17 @@ var TutorialsList = [
 // 格點須與軌道端點對齊；內容需在有 WebGL 的實機環境擺好並通關驗證後再填入，
 // 未驗證前保持空物件，自動模式不會擺入任何零件。
 //
-// 官方教學條件可考證的參考格點（尚未實機驗證，回填前請逐一確認尺寸與銜接）：
-//   Tutorial:0 simple  ramp_5.-1.0   i=-2 j=0 k=3 r=0
-//   Tutorial:1 rotate  uturnsharp_5  i= 5 j=0 k=8 r=0
-//                      uturnsharp_5  i=-5 j=0 k=3 r=2
-//   Tutorial:4 lift    shooter_9      i=-5 j=0 k=2 r=2
-//   Tutorial:5 join    join          i= 0 j=0 k=3 r=0
-//                      flatjoin      i= 8 j=0 k=5 r=2
+// 官方教學條件可考證的參考草稿（尚未實機驗證；確認尺寸與銜接後再搬入下方 ChallengeSolutions）：
+//   "Tutorial:0": [ { "name": "ramp_5.-1.0", "i": -2, "j": 0, "k": 3, "r": 0 } ],
+//   "Tutorial:1": [
+//       { "name": "uturnsharp_5", "i": 5, "j": 0, "k": 8, "r": 0 },
+//       { "name": "uturnsharp_5", "i": -5, "j": 0, "k": 3, "r": 2 }
+//   ],
+//   "Tutorial:4": [ { "name": "shooter_9", "i": -5, "j": 0, "k": 2, "r": 2 } ],
+//   "Tutorial:5": [
+//       { "name": "join", "i": 0, "j": 0, "k": 3, "r": 0 },
+//       { "name": "flatjoin", "i": 8, "j": 0, "k": 5, "r": 2 }
+//   ],
 var ChallengeSolutions = {
 };
 var ChallengeMode;
@@ -18402,9 +18406,7 @@ class AutoPlayer {
                 this._runTimer += rawDT;
                 if (this._runTimer > 90) {
                     this._runTimer = 0;
-                    if (challenge.state >= 100) { challenge.state = 0; }
-                    challenge.failure = false;
-                    challenge.start();
+                    this._replayChallenge(challenge);
                     return;
                 }
                 if (challenge.mode === ChallengeMode.Parkour) {
@@ -18469,6 +18471,8 @@ class AutoPlayer {
         this.game.applyChallengeSolution().then((ok) => {
             if (!ok) { challenge.start(); }
             else { this.game.machine.play(); }
+        }).catch(() => {
+            challenge.start();
         });
     }
 }
