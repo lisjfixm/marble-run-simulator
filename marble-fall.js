@@ -2032,7 +2032,7 @@ class DevMode {
                 if (!logo) {
                     logo = document.createElement("img");
                     logo.id = "video-mode-logo";
-                    logo.src = "datas/icons/title-text-only.png";
+                    logo.src = "datas/icons-mrs/title-text-only.png";
                     document.body.appendChild(logo);
                 }
                 if (logo) {
@@ -2050,7 +2050,7 @@ class DevMode {
                 if (!pokiLogo) {
                     pokiLogo = document.createElement("img");
                     pokiLogo.id = "video-mode-poki-logo";
-                    pokiLogo.src = "datas/icons/poki.svg";
+                    pokiLogo.src = "datas/icons-mrs/poki.svg";
                     document.body.appendChild(pokiLogo);
                 }
                 if (pokiLogo) {
@@ -2073,6 +2073,14 @@ class DevMode {
         if (location.host.startsWith("127.0.0.1")) {
             //(document.querySelector("#dev-mode-password-input") as HTMLInputElement).value = "Crillion";
             //this.activate();
+        }
+        let exportSolutionBtn = document.querySelector("#dev-export-solution");
+        if (exportSolutionBtn) {
+            exportSolutionBtn.onclick = () => { if (this.game.machine) { this.game.exportChallengeSolution(true); } };
+        }
+        let exportPathsBtn = document.querySelector("#dev-export-paths");
+        if (exportPathsBtn) {
+            exportPathsBtn.onclick = () => { if (this.game.machine) { this.game.exportChallengePaths(true); } };
         }
     }
     incActivation() {
@@ -18401,6 +18409,15 @@ class TextHelper {
         }
     }
 }
+const AUTOPLAYER_CONFIG = {
+    stallLimit: 90,            // Challenge 卡住逾時（秒），超過則重播關卡
+    spectatorLimit: 120,       // 觀眾模式已播放閒置（秒），超過則 stop→play
+    boostVyThreshold: 0.02,    // Parkour 加重垂直速度門檻
+    replayWinDelay: 2.5,      // 通關後重播延遲（秒）
+    replayFailDelay: 1.5,      // 失敗後重播延遲（秒）
+    spectatorPauseDelay: 1.5,  // 曾播放後停頓重播（秒）
+    spectatorIdleDelay: 1.0    // 未播放時自動開始（秒）
+};
 class AutoPlayer {
     constructor(game) {
         this.game = game;
@@ -18429,7 +18446,7 @@ class AutoPlayer {
             if (finished) {
                 this._runTimer = 0;
                 this._replayTimer += rawDT;
-                let delay = challenge.state >= 100 ? 2.5 : 1.5;
+                let delay = challenge.state >= 100 ? AUTOPLAYER_CONFIG.replayWinDelay : AUTOPLAYER_CONFIG.replayFailDelay;
                 if (this._replayTimer > delay) {
                     this._replayTimer = 0;
                     this._replayChallenge(challenge);
@@ -18439,7 +18456,7 @@ class AutoPlayer {
             this._replayTimer = 0;
             if (this.game.machine.playing) {
                 this._runTimer += rawDT;
-                if (this._runTimer > 90) {
+                if (this._runTimer > AUTOPLAYER_CONFIG.stallLimit) {
                     this._runTimer = 0;
                     this._replayChallenge(challenge);
                     return;
@@ -18459,8 +18476,8 @@ class AutoPlayer {
         let ball = this.game.machine.balls[0];
         if (!ball || !ball.velocity) { return; }
         let vy = ball.velocity.y;
-        if (vy < -0.02) { ball.boosting = true; }
-        else if (vy > 0.02) { ball.boosting = false; }
+        if (vy < -AUTOPLAYER_CONFIG.boostVyThreshold) { ball.boosting = true; }
+        else if (vy > AUTOPLAYER_CONFIG.boostVyThreshold) { ball.boosting = false; }
     }
     _spectator(rawDT) {
         let machine = this.game.machine;
@@ -18468,7 +18485,7 @@ class AutoPlayer {
             this._runTimer += rawDT;
             this._wasPlaying = true;
             this._replayTimer = 0;
-            if (this._runTimer > 120) {
+            if (this._runTimer > AUTOPLAYER_CONFIG.spectatorLimit) {
                 this._runTimer = 0;
                 machine.stop();
                 machine.play();
@@ -18478,7 +18495,7 @@ class AutoPlayer {
         if (this._wasPlaying) {
             this._runTimer = 0;
             this._replayTimer += rawDT;
-            if (this._replayTimer > 1.5) {
+            if (this._replayTimer > AUTOPLAYER_CONFIG.spectatorPauseDelay) {
                 this._replayTimer = 0;
                 this._wasPlaying = false;
                 machine.play();
@@ -18486,7 +18503,7 @@ class AutoPlayer {
         }
         else {
             this._replayTimer += rawDT;
-            if (this._replayTimer > 1.0) {
+            if (this._replayTimer > AUTOPLAYER_CONFIG.spectatorIdleDelay) {
                 this._replayTimer = 0;
                 this._wasPlaying = false;
                 machine.play();
@@ -18852,7 +18869,7 @@ class Toolbar {
             this.loadInputShown = false;
             this.editButton.style.display = "";
             this.photoButton.style.display = "";
-            this.shareButton.style.display = "";
+            this.shareButton.style.display = this.game.OFFLINE_MODE ? "none" : "";
             this.likeButton.style.display = this.game.OFFLINE_MODE ? "none" : "";
             if (this.game.likeManager.isCurrentMachineLiked()) {
                 this.likeButton.querySelector("#toolbar-liked-icon").style.display = "block";

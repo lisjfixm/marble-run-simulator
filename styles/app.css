@@ -691,7 +691,7 @@ body.vertical #toolbar.machine-editor-1-line {
     padding: min(1svh, 1vw) min(8svh, 12vw) min(1svh, 1vw) min(2svh, 2vw);
     color: white;
     pointer-events: initial;
-    background-image: url("../datas/icons/puce.svg");
+    background-image: url("../datas/icons-mrs/next.svg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position-x: 98%;
@@ -758,7 +758,7 @@ body.vertical #challenge-next {
     pointer-events: initial;
     text-align: left;
     text-decoration: none;
-    background-image: url("../datas/icons/puce.svg");
+    background-image: url("../datas/icons-mrs/next.svg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position-x: 95%;

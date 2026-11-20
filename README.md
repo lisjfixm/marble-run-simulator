@@ -4,7 +4,7 @@ Babylon.js 3D 彈珠軌道建造遊戲，原作 **Tiaratum Games / Sven Taton**�
 
 - 線上版本（GitHub Pages）：<https://lisjfixm.github.io/marble-run-simulator/>
 - 原始 Poki 來源：<https://poki.com/zh/g/marble-run-simulator>
-- 版本：**v1.2.4**（版本常量見 `index.js` 的 `GAME_VERSION`）
+- 版本：**v1.2.5**（版本常量見 `index.js` 的 `GAME_VERSION`）
 
 ## 本機啟動
 
@@ -42,13 +42,19 @@ py -m http.server 8775
 
 ## 自動解關解答包（建造關）
 
-- 自動模式目前只會重播循環與 Parkour 加重；建造關（教學／解謎）的解答佈局存放在 `marble-fall.js` 的 `ChallengeSolutions`，預設為空。
+- 自動模式目前只會重播循環與 Parkour 加重；建造關（教學／解謎）的解答佈局存放在 `marble-fall.js` 的 `ChallengeSolutions`，預設為空。Parkour 反應關不進解答包，靠自動加重＋重播兜底。
+- 關卡鍵命名：教學關 `Tutorial:0` … `Tutorial:6`（對應 `TutorialsList` 索引），解謎關 `Puzzle:1` … `Puzzle:5`；找不到對應鍵時自動模式只重播、不擺零件。
 - 回填流程（需在有 WebGL 的實機環境）：
   1. 打開該關卡，手動把軌道接好並確認能通關。
-  2. 瀏覽器 console 執行 `Game.Instance.exportChallengeSolution(true)` 下載解答 JSON（不帶參數只印到 console）；`Game.Instance.exportChallengePaths(true)` 可下載該關零件軌跡的 help 格式點序列。鍵為 `Tutorial:<索引>` 或 `Puzzle:<1..5>`。
-  3. 把零件陣列貼回 `ChallengeSolutions` 對應鍵；之後開啟自動模式會自動擺這套解答再播放。
-- 零件規格：`{ name, i, j, k, r, colors? }`；`name` 保留尺寸後綴，`[R]n` 後綴會拆到 `r`；格點必須與軌道端點對齊。
-- 官方教學條件可考證的 4 關參考格點寫在 `ChallengeSolutions` 上方註解，尚未實機驗證，回填前請逐一確認尺寸與銜接；5 個 Puzzle 關與其餘教學關需實機錄製。
+  2. 兩種匯出（也可在「開發工具」頁按對應按鈕，等同下列 console 呼叫）：
+     - `Game.Instance.exportChallengeSolution(true)`：下載**解答佈局** JSON，這是要回填進 `ChallengeSolutions` 的檔案；不帶參數只印到 console。
+     - `Game.Instance.exportChallengePaths(true)`：下載**軌跡點序列** JSON，供除錯與未來擬合器參考，不直接進解答包。
+  3. 把 solution 檔的零件陣列貼回 `ChallengeSolutions` 對應鍵；之後開啟自動模式會自動擺這套解答再播放。
+- solution 零件欄位：`{ name, i, j, k, r, colors? }`
+  - `name`：零件基礎名＋尺寸後綴；`[R]n` 後綴會拆到 `r`，`_X`/`_Z` 為鏡像，`_寬.高.深[.節數][.速度]` 為尺寸。
+  - `i/j/k`：格點座標；`r`：朝向（0..3）；`colors`：可選零件配色。格點必須與軌道端點對齊。
+- paths 格式：每條軌跡一組點，每 3 個為一組 `x,y,z`，世界座標放大 1000 倍後取整，與關卡 `help` 欄位同格式。
+- 現況缺口：官方教學條件可考證的 4 關參考格點寫在 `ChallengeSolutions` 上方註解，尚未實機驗證，回填前請逐一確認尺寸與銜接；5 個 Puzzle 關與其餘教學關尚無解點資料，需實機錄製。
 
 ## 自動解關的另一條路徑：提示軌跡擬合（尚未實作）
 
@@ -70,9 +76,17 @@ py -m http.server 8775
 ## 已知缺口
 
 - BB Puzzle 模式相關資源未完整保存：`datas/bb-puzzles/` 關卡 JSON、`datas/demos/`、`datas/icons-bb/pets/` 寵物圖，以及 `play.png`、`stop.png`、`path.png`、`bouncer.png`、`eraser.svg` 等圖示；這些屬未保存的原始素材，離線無法重建。
+- 其餘未保存素材：3D 翻頁按鈕引用的 `prev.png`/`next.png`（磁碟僅有對應 SVG）、社群 `datas/icons/demos/` 縮圖、`styles/flags/4x3/` 多數國旗；這些缺圖不影響離線主流程，保留缺口標註，離線不硬湊。
 - 首頁標題拆圖（`work/title_parts/`）為既有資源裁切／重建；星星與預設頭像佔位圖為程式繪製的平滑重繪版，非原作原圖。
 
 ## Changelog
+
+### v1.2.5（2026-11-20）
+
+- AutoPlayer 調校參數抽出為 `AUTOPLAYER_CONFIG` 常數（卡住／重播／加重門檻），行為不變，方便實機校準。
+- 開發工具頁新增「匯出解答 JSON」「匯出軌跡 JSON」按鈕，等同 console 呼叫匯出工具。
+- 修正誤植的圖示路徑（`title-text-only.png`、`poki.svg`），補 favicon；離線狀態隱藏分享按鈕。
+- 按鈕箭頭裝飾復用既有 `next.svg`；補解答包回填格式、鍵命名與素材缺口文件。
 
 ### v1.2.4（2026-11-20）
 
