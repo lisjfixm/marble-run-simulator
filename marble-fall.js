@@ -96,6 +96,7 @@ var TutorialsList = [
 // 零件：{ name, i, j, k, r, colors? }；name 保留尺寸後綴，[R]n 後綴會拆到 r。
 // 格點須與軌道端點對齊；內容需在有 WebGL 的實機環境擺好並通關驗證後再填入，
 // 未驗證前保持空物件，自動模式不會擺入任何零件。
+// 另一條「照提示軌跡自動擺件」的擬合器路徑尚未實作，設計盤點與零件分類見 README「提示軌跡擬合」段落。
 //
 // 官方教學條件可考證的參考草稿（尚未實機驗證；確認尺寸與銜接後再搬入下方 ChallengeSolutions）：
 //   "Tutorial:0": [ { "name": "ramp_5.-1.0", "i": -2, "j": 0, "k": 3, "r": 0 } ],
@@ -2658,7 +2659,11 @@ class Game {
         this.machine.generateBaseMesh();
         return true;
     }
-    exportChallengeSolution() {
+    _solutionFileName(key, suffix) {
+        let safe = (key || "unknown").replace(/[^A-Za-z0-9_-]/g, "-");
+        return safe + "-" + suffix + ".json";
+    }
+    exportChallengeSolution(download) {
         let key = this.challengeSolutionKey();
         let list = [];
         if (this.machine) {
@@ -2676,6 +2681,36 @@ class Game {
         out[key || "unknown"] = list;
         let json = JSON.stringify(out, null, 2);
         console.log(json);
+        if (download) {
+            Nabu.download(this._solutionFileName(key, "solution"), json);
+        }
+        return json;
+    }
+    exportChallengePaths(download) {
+        let key = this.challengeSolutionKey();
+        let cleanPaths = [];
+        if (this.machine) {
+            this.machine.parts.forEach(part => {
+                if (!part.isSelectable) { return; }
+                (part.tracks || []).forEach(track => {
+                    if (!track.templateInterpolatedPoints) { return; }
+                    let path = track.templateInterpolatedPoints.map(p => BABYLON.Vector3.TransformCoordinates(p, part.getWorldMatrix()));
+                    Mummu.DecimatePathInPlaceFast(path, (3 / 180) * Math.PI);
+                    let cleanPath = [];
+                    for (let j = 0; j < path.length; j++) {
+                        cleanPath.push(Math.round(path[j].x * 1000), Math.round(path[j].y * 1000), Math.round(path[j].z * 1000));
+                    }
+                    cleanPaths.push(cleanPath);
+                });
+            });
+        }
+        let out = {};
+        out[key || "unknown"] = cleanPaths;
+        let json = JSON.stringify(out, null, 2);
+        console.log(json);
+        if (download) {
+            Nabu.download(this._solutionFileName(key, "paths"), json);
+        }
         return json;
     }
     getScene() {

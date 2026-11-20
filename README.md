@@ -4,7 +4,7 @@ Babylon.js 3D 彈珠軌道建造遊戲，原作 **Tiaratum Games / Sven Taton**�
 
 - 線上版本（GitHub Pages）：<https://lisjfixm.github.io/marble-run-simulator/>
 - 原始 Poki 來源：<https://poki.com/zh/g/marble-run-simulator>
-- 版本：**v1.2.3**（版本常量見 `index.js` 的 `GAME_VERSION`）
+- 版本：**v1.2.4**（版本常量見 `index.js` 的 `GAME_VERSION`）
 
 ## 本機啟動
 
@@ -45,10 +45,27 @@ py -m http.server 8775
 - 自動模式目前只會重播循環與 Parkour 加重；建造關（教學／解謎）的解答佈局存放在 `marble-fall.js` 的 `ChallengeSolutions`，預設為空。
 - 回填流程（需在有 WebGL 的實機環境）：
   1. 打開該關卡，手動把軌道接好並確認能通關。
-  2. 瀏覽器 console 執行 `Game.Instance.exportChallengeSolution()`，複製輸出的 JSON（鍵為 `Tutorial:<索引>` 或 `Puzzle:<1..5>`）。
+  2. 瀏覽器 console 執行 `Game.Instance.exportChallengeSolution(true)` 下載解答 JSON（不帶參數只印到 console）；`Game.Instance.exportChallengePaths(true)` 可下載該關零件軌跡的 help 格式點序列。鍵為 `Tutorial:<索引>` 或 `Puzzle:<1..5>`。
   3. 把零件陣列貼回 `ChallengeSolutions` 對應鍵；之後開啟自動模式會自動擺這套解答再播放。
 - 零件規格：`{ name, i, j, k, r, colors? }`；`name` 保留尺寸後綴，`[R]n` 後綴會拆到 `r`；格點必須與軌道端點對齊。
 - 官方教學條件可考證的 4 關參考格點寫在 `ChallengeSolutions` 上方註解，尚未實機驗證，回填前請逐一確認尺寸與銜接；5 個 Puzzle 關與其餘教學關需實機錄製。
+
+## 自動解關的另一條路徑：提示軌跡擬合（尚未實作）
+
+- 關卡的 `help` 欄位是一串軌道參考路徑的座標點（每 3 個一組 x,y,z，放大 1000 倍取整）；提示按鈕沿這條路徑畫半透明導引線。它只給「彈珠該走的路」，不含零件名、格點與轉向。
+- 要讓 auto 照軌跡自動蓋軌道，需要一個「路徑→零件」擬合器：把軌跡分段 → 對照零件形狀與尺寸 → 選零件、定格點與轉向。
+- 離線可得：61 種零件基礎名錄、命名後綴規則（`_寬.高.深[.節數][.速度]`、`[R]n`→`r`、`_X/_Z` 鏡像）、格點換算常數（`tileSize=tileHeight=0.025`）、現成路徑平滑／抽稀工具（`Mummu.SmoothPathInPlace`、`Mummu.DecimatePathInPlaceFast`）。
+- 離線不可得：各零件在各朝向（`r=0..3`）的模板軌跡、端點偏移與接縫方向；這些必須在有 WebGL 的實機 instantiate 後，從 `track.templateInterpolatedPoints` 與 `part.getWorldMatrix()` 讀取。
+- 實機實作步驟：先錄出每種零件朝向的模板軌跡庫 → 分段比對候選零件 → 對齊格點與轉向 → 跑物理回放確認通關，再把結果校準回解答包。沙箱無 WebGL，無法驗證擺件銜接，故此路徑目前只做設計盤點，未寫入自動擺件流程。
+
+### 零件形態分類（供未來配對參考）
+
+- 直線／坡道：ramp, rampv2, piperamp, woodramp, wave, snake, curb, pipecurb, woodcurb, stairway, screw, ladder, speeder, diamond, box, bumper, wall
+- 彎道／迴轉：uturn, uturnv2, pipeuturn, wooduturn, uturnsharp, pipeuturnsharp, spiral, spiralUTurn, coil, teardropTurn
+- 迴圈：loop, pipeloop, pipeunderloop
+- 接合／分流：join, flatjoin, multiJoin, split, forwardSplit, tsplit, tjoin, cross2d, bitsplit, largesplit, sort
+- 升降／發射：elevator, steamelevator, shooter, jumper, gravitywell, dropside, dropback
+- 起訖／機關／裝飾：start, end, endbasket, spawner, controler, controlerLegacy, screen, pixel, trikeSkull, blackboard, star
 
 ## 已知缺口
 
@@ -56,6 +73,11 @@ py -m http.server 8775
 - 首頁標題拆圖（`work/title_parts/`）為既有資源裁切／重建；星星與預設頭像佔位圖為程式繪製的平滑重繪版，非原作原圖。
 
 ## Changelog
+
+### v1.2.4（2026-11-20）
+
+- 匯出工具正式化：解答佈局與零件軌跡可一鍵下載 JSON（`exportChallengeSolution(true)`、`exportChallengePaths(true)`），console 輸出保留。
+- 新增提示軌跡擬合器的設計盤點與零件形態分類；擬合器尚未實作，未接自動擺件流程。
 
 ### v1.2.3（2026-11-17）
 
