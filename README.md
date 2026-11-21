@@ -4,7 +4,7 @@ Babylon.js 3D 彈珠軌道建造遊戲，原作 **Tiaratum Games / Sven Taton**�
 
 - 線上版本（GitHub Pages）：<https://lisjfixm.github.io/marble-run-simulator/>
 - 原始 Poki 來源：<https://poki.com/zh/g/marble-run-simulator>
-- 版本：**v1.2.5**（版本常量見 `index.js` 的 `GAME_VERSION`）
+- 版本：**v1.2.6**（版本常量見 `index.js` 的 `GAME_VERSION`）
 
 ## 本機啟動
 
@@ -21,6 +21,13 @@ start-server.bat
 py -m http.server 8775
 # 瀏覽器開 http://127.0.0.1:8775/
 ```
+
+## 部署到 GitHub Pages
+
+- 倉庫 `lisjfixm/marble-run-simulator`，預設分支 `main` 放原始碼，Pages 分支 `gh-pages` 根目錄放同一份離線成品（legacy build，無建置步驟）。
+- 推送：先 `git push origin main`，再 `git push origin main:gh-pages`；本地可用 `git branch -f gh-pages main` 讓兩分支一致。
+- Pages 發布後約需 1 分鐘傳播；若瀏覽器吃到舊快取，於網址後加 `?v=<timestamp>` 繞過。
+- 版本標記同步四處：`index.js` 的 `GAME_VERSION`、`index.html` 的 `<title>`、`credits.xhtml` 的離線版本字樣、本 README 的版本線與 Changelog。
 
 ## 目錄結構
 
@@ -43,7 +50,20 @@ py -m http.server 8775
 ## 自動解關解答包（建造關）
 
 - 自動模式目前只會重播循環與 Parkour 加重；建造關（教學／解謎）的解答佈局存放在 `marble-fall.js` 的 `ChallengeSolutions`，預設為空。Parkour 反應關不進解答包，靠自動加重＋重播兜底。
-- 關卡鍵命名：教學關 `Tutorial:0` … `Tutorial:6`（對應 `TutorialsList` 索引），解謎關 `Puzzle:1` … `Puzzle:5`；找不到對應鍵時自動模式只重播、不擺零件。
+- 關卡鍵命名：教學關 `Tutorial:<索引>`，解謎關 `Puzzle:1` … `Puzzle:5`；跑酷關不進解答包（自動模式重播＋加重兜底）。找不到對應鍵時自動模式只重播、不擺零件。
+
+### 關卡一覽與鍵對照
+
+關卡 JSON 在 `datas/challenges/`，共 7 教學 + 10 跑酷 + 5 解謎：
+
+| 類型 | 數量 | 檔案 | 解答包鍵 | i18n 文字鍵前綴 |
+|---|---|---|---|---|
+| 教學 | 7 | `tutorial-simple/rotate/loop/speed/lift/join/split.json` | `Tutorial:0`…`Tutorial:6` | `tutorial-<名稱>-title` / `-subtitle` |
+| 跑酷 | 10 | `parkour-1.json` … `parkour-10.json` | 無（重播兜底） | `parkour-<1..10>-title` / `-subtitle` |
+| 解謎 | 5 | `puzzle-1.json` … `puzzle-5.json` | `Puzzle:1` … `Puzzle:5` | `puzzle-<1..5>-title` / `-subtitle` |
+
+教學索引對照 `TutorialsList`：0 `simple`、1 `rotate`、2 `loop`、3 `speed`、4 `lift`、5 `join`、6 `split`。
+BB Puzzle（黑板謎題）是另一套獨立模式，關卡 JSON 與寵物素材未保存（見「已知缺口」），不屬上述解答包。
 - 回填流程（需在有 WebGL 的實機環境）：
   1. 打開該關卡，手動把軌道接好並確認能通關。
   2. 兩種匯出（也可在「開發工具」頁按對應按鈕，等同下列 console 呼叫）：
@@ -76,10 +96,21 @@ py -m http.server 8775
 ## 已知缺口
 
 - BB Puzzle 模式相關資源未完整保存：`datas/bb-puzzles/` 關卡 JSON、`datas/demos/`、`datas/icons-bb/pets/` 寵物圖，以及 `play.png`、`stop.png`、`path.png`、`bouncer.png`、`eraser.svg` 等圖示；這些屬未保存的原始素材，離線無法重建。
-- 其餘未保存素材：3D 翻頁按鈕引用的 `prev.png`/`next.png`（磁碟僅有對應 SVG）、社群 `datas/icons/demos/` 縮圖、`styles/flags/4x3/` 多數國旗；這些缺圖不影響離線主流程，保留缺口標註，離線不硬湊。
+- 其餘未保存素材：3D 翻頁按鈕引用的 `prev.png`/`next.png`（磁碟僅有對應 SVG）、社群 `datas/icons/demos/` 縮圖、`styles/flags/4x3/` 多數國旗（僅存 `ar/cn/fr/pe/uy`）；這些缺圖不影響離線主流程，保留缺口標註，離線不硬湊。
+- 字型：`Roboto-Italic.ttf`、`Roboto-Medium.ttf` 磁碟未保存，`styles/fonts.css` 已回落指向 `Roboto-Regular.ttf`（斜體／500 字重視覺降級）；卡通字體 `BigBottomCartoon.ttf` 缺，僅 BB Puzzle 樣式引用，缺字時回落系統字體。
+- 離線空庫：`datas/offline_db.json` 無玩家作品，社群頁顯示「離線模式：暫無公開作品」空狀態，分頁下限為 1；「我的機械」頁為舊本地伺服器遷移工具，成品內無入口，離線抓取失敗會退回首頁。
 - 首頁標題拆圖（`work/title_parts/`）為既有資源裁切／重建；星星與預設頭像佔位圖為程式繪製的平滑重繪版，非原作原圖。
 
 ## Changelog
+
+### v1.2.6（2026-11-21）
+
+- 除錯 log 收斂：`marble-fall.js` 一般事件追蹤 `console.log` 改走 `dbgLog`（由 `DEBUG_CONSOLE_LOG` 旗標守關，預設靜音）；`console.error`/`warn`、匯出 JSON 與教學守衛 log 保留。
+- i18n 覆核：修復 10 處誤用 `</span>` 收尾的未閉合 `i18n-text`；教學面板靜態數字鍵對齊 `simple/rotate/loop/speed/lift/join/split` 名稱鍵；「設定／製作人員／我的機械／彈珠謎題」標題接入語言檔，新增 3 個語言鍵。
+- 外連與 404 降級：分享預覽圖改指向本地素材；缺字體 `Roboto-Italic/Medium` 回落 Regular；Poki SDK 維持 `USE_POKI_SDK=false` 守關不載入。
+- 社群離線體檢：空離線資料庫顯示空狀態提示，分頁頁數下限為 1；狀態燈初始文案與 JS 覆寫值對齊。
+- 除錯頁手機直式排版：標籤／輸入框寬度改相對，直式下按鈕縱向置中堆疊。
+- 文件：補關卡一覽與解答包／i18n 鍵對照表、雙分支部署流程，更新字型與空庫缺口說明。
 
 ### v1.2.5（2026-11-20）
 

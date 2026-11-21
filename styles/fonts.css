@@ -18,14 +18,14 @@
 
 @font-face {
     font-family: Roboto;
-    src: url(roboto/Roboto-Italic.ttf);
+    src: url(roboto/Roboto-Regular.ttf);
     font-weight: 400;
     font-style: italic;
 }
 
 @font-face {
     font-family: Roboto;
-    src: url(roboto/Roboto-Medium.ttf);
+    src: url(roboto/Roboto-Regular.ttf);
     font-weight: 500;
 }
 

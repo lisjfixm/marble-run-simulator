@@ -1,3 +1,5 @@
+var DEBUG_CONSOLE_LOG = false;
+function dbgLog() { if (DEBUG_CONSOLE_LOG) { console.log.apply(console, arguments); } }
 class BallCamera extends BABYLON.FreeCamera {
     constructor(game) {
         super("ball-camera", BABYLON.Vector3.Zero(), game.scene);
@@ -203,7 +205,7 @@ class Challenge {
         //this.demoGotoButton = document.getElementById("demo-goto-button") as HTMLButtonElement;
     }
     completeChallenge(mode, index) {
-        console.log("complete challenge " + index);
+        dbgLog("complete challenge " + index);
         this.lastCompletedMode = mode;
         if (mode === ChallengeMode.Tutorial) {
             this.game.completedChallenges.tutorial[index] = 1;
@@ -511,7 +513,7 @@ class ChallengeHelper {
                 cleanPaths.push(cleanPath);
             }
         }
-        console.log(cleanPaths);
+        dbgLog(cleanPaths);
     }
     DEBUG_logPuzzleSolution() {
         let cleanPaths = [];
@@ -528,7 +530,7 @@ class ChallengeHelper {
                 });
             }
         });
-        console.log(cleanPaths);
+        dbgLog(cleanPaths);
     }
     initialize(serializedPaths) {
         this.paths = [];
@@ -1878,14 +1880,14 @@ class DebugPerf {
             }
         });
         countedMeshes.sort((e1, e2) => { return e2.count - e1.count; });
-        console.log("-");
+        dbgLog("-");
         for (let i = 0; i < 6; i++) {
             let e = countedMeshes[i];
             if (e) {
-                console.log(e.count.toFixed(0).padStart(4, "0") + " " + e.name);
+                dbgLog(e.count.toFixed(0).padStart(4, "0") + " " + e.name);
             }
         }
-        console.log("-");
+        dbgLog("-");
     }
 }
 var fallbackMachine = { n: "遺失機械", a: "Tiaratum Games", v: 3, d: "01i57hz4i1o0706hwi1hz203111000hyi1hz403121000hyi0hz211111006i0hzhz314121006hxhzhz304111000i0hzhz20110100bi2hyhz2311010" };
@@ -2331,7 +2333,7 @@ var PokiSDKPlaying = false;
 function PokiGameplayStart() {
     if (USE_POKI_SDK) {
         if (!PokiSDKPlaying) {
-            console.log("PokiSDK.gameplayStart");
+            dbgLog("PokiSDK.gameplayStart");
             PokiSDK.gameplayStart();
             PokiSDKPlaying = true;
         }
@@ -2379,7 +2381,7 @@ async function WaitPlayerInteraction() {
     });
 }
 let onFirstPlayerInteractionTouch = (ev) => {
-    console.log("onFirstPlayerInteractionTouch");
+    dbgLog("onFirstPlayerInteractionTouch");
     ev.stopPropagation();
     PlayerHasInteracted = true;
     document.body.removeEventListener("touchstart", onFirstPlayerInteractionTouch);
@@ -2408,7 +2410,7 @@ let onFirstPlayerInteractionTouch = (ev) => {
     }
 };
 let onFirstPlayerInteractionClic = (ev) => {
-    console.log("onFirstPlayerInteractionClic");
+    dbgLog("onFirstPlayerInteractionClic");
     ev.stopPropagation();
     PlayerHasInteracted = true;
     document.body.removeEventListener("touchstart", onFirstPlayerInteractionTouch);
@@ -2434,7 +2436,7 @@ let onFirstPlayerInteractionClic = (ev) => {
     }
 };
 let onFirstPlayerInteractionKeyboard = (ev) => {
-    console.log("onFirstPlayerInteractionKeyboard");
+    dbgLog("onFirstPlayerInteractionKeyboard");
     ev.stopPropagation();
     PlayerHasInteracted = true;
     document.body.removeEventListener("touchstart", onFirstPlayerInteractionTouch);
@@ -2477,7 +2479,7 @@ function StopPointerProgatation(ev) {
     ev.stopPropagation();
 }
 function StopPointerProgatationAndMonkeys(ev) {
-    console.log("StopPointerProgatationAndMonkeys");
+    dbgLog("StopPointerProgatationAndMonkeys");
     ev.stopPropagation();
     if (Game.Instance) {
         if (Game.Instance.machineEditor) {
@@ -3792,7 +3794,7 @@ class Game {
                     let l = x1 - x0;
                     x0 = Math.floor((size * 0.5 - l * 0.5));
                     x1 = Math.floor((size * 0.5 + l * 0.5));
-                    console.log(data.data.length);
+                    dbgLog(data.data.length);
                     for (let x = x0; x < x1; x++) {
                         for (let y = y0; y < y1; y++) {
                             let n = y * size + x;
@@ -3836,7 +3838,7 @@ class Game {
                                 var tmpLink = document.createElement('a');
                                 tmpLink.download = picName + ".png";
                                 tmpLink.href = picCanvas.toDataURL();
-                                console.log(tmpLink.href);
+                                dbgLog(tmpLink.href);
                                 document.body.appendChild(tmpLink);
                                 tmpLink.click();
                                 document.body.removeChild(tmpLink);
@@ -4286,7 +4288,7 @@ class Game {
         }
     }
     async checkLiveServiceAvailability() {
-        console.log("checkLiveServiceAvailability");
+        dbgLog("checkLiveServiceAvailability");
         const __probeController = new AbortController();
         const __probeTimeout = setTimeout(() => { __probeController.abort(); }, 6000);
         try {
@@ -4323,7 +4325,7 @@ function LogTracksBarycenter() {
     let machine = Game.Instance.machine;
     let center = new BABYLON.Vector3((machine.baseMeshMinX + machine.baseMeshMaxX) * 0.5, (machine.baseMeshMinY + machine.baseMeshMaxY) * 0.5, (machine.baseMeshMinZ + machine.baseMeshMaxZ) * 0.5);
     //"x": 0.038, "y": 0.075, "z": 0.090
-    console.log("x: " + center.x.toFixed(3) + ", y: " + center.y.toFixed(3) + ", z: " + center.z.toFixed(3));
+    dbgLog("x: " + center.x.toFixed(3) + ", y: " + center.y.toFixed(3) + ", z: " + center.z.toFixed(3));
 }
 async function GenerateOfflineDatabase() {
     let state = 1 << Core.MachineDBState.Ok | 1 << Core.MachineDBState.Star;
@@ -4759,9 +4761,9 @@ class OfflineDatabase {
 }
 var offlineDataBase = { machines: [] };
 function COUNTCOUNTRYS() {
-    console.log(offlineDataBase.machines.length);
+    dbgLog(offlineDataBase.machines.length);
     let countrys = offlineDataBase.machines.map((machine) => machine.country);
-    console.log(countrys);
+    dbgLog(countrys);
     let countryCount = [];
     countrys.forEach((country) => {
         let existing = countryCount.find((c) => c.country === country);
@@ -4773,7 +4775,7 @@ function COUNTCOUNTRYS() {
         }
     });
     countryCount.sort((a, b) => b.count - a.count);
-    console.log(countryCount);
+    dbgLog(countryCount);
 }
 class PhotoMaker {
     constructor(game) {
@@ -5704,13 +5706,13 @@ class BBPuzzlePerformanceManager {
             this.graphicQHelperState = Nabu.MinMax(this.graphicQHelperState, -(this.graphicQHelperRequiredChecksCount + 1), this.graphicQHelperRequiredChecksCount + 1);
             if (this.graphicQHelperState >= this.graphicQHelperRequiredChecksCount) {
                 this.graphicQHelperState = 0;
-                console.log("Increase GraphicQ to " + (currentGraphicQ + 1).toFixed(0));
+                dbgLog("Increase GraphicQ to " + (currentGraphicQ + 1).toFixed(0));
                 this.game.config.setValue("graphicQ", currentGraphicQ + 1, true);
             }
             else if (this.graphicQHelperState <= -this.graphicQHelperRequiredChecksCount) {
                 this.graphicQHelperState = 0;
                 this.minimalAutoQualityFailed = currentGraphicQ;
-                console.log("Decrease GraphicQ to " + (currentGraphicQ - 1).toFixed(0));
+                dbgLog("Decrease GraphicQ to " + (currentGraphicQ - 1).toFixed(0));
                 this.game.config.setValue("graphicQ", currentGraphicQ - 1, true);
             }
         }
@@ -11458,7 +11460,7 @@ function DEBUG_LOG_SELECTED_PART_NAMES() {
         }
         return "";
     });
-    console.log(selectedPartNames);
+    dbgLog(selectedPartNames);
 }
 function colorizeEntireMachine(machine, color) {
     for (let i = 0; i < machine.parts.length; i++) {
@@ -14851,7 +14853,7 @@ class XyloMaker {
                     this.index++;
                     let xylophone = new Core.Xylophone(this.machineEditor.machine);
                     xylophone.setN(Core.Xylophone.NotesName.indexOf(noteName));
-                    console.log(noteName + " N = " + xylophone.n);
+                    dbgLog(noteName + " N = " + xylophone.n);
                     this.machineEditor.machine.decors.push(xylophone);
                     xylophone.position.copyFrom(this.ball.position);
                     xylophone.findMachinePart();
@@ -15095,8 +15097,8 @@ class BBPuzzlesMenu {
                             miniature.style.width = "calc(100% - 2px)";
                         }
                         else {
-                            console.log("can't make miniature");
-                            console.log(puzzle);
+                            dbgLog("can't make miniature");
+                            dbgLog(puzzle);
                         }
                         let score = document.createElement("div");
                         score.classList.add("score");
@@ -15516,8 +15518,15 @@ class CommunityMenu {
                 this.redraw(1);
                 return;
             }
-            this.maxPageNum = Math.ceil(data.count / this.machinesPerPage);
+            this.maxPageNum = Math.max(1, Math.ceil(data.count / this.machinesPerPage));
             this.pageNumText.innerText = this.pageNum.toFixed(0) + " / " + this.maxPageNum.toFixed(0);
+            if (data.count === 0) {
+                let emptyItem = document.createElement("div");
+                emptyItem.classList.add("community-empty");
+                emptyItem.innerHTML = '<i18n-text text-key="community-empty-label"></i18n-text>';
+                this.machinesContainer.appendChild(emptyItem);
+                return;
+            }
             if (this.game.devMode.activated) {
                 this.game.devMode.lastQueriedIds = [];
                 this.game.devMode.lastQueriedIds = data.machines.map((m) => {
@@ -15584,8 +15593,8 @@ class CommunityMenu {
                             miniature.style.width = "100%";
                         }
                         else {
-                            console.log("can't make miniature");
-                            console.log(machine);
+                            dbgLog("can't make miniature");
+                            dbgLog(machine);
                         }
                         let countryCode = "xx";
                         if (machine.country) {
@@ -16503,7 +16512,7 @@ class HomeMenu {
         if (challengeMenu) {
             let firstNotCompletedTutorialIndex = this.getFirstNotCompletedTutorialIndex();
             let allTutoCompleted = firstNotCompletedTutorialIndex > this.tutorialCount;
-            console.log("firstNotCompletedTutorialIndex " + firstNotCompletedTutorialIndex);
+            dbgLog("firstNotCompletedTutorialIndex " + firstNotCompletedTutorialIndex);
             let tutorialPanels = challengeMenu.tutorialContainer.querySelectorAll(".medium-panel");
             for (let index = 0; index < this.tutorialCount; index++) {
                 let panel = tutorialPanels[index];
@@ -16877,7 +16886,7 @@ class MarbleRouter extends Nabu.Router {
     }
     onUpdate() { }
     async onHRefChange(page, previousPage) {
-        console.log("onHRefChange previous " + previousPage + " now " + page);
+        dbgLog("onHRefChange previous " + previousPage + " now " + page);
         this.homeButton.style.display = "none";
         this.optionButton.style.display = "none";
         document.getElementById("challenge-topbar").style.display = "none";
@@ -17589,7 +17598,7 @@ class MaterialPicker extends HTMLElement {
             this.style.top = "";
         }
         else {
-            console.log(w + " " + h + " " + x + " " + y);
+            dbgLog(w + " " + h + " " + x + " " + y);
             if (x > w * 0.5) {
                 this.style.right = x.toFixed(0) + "px";
                 this.style.left = "";
@@ -17936,8 +17945,8 @@ class ShareMenuView extends HTMLElement {
                         parentId: this.game.machine.dbId,
                         content: serializedMachine.content
                     };
-                    console.log("publish");
-                    console.log(data);
+                    dbgLog("publish");
+                    dbgLog(data);
                     let dataString = JSON.stringify(data);
                     try {
                         const response = await fetch(SHARE_SERVICE_PATH + "publish_machine", {
@@ -17949,7 +17958,7 @@ class ShareMenuView extends HTMLElement {
                             body: dataString,
                         });
                         const machineId = await response.text();
-                        console.log("Published machineID = " + machineId);
+                        dbgLog("Published machineID = " + machineId);
                         const params = {
                             machineId: machineId
                         };
@@ -18017,7 +18026,7 @@ class ShareMenuView extends HTMLElement {
                         body: dataString,
                     });
                     const machineId = await response.text();
-                    console.log("Updated machineID = " + machineId);
+                    dbgLog("Updated machineID = " + machineId);
                     const params = {
                         machineId: machineId
                     };
@@ -19080,7 +19089,7 @@ class UserMachinesPage {
                 let data = await dataResponse.text();
                 if (data) {
                     let ids = data.split(",");
-                    console.log("User Machines fetched. " + ids.length + " machines found.");
+                    dbgLog("User Machines fetched. " + ids.length + " machines found.");
                     for (let i = 0; i < ids.length; i++) {
                         let id = ids[i];
                         if (id) {
@@ -19148,10 +19157,10 @@ class UserMachinesPage {
         try {
             let dataResponse = await fetch(LOCAL_SHARE_SERVICE_PATH + "machines_list");
             let data = await dataResponse.text();
-            console.log(data);
+            dbgLog(data);
             if (data) {
                 let ids = data.split(",");
-                console.log("User Machines fetched. " + ids.length + " machines found.");
+                dbgLog("User Machines fetched. " + ids.length + " machines found.");
                 for (let i = start; i < start + count; i++) {
                     if (ids[i]) {
                         await this.migrateStep(ids[i]);
@@ -19192,7 +19201,7 @@ class UserMachinesPage {
                         body: dataString,
                     });
                     const machineId = await response.text();
-                    console.log("Legacy machineId=" + legacyMachineId + " published as " + machineId);
+                    dbgLog("Legacy machineId=" + legacyMachineId + " published as " + machineId);
                 }
             }
         }
@@ -19286,7 +19295,7 @@ class Button extends UIElement {
         this.clickSound = new BABYLON.Sound("echo", "./datas/sounds/clic.wav", undefined, undefined, { volume: 0.25, autoplay: false });
     }
     async onPointerDown() {
-        console.log("ptdown");
+        dbgLog("ptdown");
         this.clickSound.play();
         if (this.isToggle) {
             this.value = !this.value;
@@ -19310,7 +19319,7 @@ class Button extends UIElement {
         }
     }
     async onPointerUp() {
-        console.log("ptup");
+        dbgLog("ptup");
         if (this.onPointerUpCallback) {
             this.onPointerUpCallback();
         }
@@ -19369,7 +19378,7 @@ class ButtonWheelButtonMesh extends UIElement {
     }
     async onClick() {
         if (this.onClickCallback) {
-            console.log("bwheelclick");
+            dbgLog("bwheelclick");
             this.wheel.clickSound.play();
             await this.animateRotationY(Math.PI / 8, 0.1, Nabu.Easing.easeOutSine);
             this.animateRotationY(0, 0.5, Nabu.Easing.easeInOutSine);

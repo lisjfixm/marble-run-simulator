@@ -440,3 +440,9 @@ body.vertical .machine-page-machines {
     width: 80px;
     height: 30px;
 }
+.community-empty {
+    padding: 40px 16px;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 15px;
+    text-align: center;
+}
